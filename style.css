@@ -1,11 +1,11 @@
 :root {
-    --primary: #854d0e; /* 짙은 갈색 */
+    --primary: #854d0e; /* 진한 갈색 */
     --secondary: #b91c1c; /* 루비 레드 (포인트) */
     --accent: #ca8a04; /* 골드 */
-    --success: #15803d; /* 짙은 녹색 */
-    --error: #991b1b; /* 더 짙은 빨강 */
+    --success: #15803d; /* 진한 녹색 */
+    --error: #991b1b; /* 더 진한 빨강 */
     --bg-color: #fdf6e3; /* 크림색 배경 (양피지) */
-    --text-color: #3f3c30; /* 짙은 회갈색 텍스트 */
+    --text-color: #3f3c30; /* 진한 회갈색 텍스트 */
     --card-bg: rgba(253, 250, 239, 0.7); /* 반투명 크림색 카드 */
     --sky-blue: #a0c4e4; /* 하늘색 변수 추가 */
 }
@@ -105,6 +105,17 @@ body {
 .btn-question:hover { box-shadow: 0 8px 0 #3730a3; }
 .btn-question:active { box-shadow: 0 3px 0 #3730a3; }
 
+.btn-score {
+    background: #a855f7;
+    box-shadow: 0 5px 0 #7c3aed;
+}
+.btn-score:hover {
+    box-shadow: 0 8px 0 #7c3aed;
+}
+.btn-score:active {
+    box-shadow: 0 3px 0 #7c3aed;
+}
+
 .btn-youtube {
     padding: 0.5rem 1.5rem;
     font-size: 1rem;
@@ -118,6 +129,22 @@ body {
 }
 .btn-youtube:hover {
     transform: scale(1.05);
+}
+
+/* 점수 현황 보기 버튼 스타일 */
+#show-score-status-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 0 5px 0 #4338ca;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+}
+
+#show-score-status-btn:hover {
+    box-shadow: 0 8px 0 #4338ca;
+}
+
+#show-score-status-btn:active {
+    box-shadow: 0 3px 0 #4338ca;
 }
 
 /* Quiz Card Styles */
@@ -188,7 +215,7 @@ body {
     background-color: var(--bg-color);
     background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
     width: 100%;
-    max-width: 1000px;
+    max-width: 1400px;
     max-height: 95vh;
     display: flex;
     flex-direction: column;
@@ -204,16 +231,25 @@ body {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
+
+.modal-header h3 {
+    font-size: 2.5rem;
+}
+
 .modal-body {
-    flex-grow: 1; /* 남은 공간을 모두 차지하도록 */
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: calc(90vh - 100px);
 }
 
 .question-text {
-    font-size: clamp(1.8rem, 3vw, 2.2rem); /* 기본 폰트 사이즈 살짝 조정 */
-    line-height: 1.7;
+    font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+    line-height: 1.4;
     color: var(--text-color);
-    font-weight: 500;
-    white-space: pre-line; /* 줄바꿈 적용 */
+    font-weight: 600;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-break: keep-all;
 }
 .question-text .context {
     display: block;
@@ -231,7 +267,7 @@ body {
     border-left: 3px solid var(--primary);
     font-size: 1.6rem;
     line-height: 1.8;
-    font-family: 'Nanum Myeongjo', serif; /* 명조체 적용 */
+    font-family: 'Nanum Myeongjo', serif;
 }
 
 #question-view, #answer-view {
@@ -244,9 +280,9 @@ body {
 /* Option Buttons */
 .option-btn {
     width: 100%;
-    padding: 1.25rem 1.5rem;
-    font-size: 1.4rem;
-    font-weight: 500;
+    padding: 1.2rem 1.5rem;
+    font-size: clamp(1rem, 2.2vw, 1.6rem);
+    font-weight: 600;
     background: rgba(0,0,0,0.05);
     border: 2px solid rgba(0,0,0,0.2);
     color: var(--text-color);
@@ -254,6 +290,12 @@ body {
     cursor: pointer;
     transition: all 0.2s;
     text-align: left;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
 }
 .option-btn:hover {
     transform: translateY(-3px);
@@ -280,8 +322,8 @@ body {
     margin: 2rem 0;
 }
 .answer-text {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: 800;
     color: var(--success);
     text-align: center;
 }
@@ -294,16 +336,57 @@ body {
     text-align: center;
     border: 1px solid rgba(0,0,0,0.1);
 }
+
+/* 팀별 색상 구분 */
+.score-card.team-1 {
+    border: 4px solid #ef4444; /* 빨강 */
+    border-radius: 20px;
+}
+.score-card.team-1 .team-name {
+    color: #ef4444;
+}
+
+.score-card.team-2 {
+    border: 4px solid #3b82f6; /* 파랑 */
+    border-radius: 20px;
+}
+.score-card.team-2 .team-name {
+    color: #3b82f6;
+}
+
+.score-card.team-3 {
+    border: 4px solid #10b981; /* 초록 */
+    border-radius: 20px;
+}
+.score-card.team-3 .team-name {
+    color: #10b981;
+}
+
+.score-card.team-4 {
+    border: 4px solid #f59e0b; /* 노랑 */
+    border-radius: 20px;
+}
+.score-card.team-4 .team-name {
+    color: #f59e0b;
+}
+
 .team-name {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 .team-score {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     font-weight: 900;
     color: var(--primary);
 }
+
+/* 팀별 색상 */
+.team-color-1 { color: #ef4444; }
+.team-color-2 { color: #3b82f6; }
+.team-color-3 { color: #10b981; }
+.team-color-4 { color: #f59e0b; }
+
 .score-btn {
     padding: 0.5rem 1rem;
     border-radius: 8px;
@@ -367,6 +450,10 @@ body {
     background: rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.1);
     border-radius: 10px;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    line-height: 1.3;
+    overflow-wrap: break-word;
+    word-break: keep-all;
 }
 .connecting-line {
     stroke: var(--accent);
@@ -409,6 +496,194 @@ body {
     font-size: 1.2rem;
     line-height: 1.6;
 }
+
+/* 점수 입력 사이드바 스타일 */
+.score-input-box {
+    background: rgba(168, 85, 247, 0.1);
+    border-left: 4px solid #a855f7;
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 320px;
+    flex-shrink: 0;
+    margin: 0;
+    display: none;
+}
+
+.score-input-box.show {
+    display: block;
+    animation: slideInFromRight 0.5s ease-out;
+}
+
+.score-input-title {
+    color: #a855f7;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.selection-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.team-buttons, .score-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.team-select-btn, .score-select-btn {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+
+.team-select-btn:hover, .score-select-btn:hover {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.1);
+    transform: translateY(-1px);
+}
+
+.team-select-btn.selected, .score-select-btn.selected {
+    border-color: #a855f7;
+    background: #a855f7;
+    color: white;
+    transform: scale(1.05);
+}
+
+.score-input-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.apply-score-btn {
+    padding: 1rem;
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 #14532d;
+}
+
+.apply-score-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #14532d;
+}
+
+.apply-score-btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #14532d;
+}
+
+.apply-score-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: 0 4px 0 #6b7280;
+}
+
+.cancel-score-btn {
+    padding: 0.75rem;
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 0 #4b5563;
+}
+
+.cancel-score-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 0 #4b5563;
+}
+
+.cancel-score-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #4b5563;
+}
+
+.current-selection {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.selection-display {
+    font-size: 0.95rem;
+    color: #6b7280;
+    transition: all 0.3s;
+}
+
+.selection-display.has-selection {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.selected-info {
+    padding: 0.5rem;
+    background: rgba(21, 128, 61, 0.1);
+    border-radius: 6px;
+    border: 1px solid var(--success);
+}
+
+/* 점수 적용 피드백 */
+.score-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    animation: scoreAppliedAnimation 3s ease-out forwards;
+}
+
+.score-feedback-content {
+    background: var(--success);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+@keyframes scoreAppliedAnimation {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+}
+
 @keyframes slideInFromRight {
     from {
         opacity: 0;
@@ -419,14 +694,240 @@ body {
         transform: translateX(0);
     }
 }
-@media (max-width: 768px) {
-    #modal-main-content {
-        flex-direction: column;
-    }
-    .hint-box {
-        width: 100%;
-        margin-top: 1.5rem;
-    }
+
+/* 점수 현황판 모달 스타일 개선 - 4팀 모두 보이도록 */
+.score-status-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+    width: 95vw;
+}
+
+.round-info {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 0.6rem;
+    text-align: center;
+    border-left: 4px solid var(--primary);
+    margin-bottom: 0.8rem;
+}
+
+.current-round {
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+}
+
+.progress-info {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.ranking-title, .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* 현재 순위 리스트 - 가로 2x2 그리드로 변경 */
+.ranking-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.ranking-item-compact {
+    display: flex;
+    align-items: center;
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 0.6rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    min-height: 60px;
+}
+
+.ranking-item-compact.rank-1 {
+    border-color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    transform: scale(1.02);
+}
+
+.ranking-item-compact.rank-2 {
+    border-color: #C0C0C0;
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(169, 169, 169, 0.1));
+}
+
+.ranking-item-compact.rank-3 {
+    border-color: #CD7F32;
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), rgba(184, 115, 51, 0.1));
+}
+
+.rank-badge {
+    background: var(--primary);
+    color: white;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    min-width: 45px;
+    text-align: center;
+}
+
+.team-info-compact {
+    flex-grow: 1;
+    margin: 0 0.6rem;
+}
+
+.team-name-compact {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.1rem;
+}
+
+.team-score-compact {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.rank-icon {
+    font-size: 1.2rem;
+}
+
+/* 점수 조정 기능 스타일 - 훨씬 더 컴팩트하게 */
+.score-adjustment {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.score-adjustment-description {
+    display: none;
+}
+
+.score-adjustment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.score-adjustment-card {
+    background: white;
+    border-radius: 8px;
+    padding: 0.8rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.score-adjustment-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.score-adjustment-card.team-color-1 { border-color: #ef4444; }
+.score-adjustment-card.team-color-2 { border-color: #3b82f6; }
+.score-adjustment-card.team-color-3 { border-color: #10b981; }
+.score-adjustment-card.team-color-4 { border-color: #f59e0b; }
+
+/* 팀명과 버튼을 같은 행에 배치 */
+.team-adjustment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.team-adjustment-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.team-adjustment-buttons {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.current-score {
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 600;
+    text-align: center;
+}
+
+.current-score span {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.score-adjustment-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.score-adjustment-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.score-adjustment-btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.plus-btn {
+    background: var(--success);
+    color: white;
+}
+
+.plus-btn:hover {
+    background: #16a34a;
+}
+
+.minus-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.minus-btn:hover {
+    background: #b91c1c;
+}
+
+/* 점수 조정 피드백 애니메이션 */
+.score-adjustment-card.score-increase {
+    animation: scoreIncrease 0.4s ease-out;
+    border-color: var(--success) !important;
+}
+
+.score-adjustment-card.score-decrease {
+    animation: scoreDecrease 0.4s ease-out;
+    border-color: #dc2626 !important;
+}
+
+@keyframes scoreIncrease {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); background: rgba(21, 128, 61, 0.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes scoreDecrease {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); background: rgba(220, 38, 38, 0.1); }
+    100% { transform: scale(1); }
 }
 
 /* Bookmark Progress Indicator */
@@ -465,6 +966,27 @@ body {
     transform: translateY(-2px);
 }
 
+/* 점수 현황판 모달 추가 스타일 */
+.score-status-modal .modal-content {
+    overflow: hidden;
+}
+
+/* 애니메이션 */
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.score-status-modal {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
 /* Scoreboard Cover & Toggle Button */
 .toggle-scoreboard-btn {
     padding: 0.5rem 1rem;
@@ -472,7 +994,7 @@ body {
     border: 1px solid rgba(0,0,0,0.2);
     cursor: pointer;
     font-weight: 600;
-    background: #e7e5e4; /* Stone color */
+    background: #e7e5e4;
 }
 .score-board-cover {
     position: absolute;
@@ -486,4 +1008,135 @@ body {
     font-weight: 700;
     color: var(--primary);
     z-index: 10;
+}
+
+/* 태블릿 반응형 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .question-text {
+        font-size: clamp(1.6rem, 3vw, 3rem);
+    }
+    
+    .option-btn {
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        padding: 1.1rem 1.3rem;
+    }
+    
+    .modal-content {
+        max-width: 95vw;
+    }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    #modal-main-content {
+        flex-direction: column;
+    }
+    .hint-box, .score-input-box {
+        width: 100%;
+        margin-top: 1.5rem;
+    }
+    
+    .team-buttons, .score-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    /* 모바일에서 폰트 크기 추가 조정 */
+    .question-text {
+        font-size: clamp(1.4rem, 4vw, 2.5rem);
+        line-height: 1.3;
+    }
+    
+    .option-btn {
+        font-size: clamp(0.9rem, 3vw, 1.3rem);
+        padding: 1rem 1.2rem;
+        min-height: 50px;
+    }
+    
+    .modal-content {
+        max-width: 98vw;
+        margin: 1rem;
+    }
+    
+    /* 점수 현황판 모바일 반응형 */
+    .ranking-list {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .ranking-item-compact {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.2rem;
+        padding: 0.4rem;
+        min-height: auto;
+    }
+    
+    .rank-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+        min-width: 40px;
+    }
+    
+    .team-name-compact {
+        font-size: 0.9rem;
+    }
+    
+    .team-score-compact {
+        font-size: 1.1rem;
+    }
+    
+    .rank-icon {
+        font-size: 1.1rem;
+    }
+    
+    .team-info-compact {
+        margin: 0;
+    }
+    
+    /* 점수 조정 모바일 반응형 */
+    .score-adjustment-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .score-adjustment-card {
+        padding: 0.6rem;
+    }
+    
+    .team-adjustment-header {
+        margin-bottom: 0.4rem;
+    }
+    
+    .team-adjustment-name {
+        font-size: 1rem;
+    }
+    
+    .team-adjustment-buttons {
+        gap: 0.3rem;
+    }
+    
+    .score-adjustment-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+    
+    .current-score {
+        font-size: 0.85rem;
+    }
+    
+    /* 모달 패딩 조정 */
+    .score-status-modal .modal-body {
+        padding: 0.6rem;
+    }
+    
+    .score-status-modal .current-rankings {
+        margin-bottom: 0.8rem;
+    }
+    
+    .score-adjustment {
+        padding: 0.4rem;
+        margin-top: 0.4rem;
+    }
 }
