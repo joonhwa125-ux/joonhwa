@@ -169,7 +169,7 @@ const quizData = [
         youtube: "https://www.youtube.com/embed/LcBNZmz1tOI"
     },
     { 
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고\n즐겁이 헌신하니 (         ) 같은\n주의 청년들이 주께 나오는도다\"</span>", 
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고\n즐겁게 헌신하니 (         ) 같은\n주의 청년들이 주께 나오는도다\"</span>", 
         answer: "새벽 이슬", 
         hint: "시편 110편",
         youtube: "https://www.youtube.com/embed/dUrLqDBLzqA"
@@ -184,7 +184,7 @@ const quizData = [
     { 
         question: "성경 전체 가운데 가장 짧은 장은 어디입니까?", 
         answer: "시편 117편", 
-        hint: "총 2절로 되어있습니다.",
+        hint: "이 2절로 되어있습니다.",
         youtube: "https://www.youtube.com/embed/xQwnH8th_fs"
     },
     { 
@@ -254,6 +254,10 @@ let incorrectAttempts = 0;
 let completedQuestionsHistory = [];
 let synth;
 
+// 점수 입력 관련 변수
+let selectedTeam = null;
+let selectedScore = null;
+
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
 const roundIntro = document.getElementById('round-intro');
@@ -265,7 +269,6 @@ const answerBtn = document.getElementById('answer-btn');
 const questionViewBtn = document.getElementById('question-view-btn');
 const feedbackModal = document.getElementById('feedback-modal');
 const feedbackText = document.getElementById('feedback-text');
-
 
 // Initialize
 function init() {
@@ -316,7 +319,6 @@ const playRoundStartSound = () => {
     }
 };
 
-
 // Event Listeners
 function setupEventListeners() {
     document.getElementById('start-btn').addEventListener('click', startGame);
@@ -325,10 +327,11 @@ function setupEventListeners() {
     document.getElementById('next-round-btn').addEventListener('click', nextRound);
     document.getElementById('close-modal').addEventListener('click', closeModal);
     document.getElementById('hint-btn').addEventListener('click', showHint);
-    answerBtn.addEventListener('click', showAnswer);
+    
+    // 수정된 함수 연결
+    answerBtn.addEventListener('click', showAnswerWithScoreInput);
     questionViewBtn.addEventListener('click', showQuestionView);
     document.getElementById('youtube-btn').addEventListener('click', toggleYoutube);
-    document.getElementById('toggle-scoreboard-btn').addEventListener('click', toggleScoreboard);
     
     quizModal.addEventListener('click', (e) => {
         if (e.target === quizModal) closeModal();
@@ -379,7 +382,7 @@ function startRound() {
     }
     roundIntro.classList.add('hidden');
     gameScreen.classList.remove('hidden');
-    setupRound();
+    setupRoundWithHiddenScoreboard();
 }
 
 function nextRound() {
@@ -387,13 +390,8 @@ function nextRound() {
         currentRoundIndex++;
         showRoundIntro();
     } else {
-        try {
-            playRoundStartSound();
-        } catch (error) {
-            console.error("라운드 종료 사운드 재생 오류:", error);
-        }
-        alert('모든 라운드가 종료되었습니다!\n수고하셨습니다!');
-        resetGame();
+        // 모든 라운드 종료 - 순위 발표
+        showFinalRanking();
     }
 }
 
@@ -402,13 +400,24 @@ function resetGame() {
         currentRoundIndex = 0;
         teamScores = [0, 0, 0, 0];
         completedQuestionsHistory = [];
+        
+        // 점수 현황 버튼 제거
+        const scoreStatusBtn = document.getElementById('show-score-status-btn');
+        if (scoreStatusBtn) {
+            scoreStatusBtn.parentElement.remove();
+        }
+        
+        // 점수판 다시 표시
+        const scoreBoard = document.getElementById('score-board');
+        scoreBoard.style.display = 'grid';
+        
         gameScreen.classList.add('hidden');
         startScreen.classList.remove('hidden');
     }
 }
 
 // Round and Board Setup
-function setupRound() {
+function setupRoundWithHiddenScoreboard() {
     const round = rounds[currentRoundIndex];
     const quizGrid = document.getElementById('quiz-grid');
     const progressContainer = document.getElementById('round-progress-container');
@@ -417,6 +426,7 @@ function setupRound() {
     progressContainer.innerHTML = '';
     completedQuestionsInRound = 0;
     
+    // 라운드 진행 상황 표시
     rounds.forEach((_, index) => {
         const bookmark = document.createElement('div');
         bookmark.className = 'bookmark';
@@ -433,111 +443,106 @@ function setupRound() {
     
     const sortedIndices = [...round.questionIndices].sort((a, b) => a - b);
 
+    // 퀴즈 카드 생성
     sortedIndices.forEach((qIndex, localIndex) => {
         const data = quizData[qIndex];
         if (!data) return;
         
-        const card = document.createElement('div');
-        card.className = 'quiz-card';
-        card.dataset.index = qIndex;
-        
-        card.innerHTML = `
-            <div class="quiz-card-inner">
-                <div class="quiz-card-face quiz-card-front ${data.bonus ? 'bonus' : ''}">
-                    <span class="card-number">${localIndex + 1}</span>
-                </div>
-                <div class="quiz-card-face quiz-card-back"></div>
-            </div>
-        `;
-        
-        card.addEventListener('click', () => {
-            try {
-                playFlipSound();
-            } catch (error) {
-                console.error("카드 뒤집기 사운드 재생 오류:", error);
-            }
-            openQuizModal(qIndex);
-            if (!completedQuestionsHistory.includes(qIndex)) {
-                completedQuestionsHistory.push(qIndex);
-                card.classList.add('flipped');
-                completedQuestionsInRound++;
-
-                const phrase = roundPhrases[currentRoundIndex];
-                const charIndex = sortedIndices.indexOf(qIndex);
-                if(phrase && charIndex < phrase.length) {
-                    const char = phrase[charIndex];
-                    const cardBack = card.querySelector('.quiz-card-back');
-                    cardBack.textContent = char;
-                }
-                
-                if (completedQuestionsInRound === round.questionIndices.length) {
-                    const nextBtn = document.getElementById('next-round-btn');
-                    nextBtn.classList.remove('hidden');
-                    nextBtn.textContent = currentRoundIndex < rounds.length - 1 ? '다음 라운드' : '퀴즈 종료!';
-                }
-            }
-        });
-        
+        const card = createQuizCard(qIndex, localIndex, data);
         quizGrid.appendChild(card);
     });
     
-    setupScoreboard();
+    // 점수판 숨기고 버튼 추가 (한 번만 실행)
+    if (!document.getElementById('show-score-status-btn')) {
+        hideScoreboardAndAddButton();
+    }
 }
 
-// Scoreboard
-function setupScoreboard() {
-    const scoreBoard = document.getElementById('score-board');
-    while (scoreBoard.children.length > 1) {
-        scoreBoard.removeChild(scoreBoard.lastChild);
-    }
+// 퀴즈 카드 생성
+function createQuizCard(qIndex, localIndex, data) {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.dataset.index = qIndex;
     
-    teamNames.forEach((name, index) => {
-        const scoreCard = document.createElement('div');
-        scoreCard.className = 'score-card';
-        scoreCard.innerHTML = `
-            <div class="team-name">${name}</div>
-            <div class="team-score" id="score-${index}">${teamScores[index]}</div>
-            <div class="flex justify-center gap-2 mt-4">
-                <button class="score-btn score-btn-minus" data-team="${index}">-</button>
-                <button class="score-btn score-btn-plus" data-team="${index}">+</button>
+    card.innerHTML = `
+        <div class="quiz-card-inner">
+            <div class="quiz-card-face quiz-card-front ${data.bonus ? 'bonus' : ''}">
+                <span class="card-number">${localIndex + 1}</span>
             </div>
-        `;
-        scoreBoard.appendChild(scoreCard);
-    });
+            <div class="quiz-card-face quiz-card-back"></div>
+        </div>
+    `;
     
-    document.querySelectorAll('.score-btn-plus').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const teamIndex = parseInt(e.target.dataset.team);
-            teamScores[teamIndex]++;
-            updateScore(teamIndex);
-        });
-    });
-    
-    document.querySelectorAll('.score-btn-minus').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const teamIndex = parseInt(e.target.dataset.team);
-            if (teamScores[teamIndex] > 0) {
-                teamScores[teamIndex]--;
-                updateScore(teamIndex);
+    card.addEventListener('click', () => {
+        try {
+            playFlipSound();
+        } catch (error) {
+            console.error("카드 뒤집기 사운드 재생 오류:", error);
+        }
+        // 수정된 함수 호출
+        openQuizModalWithScoreInput(qIndex);
+        
+        if (!completedQuestionsHistory.includes(qIndex)) {
+            completedQuestionsHistory.push(qIndex);
+            card.classList.add('flipped');
+            completedQuestionsInRound++;
+
+            const phrase = roundPhrases[currentRoundIndex];
+            const round = rounds[currentRoundIndex];
+            const sortedIndices = [...round.questionIndices].sort((a, b) => a - b);
+            const charIndex = sortedIndices.indexOf(qIndex);
+            
+            if(phrase && charIndex < phrase.length) {
+                const char = phrase[charIndex];
+                const cardBack = card.querySelector('.quiz-card-back');
+                cardBack.textContent = char;
             }
-        });
+            
+            if (completedQuestionsInRound === round.questionIndices.length) {
+                const nextBtn = document.getElementById('next-round-btn');
+                nextBtn.classList.remove('hidden');
+                nextBtn.textContent = currentRoundIndex < rounds.length - 1 ? '다음 라운드' : '퀴즈 종료!';
+            }
+        }
     });
+    
+    return card;
 }
 
-function updateScore(index) {
-    const scoreEl = document.getElementById(`score-${index}`);
-    if (scoreEl) {
-        scoreEl.textContent = teamScores[index];
-    }
+// 게임 화면에서 점수판 숨기고 버튼으로 대체
+function hideScoreboardAndAddButton() {
+    // 기존 점수판 숨기기
+    const scoreBoard = document.getElementById('score-board');
+    scoreBoard.style.display = 'none';
+    
+    // 점수 현황 보기 버튼 추가
+    const scoreButtonContainer = document.createElement('div');
+    scoreButtonContainer.className = 'text-center mb-8';
+    scoreButtonContainer.innerHTML = `
+        <button id="show-score-status-btn" class="btn-3d">
+            📊 점수 현황 보기
+        </button>
+    `;
+    
+    // 버튼을 next-round-btn 앞에 추가
+    const nextRoundBtn = document.getElementById('next-round-btn').parentElement;
+    nextRoundBtn.insertAdjacentElement('beforebegin', scoreButtonContainer);
+    
+    // 버튼 이벤트 추가
+    document.getElementById('show-score-status-btn').addEventListener('click', showScoreStatusModal);
 }
 
 // Modal Logic
-function openQuizModal(index) {
+function openQuizModalWithScoreInput(index) {
     currentQuestionIndex = index;
     incorrectAttempts = 0;
     const data = quizData[index];
     
     resetModal();
+    
+    // 점수 입력 시스템 초기화
+    initializeScoreInputInModal();
+    addScoreInputToModal();
     
     document.getElementById('question-number').textContent = index + 1;
     document.getElementById('question-text').innerHTML = data.question;
@@ -578,6 +583,18 @@ function resetModal() {
     document.getElementById('matching-question-container').innerHTML = '';
     document.getElementById('matching-question-container').classList.add('hidden');
     
+    // 점수 입력 사이드바 숨기기
+    const scoreInputBox = document.getElementById('score-input-box');
+    if (scoreInputBox) {
+        scoreInputBox.classList.remove('show');
+    }
+    
+    // 점수 입력 버튼 숨기기
+    const scoreInputBtn = document.getElementById('score-input-btn');
+    if (scoreInputBtn) {
+        scoreInputBtn.classList.add('hidden');
+    }
+    
     const oldSvg = document.querySelector('#matching-question-container svg');
     if(oldSvg) oldSvg.remove();
 
@@ -604,7 +621,7 @@ function toggleYoutube() {
     youtubeContainer.classList.toggle('hidden');
 }
 
-function showAnswer() {
+function showAnswerWithScoreInput() {
     const data = quizData[currentQuestionIndex];
     
     questionView.classList.add('fade-out');
@@ -615,6 +632,12 @@ function showAnswer() {
         answerView.classList.remove('hidden', 'fade-out');
         questionViewBtn.classList.remove('hidden');
         document.getElementById('hint-box').classList.remove('show');
+        
+        // 점수 입력 버튼 표시
+        const scoreInputBtn = document.getElementById('score-input-btn');
+        if (scoreInputBtn) {
+            scoreInputBtn.classList.remove('hidden');
+        }
 
         if (data.type === 'matching') {
             questionView.classList.remove('hidden', 'fade-out');
@@ -627,11 +650,25 @@ function showAnswer() {
 }
 
 function showQuestionView() {
+    const data = quizData[currentQuestionIndex];
+    
     answerView.classList.add('fade-out');
     questionViewBtn.classList.add('hidden');
+    
+    // 점수 입력 버튼도 숨기기
+    const scoreInputBtn = document.getElementById('score-input-btn');
+    if (scoreInputBtn) {
+        scoreInputBtn.classList.add('hidden');
+    }
+    
+    // 점수 입력 사이드바도 숨기기
+    hideScoreInput();
 
-    const oldSvg = document.querySelector('#matching-question-container svg');
-    if(oldSvg) oldSvg.remove();
+    // 매칭 문제의 정답 라인 제거 (깨끗한 문제 화면으로)
+    if (data && data.type === 'matching') {
+        const oldSvg = document.querySelector('#matching-question-container svg');
+        if(oldSvg) oldSvg.remove();
+    }
 
     setTimeout(() => {
         answerView.classList.add('hidden');
@@ -672,6 +709,10 @@ function checkAnswer(button, selectedIndex, correctIndex) {
         button.classList.add('correct');
         document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true);
         showFeedback(true, true);
+        
+        // 정답 시 점수 입력 버튼 표시
+        showScoreInputButton();
+        
     } else {
         try {
             playIncorrectSound();
@@ -683,13 +724,31 @@ function checkAnswer(button, selectedIndex, correctIndex) {
         showFeedback(false);
         
         if (incorrectAttempts >= 3) {
+            // 3번 틀렸을 때 정답 표시 및 점수 입력 버튼 표시
             document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.disabled = true;
                 if (parseInt(btn.dataset.index) === correctIndex) {
                     btn.classList.add('correct');
                 }
             });
+            
+            // 3번 오답 시에도 점수 입력 버튼 표시
+            showScoreInputButton();
         }
+    }
+}
+
+// 점수 입력 버튼을 표시하는 함수
+function showScoreInputButton() {
+    // 점수 입력 버튼이 없다면 생성
+    if (!document.getElementById('score-input-btn')) {
+        addScoreInputToModal();
+    }
+    
+    // 점수 입력 버튼 표시
+    const scoreInputBtn = document.getElementById('score-input-btn');
+    if (scoreInputBtn) {
+        scoreInputBtn.classList.remove('hidden');
     }
 }
 
@@ -769,6 +828,522 @@ function drawMatchingAnswerLines(data) {
     });
 }
 
+// 점수 입력 시스템
+// HTML에 추가할 점수 입력 사이드바 (힌트박스 다음에 추가)
+function createScoreInputSidebar() {
+    const modalMainContent = document.getElementById('modal-main-content');
+    
+    // 점수 입력 사이드바 HTML 생성
+    const scoreInputHTML = `
+        <div id="score-input-box" class="score-input-box">
+            <div class="score-input-title">🏆 점수 입력</div>
+            
+            <div class="team-selection mb-4">
+                <div class="selection-label">승리 팀 선택:</div>
+                <div class="team-buttons">
+                    ${teamNames.map((name, index) => `
+                        <button class="team-select-btn" data-team="${index}">
+                            ${name}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="score-selection mb-4">
+                <div class="selection-label">획득 점수:</div>
+                <div class="score-buttons">
+                    ${[1, 2, 3, 4, 5].map(score => `
+                        <button class="score-select-btn" data-score="${score}">
+                            ${score}점
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="score-input-actions">
+                <button id="apply-score-btn" class="apply-score-btn" disabled>
+                    점수 적용
+                </button>
+                <button id="cancel-score-btn" class="cancel-score-btn">
+                    취소
+                </button>
+            </div>
+            
+            <div class="current-selection mt-4">
+                <div id="selection-display" class="selection-display">
+                    팀과 점수를 선택해주세요
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // 기존 힌트박스 다음에 추가
+    const hintBox = document.getElementById('hint-box');
+    hintBox.insertAdjacentHTML('afterend', scoreInputHTML);
+}
+
+// 점수 입력 버튼 이벤트 설정
+function setupScoreInputEvents() {
+    // 팀 선택 버튼 이벤트
+    document.querySelectorAll('.team-select-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // 기존 선택 제거
+            document.querySelectorAll('.team-select-btn').forEach(b => b.classList.remove('selected'));
+            
+            // 새 선택 적용
+            e.target.classList.add('selected');
+            selectedTeam = parseInt(e.target.dataset.team);
+            updateSelectionDisplay();
+            checkApplyButtonState();
+        });
+    });
+    
+    // 점수 선택 버튼 이벤트
+    document.querySelectorAll('.score-select-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // 기존 선택 제거
+            document.querySelectorAll('.score-select-btn').forEach(b => b.classList.remove('selected'));
+            
+            // 새 선택 적용
+            e.target.classList.add('selected');
+            selectedScore = parseInt(e.target.dataset.score);
+            updateSelectionDisplay();
+            checkApplyButtonState();
+        });
+    });
+    
+    // 점수 적용 버튼
+    document.getElementById('apply-score-btn').addEventListener('click', applySelectedScore);
+    
+    // 취소 버튼
+    document.getElementById('cancel-score-btn').addEventListener('click', hideScoreInput);
+}
+
+// 선택 상태 표시 업데이트
+function updateSelectionDisplay() {
+    const display = document.getElementById('selection-display');
+    
+    if (selectedTeam !== null && selectedScore !== null) {
+        display.innerHTML = `
+            <div class="selected-info">
+                <strong>${teamNames[selectedTeam]}</strong>에게 
+                <strong>${selectedScore}점</strong> 부여
+            </div>
+        `;
+        display.classList.add('has-selection');
+    } else if (selectedTeam !== null) {
+        display.innerHTML = `<strong>${teamNames[selectedTeam]}</strong> 선택됨 - 점수를 선택하세요`;
+        display.classList.remove('has-selection');
+    } else if (selectedScore !== null) {
+        display.innerHTML = `<strong>${selectedScore}점</strong> 선택됨 - 팀을 선택하세요`;
+        display.classList.remove('has-selection');
+    } else {
+        display.innerHTML = '팀과 점수를 선택해주세요';
+        display.classList.remove('has-selection');
+    }
+}
+
+// 적용 버튼 활성화 체크
+function checkApplyButtonState() {
+    const applyBtn = document.getElementById('apply-score-btn');
+    applyBtn.disabled = !(selectedTeam !== null && selectedScore !== null);
+}
+
+// 선택한 점수 적용
+function applySelectedScore() {
+    if (selectedTeam !== null && selectedScore !== null) {
+        // 점수 추가
+        teamScores[selectedTeam] += selectedScore;
+        
+        // 효과음 재생
+        try {
+            playCorrectSound();
+        } catch (error) {
+            console.error("점수 적용 사운드 재생 오류:", error);
+        }
+        
+        // 콘페티 효과
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+        
+        // 피드백 표시
+        showScoreAppliedFeedback();
+        
+        // 사이드바 숨기기
+        hideScoreInput();
+    }
+}
+
+// 점수 적용 피드백
+function showScoreAppliedFeedback() {
+    const feedback = document.createElement('div');
+    feedback.className = 'score-feedback';
+    feedback.innerHTML = `
+        <div class="score-feedback-content">
+            ✅ ${teamNames[selectedTeam]}에게 ${selectedScore}점이 추가되었습니다!
+        </div>
+    `;
+    
+    document.body.appendChild(feedback);
+    
+    setTimeout(() => {
+        feedback.remove();
+    }, 3000);
+}
+
+// 점수 입력 사이드바 표시
+function showScoreInput() {
+    // 선택 초기화
+    selectedTeam = null;
+    selectedScore = null;
+    
+    // 기존 선택 제거
+    document.querySelectorAll('.team-select-btn').forEach(btn => btn.classList.remove('selected'));
+    document.querySelectorAll('.score-select-btn').forEach(btn => btn.classList.remove('selected'));
+    
+    // 매칭 문제의 경우 정답 라인 제거 (깨끗한 문제 화면 표시)
+    const data = quizData[currentQuestionIndex];
+    if (data && data.type === 'matching') {
+        const oldSvg = document.querySelector('#matching-question-container svg');
+        if(oldSvg) oldSvg.remove();
+    }
+    
+    // 사이드바 표시
+    document.getElementById('score-input-box').classList.add('show');
+    updateSelectionDisplay();
+    checkApplyButtonState();
+}
+
+// 점수 입력 사이드바 숨기기
+function hideScoreInput() {
+    const scoreInputBox = document.getElementById('score-input-box');
+    if (scoreInputBox) {
+        scoreInputBox.classList.remove('show');
+    }
+    selectedTeam = null;
+    selectedScore = null;
+}
+
+// 모달 열때 점수 입력 사이드바 초기화
+function initializeScoreInputInModal() {
+    // 기존 점수 입력 박스가 있으면 제거
+    const existingScoreBox = document.getElementById('score-input-box');
+    if (existingScoreBox) {
+        existingScoreBox.remove();
+    }
+    
+    // 새로 생성
+    createScoreInputSidebar();
+    setupScoreInputEvents();
+}
+
+// 점수 입력 버튼을 모달에 추가
+function addScoreInputToModal() {
+    // 답안 공개 후에만 점수 입력 버튼 표시
+    const scoreInputBtn = document.createElement('button');
+    scoreInputBtn.id = 'score-input-btn';
+    scoreInputBtn.className = 'btn-3d btn-score hidden';
+    scoreInputBtn.textContent = '점수 입력';
+    scoreInputBtn.addEventListener('click', showScoreInput);
+    
+    // 힌트 버튼 옆에 추가
+    const hintBtn = document.getElementById('hint-btn');
+    hintBtn.insertAdjacentElement('afterend', scoreInputBtn);
+}
+
+// 점수 현황 모달 표시
+function showScoreStatusModal() {
+    // 현재 순위 계산
+    const teamRankings = teamNames.map((name, index) => ({
+        name: name,
+        score: teamScores[index],
+        index: index,
+        teamNumber: index + 1
+    })).sort((a, b) => b.score - a.score);
+    
+    // 모달 생성
+    const scoreModal = document.createElement('div');
+    scoreModal.className = 'modal-overlay';
+    scoreModal.id = 'score-status-modal';
+    
+    const modalHTML = `
+        <div class="modal-content score-status-modal">
+            <div class="modal-header flex justify-between items-center">
+                <h2 class="text-3xl font-bold">📊 현재 점수 현황</h2>
+                <button onclick="closeScoreStatusModal()" class="text-white text-4xl hover:text-gray-300 transition">
+                    ×
+                </button>
+            </div>
+            
+            <div class="modal-body p-6">
+                <!-- 라운드 정보 -->
+                <div class="round-info mb-6">
+                    <div class="current-round">
+                        현재: <strong>${rounds[currentRoundIndex].title}</strong>
+                    </div>
+                    <div class="progress-info">
+                        진행 상황: ${completedQuestionsInRound}/${rounds[currentRoundIndex].questionIndices.length} 문제 완료
+                    </div>
+                </div>
+                
+                <!-- 현재 순위 -->
+                <div class="current-rankings mb-4">
+                    <h3 class="ranking-title">🏆 현재 순위</h3>
+                    <div class="ranking-list">
+                        ${teamRankings.map((team, rank) => `
+                            <div class="ranking-item-compact rank-${rank + 1}">
+                                <div class="rank-badge">${rank + 1}위</div>
+                                <div class="team-info-compact">
+                                    <div class="team-name-compact team-color-${team.teamNumber}">${team.name}</div>
+                                    <div class="team-score-compact" id="modal-score-${team.index}">${team.score}점</div>
+                                </div>
+                                <div class="rank-icon">${getRankEmoji(rank + 1)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <!-- 점수 조정 기능 -->
+                <div class="score-adjustment">
+                    <h3 class="section-title">⚡ 추가 점수 입력</h3>
+                    
+                    <div class="score-adjustment-grid">
+                        ${teamNames.map((name, index) => `
+                            <div class="score-adjustment-card team-color-${index + 1}">
+                                <div class="team-adjustment-header">
+                                    <div class="team-adjustment-name">${name}</div>
+                                    <div class="team-adjustment-buttons">
+                                        <button class="score-adjustment-btn minus-btn" onclick="adjustTeamScore(${index}, -1)">
+                                            -1
+                                        </button>
+                                        <button class="score-adjustment-btn plus-btn" onclick="adjustTeamScore(${index}, 1)">
+                                            +1
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="current-score">현재: <span id="adjustment-score-${index}">${teamScores[index]}</span>점</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    scoreModal.innerHTML = modalHTML;
+    document.body.appendChild(scoreModal);
+    
+    // 클릭 외부 영역으로 닫기
+    scoreModal.addEventListener('click', (e) => {
+        if (e.target === scoreModal) {
+            closeScoreStatusModal();
+        }
+    });
+}
+
+// 팀 점수 조정 함수
+function adjustTeamScore(teamIndex, adjustment) {
+    // 점수가 음수가 되지 않도록 체크
+    if (teamScores[teamIndex] + adjustment < 0) {
+        return;
+    }
+    
+    // 점수 조정
+    teamScores[teamIndex] += adjustment;
+    
+    // 모달 내 점수 업데이트
+    const modalScoreElement = document.getElementById(`modal-score-${teamIndex}`);
+    const adjustmentScoreElement = document.getElementById(`adjustment-score-${teamIndex}`);
+    
+    if (modalScoreElement) {
+        modalScoreElement.textContent = `${teamScores[teamIndex]}점`;
+    }
+    if (adjustmentScoreElement) {
+        adjustmentScoreElement.textContent = teamScores[teamIndex];
+    }
+    
+    // 순위 업데이트 (모달 내)
+    updateModalRankings();
+    
+    // 효과음 재생
+    try {
+        if (adjustment > 0) {
+            playCorrectSound();
+        } else {
+            playSound("D4", "8n"); // 낮은 톤의 소리
+        }
+    } catch (error) {
+        console.error("점수 조정 사운드 재생 오류:", error);
+    }
+    
+    // 간단한 시각적 피드백
+    showScoreAdjustmentFeedback(teamIndex, adjustment);
+}
+
+// 모달 내 순위 업데이트
+function updateModalRankings() {
+    // 새로운 순위 계산
+    const teamRankings = teamNames.map((name, index) => ({
+        name: name,
+        score: teamScores[index],
+        index: index,
+        teamNumber: index + 1
+    })).sort((a, b) => b.score - a.score);
+    
+    // 순위 리스트 업데이트
+    const rankingList = document.querySelector('.ranking-list');
+    if (rankingList) {
+        rankingList.innerHTML = teamRankings.map((team, rank) => `
+            <div class="ranking-item-compact rank-${rank + 1}">
+                <div class="rank-badge">${rank + 1}위</div>
+                <div class="team-info-compact">
+                    <div class="team-name-compact team-color-${team.teamNumber}">${team.name}</div>
+                    <div class="team-score-compact" id="modal-score-${team.index}">${team.score}점</div>
+                </div>
+                <div class="rank-icon">${getRankEmoji(rank + 1)}</div>
+            </div>
+        `).join('');
+    }
+}
+
+// 점수 조정 피드백
+function showScoreAdjustmentFeedback(teamIndex, adjustment) {
+    const adjustmentCard = document.querySelector(`.score-adjustment-card:nth-child(${teamIndex + 1})`);
+    if (adjustmentCard) {
+        adjustmentCard.classList.add(adjustment > 0 ? 'score-increase' : 'score-decrease');
+        
+        setTimeout(() => {
+            adjustmentCard.classList.remove('score-increase', 'score-decrease');
+        }, 500);
+    }
+}
+
+// 점수 현황 모달 닫기
+function closeScoreStatusModal() {
+    const modal = document.getElementById('score-status-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function getRankEmoji(rank) {
+    switch(rank) {
+        case 1: return '🥇';
+        case 2: return '🥈';
+        case 3: return '🥉';
+        default: return '🏅';
+    }
+}
+
+// 최종 순위 발표
+function showFinalRanking() {
+    // 팀별 점수로 순위 계산
+    const teamRankings = teamNames.map((name, index) => ({
+        name: name,
+        score: teamScores[index],
+        index: index + 1
+    })).sort((a, b) => b.score - a.score);
+    
+    // 순위 모달 생성
+    const rankingModal = document.createElement('div');
+    rankingModal.className = 'modal-overlay';
+    rankingModal.id = 'final-ranking-modal';
+    
+    const rankingHTML = `
+        <div class="modal-content ranking-modal">
+            <div class="modal-header text-center">
+                <h2 class="text-4xl font-bold">🏆 최종 순위 발표 🏆</h2>
+            </div>
+            
+            <div class="modal-body p-8">
+                <div class="ranking-container">
+                    ${teamRankings.map((team, rank) => `
+                        <div class="ranking-item-compact rank-${rank + 1}" data-rank="${rank + 1}">
+                            <div class="rank-badge">
+                                ${getRankEmoji(rank + 1)} ${rank + 1}위
+                            </div>
+                            <div class="team-info-compact">
+                                <div class="team-name-compact">${team.name}</div>
+                                <div class="team-score-compact">${team.score}점</div>
+                            </div>
+                            <div class="rank-icon">
+                                ${getRankDecoration(rank + 1)}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="ranking-stats mt-8">
+                    <h3 class="text-2xl font-bold mb-4">📊 게임 통계</h3>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <div class="stat-number">${teamRankings[0].score}</div>
+                            <div class="stat-label">최고 점수</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">${completedQuestionsHistory.length}</div>
+                            <div class="stat-label">총 문제 수</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">${Math.round(teamScores.reduce((a, b) => a + b, 0) / 4)}</div>
+                            <div class="stat-label">평균 점수</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">${teamRankings[0].name}</div>
+                            <div class="stat-label">우승팀</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-black bg-opacity-10 text-center">
+                <button onclick="closeFinalRanking()" class="btn-3d">
+                    게임 종료
+                </button>
+                <button onclick="resetGame()" class="btn-3d ml-4">
+                    새 게임 시작
+                </button>
+            </div>
+        </div>
+    `;
+    
+    rankingModal.innerHTML = rankingHTML;
+    document.body.appendChild(rankingModal);
+    
+    // 우승 콘페티 효과
+    setTimeout(() => {
+        if (typeof confetti === 'function') {
+            confetti({
+                particleCount: 300,
+                spread: 90,
+                origin: { y: 0.4 },
+                colors: ['#FFD700', '#FFA500', '#FF6347']
+            });
+        }
+    }, 500);
+}
+
+function getRankDecoration(rank) {
+    switch(rank) {
+        case 1: return '👑';
+        case 2: return '⭐';
+        case 3: return '🎖️';
+        default: return '💫';
+    }
+}
+
+function closeFinalRanking() {
+    const modal = document.getElementById('final-ranking-modal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
 // BGM & Keyboard Functions
 function toggleBGM() {
     const bgmPlayer = document.getElementById('bgm-player');
@@ -780,7 +1355,7 @@ function toggleBGM() {
         bgmToggleBtn.innerHTML = '▶';
     } else {
         bgmPlayer.play().catch(error => console.log("BGM 자동 재생이 차단되었습니다."));
-        bgmToggleBtn.innerHTML = '❚❚';
+        bgmToggleBtn.innerHTML = '⏸';
     }
 }
 
@@ -797,26 +1372,24 @@ function handleKeyPress(e) {
         case 'q':
             if (!questionViewBtn.classList.contains('hidden')) questionViewBtn.click();
             break;
+        case 's':
+            // 점수 입력 단축키 추가
+            const scoreInputBtn = document.getElementById('score-input-btn');
+            if (scoreInputBtn && !scoreInputBtn.classList.contains('hidden')) {
+                scoreInputBtn.click();
+            }
+            break;
         case 'escape':
             closeModal();
             break;
     }
 }
 
-// Scoreboard Toggle Function
-function toggleScoreboard() {
-    const cover = document.getElementById('score-board-cover');
-    const btn = document.getElementById('toggle-scoreboard-btn');
-    const isCovered = !cover.classList.contains('hidden');
-
-    if (isCovered) {
-        cover.classList.add('hidden');
-        btn.innerHTML = '👁️ 점수판 가리기';
-    } else {
-        cover.classList.remove('hidden');
-        btn.innerHTML = '👁️ 점수판 보기';
-    }
-}
+// 전역 함수로 노출 (HTML에서 onclick으로 사용)
+window.closeScoreStatusModal = closeScoreStatusModal;
+window.showScoreStatusModal = showScoreStatusModal;
+window.closeFinalRanking = closeFinalRanking;
+window.adjustTeamScore = adjustTeamScore;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', init);
