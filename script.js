@@ -5,7 +5,7 @@ const quizData = [
         question: "다음은 악인의 운명에 관한 말씀입니다.<span class='context'>빈칸에 들어갈 말을 순서대로 말하세요.</span><span class='quote'>\"바람에 나는 (  )와 같고 (  )을 견디지 못하며\n(  )들의 모임에 들지 못하며 그 길은 (  )할 것이다\"</span>", 
         answer: "겨, 심판, 의인, 망", 
         hint: "시편 1편",
-        youtube: "https://www.youtube.com/watch?v=PrpqHpHTW3Q"
+        youtube: "https://youtu.be/PrpqHpHTW3Q?si=e_GeAxKTaC58eTqx"
     },
     { 
         question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
@@ -1393,3 +1393,4 @@ window.adjustTeamScore = adjustTeamScore;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', init);
+
