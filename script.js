@@ -11,7 +11,7 @@ const quizData = [
         question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
         answer: "방패, 영광", 
         hint: "시편 3편",
-        youtube: "https://www.youtube.com/watch?v=R_Xu2ir5qqI&list=RDR_Xu2ir5qqI&start_radio=1"
+        youtube: "3dZ8hq5d7HI"
     },
     { 
         type: 'multiple-choice', 
@@ -19,7 +19,7 @@ const quizData = [
         options: ["용암을 내뿜는 화산", "오물을 쏟아내는 하수구", "열린 무덤", "독을 내뿜는 거미줄"], 
         answerIndex: 2, 
         hint: "시편 5편",
-        youtube: "https://www.youtube.com/watch?v=cjQ7d4_OUWw&list=RDcjQ7d4_OUWw&start_radio=1"
+        youtube: "VKiMRJNGlng"
     },
     { 
         type: 'multiple-choice', 
@@ -27,7 +27,7 @@ const quizData = [
         options: ["하나님의 공의", "하나님 없는 인생들의 승리", "원수의 멸망", "이방 나라들의 심판"], 
         answerIndex: 1, 
         hint: "시편 9편",
-        youtube: "https://youtu.be/_zxVFaOS6Rg"
+        youtube: "RBmg0hQh8nQ"
     },
     { 
         type: 'multiple-choice', 
@@ -35,7 +35,7 @@ const quizData = [
         options: ["(1) 반석", "(2) 요새", "(3) 창", "(4) 구원의 뿔"], 
         answerIndex: 2, 
         hint: "시편 18편",
-        youtube: "https://youtu.be/jrfwR4i53w4"
+        youtube: "fvKM6MZniNA"
     },
     { 
         bonus: true, 
@@ -43,7 +43,7 @@ const quizData = [
         question: "하나님의 말씀에 대한 명칭과 그 기능을 연결하세요.", 
         answer: '1-ㄴ, 2-ㄷ, 3-ㄱ, 4-ㄹ', 
         hint: "시편 19편",
-        youtube: "https://www.youtube.com/watch?v=StRI2O-dT50",
+        youtube: "BzpBqaRurFk",
         matchingData: { 
             left: ['1. 여호와의 율법', '2. 여호와의 증거', '3. 여호와의 교훈', '4. 여호와의 계명'], 
             right: ['ㄱ. 마음을 기쁘게 함', 'ㄴ. 영혼을 소성시킴', 'ㄷ. 우둔한 자로 지혜롭게 함', 'ㄹ. 눈을 밝게 함'], 
@@ -56,7 +56,7 @@ const quizData = [
         options: ["시편 12편", "시편 22편", "시편 33편", "시편 43편"], 
         answerIndex: 1, 
         hint: "엘리 엘리 라마 사막다니",
-        youtube: "https://www.youtube.com/watch?v=FpWLfu3bsZA"
+        youtube: "9qQ5KKzAGVw"
     },
     { 
         type: 'multiple-choice', 
@@ -64,7 +64,7 @@ const quizData = [
         options: ["하늘", "산", "주의 지성소", "궁전"], 
         answerIndex: 2, 
         hint: "시편 28편",
-        youtube: "https://www.youtube.com/watch?v=wkdkMxGVOKQ"
+        youtube: "VlB4m5v3gTI"
     },
     { 
         type: 'multiple-choice', 
@@ -72,7 +72,7 @@ const quizData = [
         options: ["자기의 죄악이 드러나지 않을 것임", "자신의 연약함", "자신의 의로움", "악을 거절함"], 
         answerIndex: 0, 
         hint: "시편 36편",
-        youtube: "https://www.youtube.com/watch?v=1M3IusEoXt8"
+        youtube: "vfF5Y3aT1Wc"
     },
     { 
         type: 'multiple-choice', 
@@ -80,14 +80,14 @@ const quizData = [
         options: ["악인의 보복을 받을까봐", "남의 일에 간섭할 필요가 없기에", "악인의 번영은 일시적이기 때문에", "사람은 자신의 운명대로 사는 것이므로"], 
         answerIndex: 2, 
         hint: "시편 37편",
-        youtube: "https://www.youtube.com/watch?v=NATmz9TGpdk"
+        youtube: "o_3oBc5Zcss"
     },
     { 
         bonus: true, 
         question: "'마스길'이란 히브리어는 무슨 뜻입니까?", 
         answer: "교훈, 교훈시", 
         hint: "시편 32편",
-        youtube: "https://www.youtube.com/watch?v=lYM5nQwuZ90"
+        youtube: "DXDGE_lRI0E"
     },
     { 
         type: 'multiple-choice', 
@@ -95,7 +95,7 @@ const quizData = [
         options: ["만군의 여호와께서 우리와 함께 하시니", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
         answerIndex: 0, 
         hint: "시편 46편",
-        youtube: "https://www.youtube.com/watch?v=ElYObIDOUoM"
+        youtube: "kNMUur0mJTQ"
     },
     { 
         type: 'multiple-choice', 
@@ -103,19 +103,19 @@ const quizData = [
         options: ["거룩한 산", "하나님의 요새", "시온 산", "하나님의 성"], 
         answerIndex: 1, 
         hint: "시편 48편",
-        youtube: "https://www.youtube.com/watch?v=Zo9CLo7PQrw&feature=youtu.be"
+        youtube: "i0AgENR1FhM"
     },
     { 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"사람은 존귀하나 장구하지 못함이여\n(         ) 같도다\"</span>", 
         answer: "멸망하는 짐승", 
         hint: "시편 49편",
-        youtube: "https://www.youtube.com/watch?v=ISHuuFoLQbU"
+        youtube: "L6tC9BWKe3o"
     },
     { 
         question: "다윗이 밧세바와 동침한 후 지은\n회개의 시는 시편 몇 편입니까?", 
         answer: "시편 51편", 
         hint: "시편의 표제에 기록되어 있습니다.",
-        youtube: "https://www.youtube.com/watch?v=zkVzW3zGl3A&feature=youtu.be"
+        youtube: "E1BciSW9nwM"
     },
     { 
         type: 'multiple-choice', 
@@ -123,7 +123,7 @@ const quizData = [
         options: ["연약한 심령", "값비싼 번제", "상한 심령", "자신의 의"], 
         answerIndex: 2, 
         hint: "시편 51편",
-        youtube: "https://www.youtube.com/watch?v=nP_eoEPW12g"
+        youtube: "FJO_vTKEwD4"
     },
     { 
         type: 'multiple-choice', 
@@ -131,20 +131,20 @@ const quizData = [
         options: ["골수와 기름진 것", "주의 인자하심", "탈취한 물건을 나누는 것", "주님의 권능"], 
         answerIndex: 1, 
         hint: "시편 63편",
-        youtube: "https://www.youtube.com/watch?v=u1Zk32exTvg"
+        youtube: "e4XqJdgXF_Q"
     },
     { 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나음즉\n악인의 장막에 사는 것보다\n내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
         answer: "문지기", 
         hint: "시편 84편",
-        youtube: "https://www.youtube.com/watch?v=a4eUJNLjxjw&feature=youtu.be"
+        youtube: "jkQAJZNxXD8"
     },
     { 
         bonus: true, 
         question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도\n그 연수의 자랑은 (  )와 (  )뿐이요\n신속히 가니 우리가 (  )가나이다...\n우리에게 우리의 날 (  )함을 가르치사\n지혜로운 마음을 얻게 하소서\"</span>", 
         answer: "수고, 슬픔, 날아가, 계수", 
         hint: "시편 90편",
-        youtube: "https://www.youtube.com/watch?v=vJmqCi4a2vg"
+        youtube: "pQELN4VQ9Vg"
     },
     { 
         type: 'multiple-choice', 
@@ -152,40 +152,40 @@ const quizData = [
         options: ["르비딤", "양식", "므리바", "맛사"], 
         answerIndex: 1, 
         hint: "시편 95편",
-        youtube: "https://www.youtube.com/watch?v=rndS3FU-Qso"
+        youtube: "K2Mfq6gn5NI"
     },
     { 
         bonus: true, 
         question: "시편은 모두 몇 권, 몇 편으로 구성되어 있습니까?", 
         answer: "5권, 150편", 
         hint: "모세오경",
-        youtube: "https://www.youtube.com/watch?v=8cVZ-S3Z4-4&list=RD8cVZ-S3Z4-4&start_radio=1"
+        youtube: "j9phNEaPrv8"
     },
     { 
         bonus: true, 
         question: "'할렐루야'의 뜻은 무엇입니까?", 
         answer: "여호와를 찬양하라", 
         hint: "시편 111편",
-        youtube: "https://www.youtube.com/watch?v=CeHkhgQdyGI"
+        youtube: "LcBNZmz1tOI"
     },
     { 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고\n즐겁게 헌신하니 (         ) 같은\n주의 청년들이 주께 나오는도다\"</span>", 
         answer: "새벽 이슬", 
         hint: "시편 110편",
-        youtube: "https://www.youtube.com/watch?v=QXhsA621WZA&feature=youtu.be"
+        youtube: "dUrLqDBLzqA"
     },
     { 
         bonus: true, 
         question: "하나님의 지존하심을 나타내는 말씀입니다.<span class='context'>빈칸을 순서대로 채우세요.</span><span class='quote'>\"높은 곳에 앉으셨으나 (   ) 낮추사\n천지를 살피시고 (   ) 자를 먼지 더미에서 일으키시며\n궁핍한 자를 (   ) 더미에서 들어 세워...\"</span>", 
         answer: "스스로, 가난한, 거름", 
         hint: "시편 113편",
-        youtube: "https://www.youtube.com/watch?v=AEf_pX52Z-0&feature=youtu.be"
+        youtube: "3F50tC4T4AM"
     },
     { 
         question: "성경 전체 가운데 가장 짧은 장은 어디입니까?", 
         answer: "시편 117편", 
-        hint: "2절로 되어있습니다.",
-        youtube: "https://www.youtube.com/watch?v=B5kV3pk_7_s&list=RDB5kV3pk_7_s&start_radio=1"
+        hint: "이 2절로 되어있습니다.",
+        youtube: "xQwnH8th_fs"
     },
     { 
         type: 'multiple-choice', 
@@ -193,7 +193,7 @@ const quizData = [
         options: ["등", "정금", "꿀", "소금"], 
         answerIndex: 3, 
         hint: "시편 119편",
-        youtube: "https://www.youtube.com/watch?v=cGUz6ByIxxw"
+        youtube: "Wc5EHhS7eHw"
     },
     { 
         type: 'multiple-choice', 
@@ -201,44 +201,94 @@ const quizData = [
         options: ["거짓된 혀", "젊은 자의 자식", "노인의 지혜", "부자의 재물"], 
         answerIndex: 1, 
         hint: "시편 127편",
-        youtube: "https://www.youtube.com/watch?v=iqBneGgE5rI"
+        youtube: "3qA_HvF5UXo"
     },
     { 
         type: 'multiple-choice', 
         question: "다음 중 시편의 저자가 아닌 사람은 누구입니까?", 
         options: ["다윗", "엘리사", "모세", "솔로몬"], 
         answerIndex: 1, 
-        hint: "선지자",
-        youtube: "https://www.youtube.com/watch?v=vQeAmrM17BM&list=RDvQeAmrM17BM&start_radio=1"
+        hint: "",
+        youtube: "j9phNEaPrv8"
     },
     { 
         bonus: true, 
         question: "할렐루야로 시작하여 할렐루야로 끝나는\n'할렐루야 시'는 이 몇 개입니까?", 
         answer: "8개", 
         hint: "시편 106, 113, 135, 146, 147, 148, 149, 150편",
-        youtube: "https://www.youtube.com/watch?v=50Pzah2Ia3Q&list=RD50Pzah2Ia3Q&start_radio=1"
+        youtube: "Kkr9uyd-3iA"
     }
 ];
 
-// 유튜브 URL 처리 함수 추가
-function getYouTubeEmbedUrl(videoId) {
-    if (!videoId) return null;
+// 강화된 유튜브 URL 처리 함수
+function getYouTubeEmbedUrl(videoInput) {
+    if (!videoInput) return null;
     
-    // 이미 embed URL인 경우 그대로 반환
-    if (videoId.includes('embed/')) {
-        return videoId;
+    console.log('YouTube URL 처리 시작:', videoInput);
+    
+    let videoId = '';
+    
+    try {
+        // 1. 이미 embed URL인 경우
+        if (videoInput.includes('embed/')) {
+            videoId = videoInput.split('embed/')[1].split('?')[0].split('/')[0];
+        }
+        // 2. watch?v= 형식 처리 (가장 일반적)
+        else if (videoInput.includes('watch?v=')) {
+            try {
+                const url = new URL(videoInput);
+                videoId = url.searchParams.get('v');
+            } catch {
+                // URL 파싱 실패 시 정규표현식 사용
+                const match = videoInput.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+                videoId = match ? match[1] : null;
+            }
+        }
+        // 3. youtu.be 단축 URL
+        else if (videoInput.includes('youtu.be/')) {
+            videoId = videoInput.split('youtu.be/')[1].split('?')[0].split('&')[0].split('/')[0];
+        }
+        // 4. YouTube Shorts URL
+        else if (videoInput.includes('youtube.com/shorts/')) {
+            videoId = videoInput.split('shorts/')[1].split('?')[0].split('/')[0];
+        }
+        // 5. 순수 비디오 ID (11자리 영숫자)
+        else if (/^[a-zA-Z0-9_-]{11}$/.test(videoInput.trim())) {
+            videoId = videoInput.trim();
+        }
+        // 6. 마지막 시도: URL에서 11자리 패턴 찾기
+        else {
+            const match = videoInput.match(/[a-zA-Z0-9_-]{11}/);
+            videoId = match ? match[0] : null;
+        }
+        
+        // 비디오 ID 검증
+        if (!videoId || !/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+            console.error('유효하지 않은 YouTube 비디오 ID:', videoId, '원본:', videoInput);
+            return null;
+        }
+        
+        console.log('추출된 비디오 ID:', videoId);
+        
+        // 여러 백업 URL 생성 시도
+        const embedUrls = [
+            // 기본 embed URL
+            `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&playsinline=1`,
+            // nocookie 도메인 사용
+            `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&playsinline=1`,
+            // 최소한의 파라미터
+            `https://www.youtube.com/embed/${videoId}?autoplay=0`,
+            // 파라미터 없는 순수 URL
+            `https://www.youtube.com/embed/${videoId}`
+        ];
+        
+        console.log('생성된 embed URLs:', embedUrls);
+        return embedUrls;
+        
+    } catch (error) {
+        console.error('YouTube URL 파싱 중 오류:', error, videoInput);
+        return null;
     }
-    
-    // watch?v= 형식에서 video ID만 추출
-    let extractedId = videoId;
-    if (videoId.includes('watch?v=')) {
-        extractedId = videoId.split('watch?v=')[1].split('&')[0];
-    } else if (videoId.includes('youtu.be/')) {
-        extractedId = videoId.split('youtu.be/')[1].split('?')[0];
-    }
-    
-    // embed URL로 변환하고 필요한 매개변수 추가
-    return `https://www.youtube.com/embed/${extractedId}?autoplay=0&rel=0&modestbranding=1&playsinline=1`;
 }
 
 const rounds = [
@@ -575,27 +625,32 @@ function openQuizModalWithScoreInput(index) {
         document.getElementById('hint-text').textContent = data.hint;
     }
     
-    // 유튜브 관련 수정된 부분
+    // 유튜브 관련 개선된 부분
     const youtubeBtn = document.getElementById('youtube-btn');
     const youtubePlayer = document.getElementById('youtube-player');
     
     if (data.youtube) {
-        const embedUrl = getYouTubeEmbedUrl(data.youtube);
-        if (embedUrl) {
-            youtubePlayer.src = embedUrl;
-            youtubeBtn.classList.remove('hidden');
+        const embedUrls = getYouTubeEmbedUrl(data.youtube);
+        if (embedUrls && embedUrls.length > 0) {
+            // 전역 변수에 URL 목록 저장 (재시도용)
+            currentYouTubeUrls = embedUrls;
             
-            // iframe 로드 에러 처리
-            youtubePlayer.onerror = function() {
-                console.error('유튜브 영상 로드 실패:', embedUrl);
-                showYouTubeError();
-            };
+            // 로딩 상태 표시
+            showYouTubeLoading();
+            
+            // 순차적으로 URL 시도
+            tryYouTubeUrls(embedUrls, 0);
+            
+            youtubeBtn.classList.remove('hidden');
         } else {
+            console.warn('YouTube URL 처리 실패:', data.youtube);
+            currentYouTubeUrls = null;
             youtubeBtn.classList.add('hidden');
         }
     } else {
         youtubeBtn.classList.add('hidden');
         youtubePlayer.src = '';
+        currentYouTubeUrls = null;
     }
     
     if (data.type === 'multiple-choice') {
@@ -611,10 +666,112 @@ function openQuizModalWithScoreInput(index) {
     quizModal.classList.remove('hidden');
 }
 
-// 유튜브 에러 처리 함수
+// YouTube URL들을 순차적으로 시도하는 함수
+function tryYouTubeUrls(urls, index) {
+    if (index >= urls.length) {
+        console.error('모든 YouTube URL 시도 실패');
+        hideYouTubeLoading();
+        showYouTubeError();
+        return;
+    }
+    
+    const youtubePlayer = document.getElementById('youtube-player');
+    const currentUrl = urls[index];
+    
+    console.log(`YouTube URL 시도 ${index + 1}/${urls.length}:`, currentUrl);
+    
+    // 이전 이벤트 리스너 제거
+    youtubePlayer.onload = null;
+    youtubePlayer.onerror = null;
+    
+    // 로드 성공 처리
+    youtubePlayer.onload = function() {
+        console.log('YouTube 영상 로드 성공:', currentUrl);
+        hideYouTubeLoading();
+        
+        // 실제로 콘텐츠가 로드되었는지 확인
+        setTimeout(() => {
+            try {
+                // iframe이 실제로 콘텐츠를 로드했는지 간접적으로 확인
+                if (youtubePlayer.contentWindow) {
+                    console.log('YouTube 콘텐츠 확인 완료');
+                }
+            } catch (e) {
+                // 크로스 오리진 제한으로 에러가 날 수 있지만 정상
+                console.log('YouTube 로드 완료 (CORS 제한)');
+            }
+        }, 1000);
+    };
+    
+    // 로드 실패 처리
+    youtubePlayer.onerror = function() {
+        console.warn(`YouTube URL 실패 ${index + 1}/${urls.length}:`, currentUrl);
+        
+        // 다음 URL 시도
+        setTimeout(() => {
+            tryYouTubeUrls(urls, index + 1);
+        }, 500);
+    };
+    
+    // 타임아웃 설정 (각 URL당 8초)
+    const timeoutId = setTimeout(() => {
+        console.warn(`YouTube URL 타임아웃 ${index + 1}/${urls.length}:`, currentUrl);
+        
+        // 다음 URL 시도
+        tryYouTubeUrls(urls, index + 1);
+    }, 8000);
+    
+    // 성공 시 타임아웃 취소
+    const originalOnload = youtubePlayer.onload;
+    youtubePlayer.onload = function() {
+        clearTimeout(timeoutId);
+        if (originalOnload) originalOnload();
+    };
+    
+    // URL 설정
+    youtubePlayer.src = currentUrl;
+}
+
+// 수동 재시도를 위한 전역 변수
+let currentYouTubeUrls = null;
+
+// 유튜브 로딩 상태 표시
+function showYouTubeLoading() {
+    const youtubeContainer = document.getElementById('youtube-container');
+    const existingLoader = youtubeContainer.querySelector('.youtube-loader');
+    
+    // 기존 로더가 없으면 생성
+    if (!existingLoader) {
+        const loader = document.createElement('div');
+        loader.className = 'youtube-loader';
+        loader.innerHTML = `
+            <div class="loader-content">
+                <div class="spinner"></div>
+                <span>영상을 불러오는 중...</span>
+            </div>
+        `;
+        youtubeContainer.appendChild(loader);
+    }
+}
+
+// 유튜브 로딩 상태 숨김
+function hideYouTubeLoading() {
+    const loader = document.querySelector('.youtube-loader');
+    if (loader) {
+        loader.remove();
+    }
+}
+
+// 개선된 유튜브 에러 처리 함수
 function showYouTubeError() {
     const youtubeContainer = document.getElementById('youtube-container');
     const youtubePlayer = document.getElementById('youtube-player');
+    
+    // 기존 에러 메시지 제거
+    const existingError = youtubeContainer.querySelector('.youtube-error');
+    if (existingError) {
+        existingError.remove();
+    }
     
     youtubePlayer.style.display = 'none';
     
@@ -622,29 +779,96 @@ function showYouTubeError() {
     errorMessage.className = 'youtube-error';
     errorMessage.innerHTML = `
         <div class="error-content">
-            <span>⚠️ 영상을 불러올 수 없습니다</span>
-            <button onclick="retryYouTube()" class="retry-btn">다시 시도</button>
+            <div class="error-icon">⚠️</div>
+            <div class="error-text">
+                <div class="error-title">영상을 불러올 수 없습니다</div>
+                <div class="error-subtitle">네트워크 연결을 확인하거나 잠시 후 다시 시도해보세요</div>
+            </div>
+            <div class="error-actions">
+                <button onclick="retryYouTube()" class="retry-btn">다시 시도</button>
+                <button onclick="skipYouTube()" class="skip-btn">건너뛰기</button>
+                <button onclick="openYouTubeDirectly()" class="direct-btn">직접 열기</button>
+            </div>
         </div>
     `;
     
     youtubeContainer.appendChild(errorMessage);
 }
 
-// 유튜브 재시도 함수
+// 개선된 유튜브 재시도 함수
 function retryYouTube() {
-    const data = quizData[currentQuestionIndex];
     const youtubePlayer = document.getElementById('youtube-player');
-    const errorMessage = document.querySelector('.youtube-error');
+    const youtubeContainer = document.getElementById('youtube-container');
+    
+    // 에러 메시지와 로더 제거
+    const errorMessage = youtubeContainer.querySelector('.youtube-error');
+    const loader = youtubeContainer.querySelector('.youtube-loader');
+    
+    if (errorMessage) errorMessage.remove();
+    if (loader) loader.remove();
+    
+    // 플레이어 다시 표시
+    youtubePlayer.style.display = 'block';
+    youtubePlayer.src = ''; // 기존 src 초기화
+    
+    if (currentYouTubeUrls && currentYouTubeUrls.length > 0) {
+        console.log('YouTube 재시도 시작');
+        showYouTubeLoading();
+        
+        // 다시 처음부터 모든 URL 시도
+        setTimeout(() => {
+            tryYouTubeUrls(currentYouTubeUrls, 0);
+        }, 500);
+    } else {
+        console.error('재시도할 YouTube URL이 없습니다');
+        showYouTubeError();
+    }
+}
+
+// 유튜브 건너뛰기 함수
+function skipYouTube() {
+    const youtubeContainer = document.getElementById('youtube-container');
+    const errorMessage = youtubeContainer.querySelector('.youtube-error');
     
     if (errorMessage) {
         errorMessage.remove();
     }
     
-    youtubePlayer.style.display = 'block';
+    // 컨테이너 숨기기
+    youtubeContainer.classList.add('hidden');
     
-    if (data.youtube) {
-        const embedUrl = getYouTubeEmbedUrl(data.youtube);
-        youtubePlayer.src = embedUrl + '&t=' + new Date().getTime(); // 캐시 방지
+    // 피드백 표시
+    const feedback = document.createElement('div');
+    feedback.className = 'youtube-skip-feedback';
+    feedback.textContent = '영상을 건너뛰었습니다';
+    document.body.appendChild(feedback);
+    
+    setTimeout(() => {
+        feedback.remove();
+    }, 2000);
+}
+
+// YouTube 직접 열기 함수 (새로운 기능)
+function openYouTubeDirectly() {
+    const data = quizData[currentQuestionIndex];
+    if (data && data.youtube && currentYouTubeUrls && currentYouTubeUrls.length > 0) {
+        // 원본 YouTube URL 생성
+        let originalUrl = '';
+        
+        if (data.youtube.includes('youtube.com') || data.youtube.includes('youtu.be')) {
+            originalUrl = data.youtube;
+        } else {
+            // 비디오 ID만 있는 경우
+            const videoId = data.youtube.length === 11 ? data.youtube : 
+                           currentYouTubeUrls[0].split('embed/')[1].split('?')[0];
+            originalUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        }
+        
+        // 새 창에서 YouTube 열기
+        window.open(originalUrl, '_blank', 'noopener,noreferrer');
+        
+        // 건너뛰기 처리
+        skipYouTube();
     }
 }
 
@@ -656,11 +880,18 @@ function resetModal() {
     document.getElementById('matching-question-container').innerHTML = '';
     document.getElementById('matching-question-container').classList.add('hidden');
     
-    // 유튜브 에러 메시지 제거
-    const errorMessage = document.querySelector('.youtube-error');
-    if (errorMessage) {
-        errorMessage.remove();
-    }
+    // 유튜브 관련 요소들 정리
+    const youtubeContainer = document.getElementById('youtube-container');
+    const errorMessage = youtubeContainer.querySelector('.youtube-error');
+    const loader = youtubeContainer.querySelector('.youtube-loader');
+    const youtubePlayer = document.getElementById('youtube-player');
+    
+    if (errorMessage) errorMessage.remove();
+    if (loader) loader.remove();
+    youtubePlayer.style.display = 'block'; // 플레이어 다시 표시
+    
+    // YouTube URL 목록 초기화
+    currentYouTubeUrls = null;
     
     // 점수 입력 사이드바 숨기기
     const scoreInputBox = document.getElementById('score-input-box');
@@ -1470,6 +1701,8 @@ window.showScoreStatusModal = showScoreStatusModal;
 window.closeFinalRanking = closeFinalRanking;
 window.adjustTeamScore = adjustTeamScore;
 window.retryYouTube = retryYouTube;
+window.skipYouTube = skipYouTube;
+window.openYouTubeDirectly = openYouTubeDirectly;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', init);
