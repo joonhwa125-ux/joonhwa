@@ -501,13 +501,18 @@ function setupRoundWithHiddenScoreboard() {
         completedQuestionsInRound = 0; 
     }
     
-    // 라운드 진행도 북마크 생성
+    // 라운드 진행도 탭(북마크) 생성
     rounds.forEach((_, index) => { 
-        const bookmark = document.createElement('div'); 
+        // ⭐️ 변경점: div를 button으로 변경하여 상호작용이 가능한 요소로 만듭니다.
+        const bookmark = document.createElement('button'); 
         bookmark.className = 'bookmark'; 
         bookmark.textContent = `${index + 1} 라운드`; 
         if (index < currentRoundIndex) bookmark.classList.add('completed'); 
         else if (index === currentRoundIndex) bookmark.classList.add('active'); 
+        
+        // ⭐️ 변경점: 각 탭에 클릭 이벤트를 추가하여 라운드를 전환할 수 있도록 합니다.
+        bookmark.addEventListener('click', () => switchToRound(index));
+
         progressContainer.appendChild(bookmark); 
     }); 
     
@@ -1128,6 +1133,29 @@ function getRankEmoji(rank) {
     return ['🥇', '🥈', '🥉'][rank - 1] || '🏅'; 
 }
 
+/**
+ * 지정된 라운드로 게임 화면을 전환하는 함수
+ * @param {number} targetRoundIndex - 이동할 라운드의 인덱스
+ */
+function switchToRound(targetRoundIndex) {
+    // 현재 보고 있는 라운드를 다시 클릭하면 아무것도 하지 않음
+    if (targetRoundIndex === currentRoundIndex) return;
+
+    console.log(`Switching from round ${currentRoundIndex + 1} to ${targetRoundIndex + 1}`);
+
+    // 1. 현재 라운드의 진행 상태 (넘긴 카드 등)를 저장합니다.
+    saveCurrentRoundState();
+
+    // 2. 현재 라운드 인덱스를 목표 라운드로 변경합니다.
+    currentRoundIndex = targetRoundIndex;
+
+    // 3. 목표 라운드에 맞게 퀴즈 그리드와 헤더 탭을 다시 렌더링합니다.
+    setupRoundWithHiddenScoreboard();
+
+    // 4. 목표 라운드의 저장된 상태 (넘긴 카드 등)를 불러와 복원합니다.
+    restoreRoundState(targetRoundIndex);
+}
+
 // 최종 순위 표시
 function showFinalRanking() { 
     const teamRankings = teamNames.map((name, index) => ({ name, score: teamScores[index] })).sort((a, b) => b.score - a.score); 
@@ -1136,7 +1164,10 @@ function showFinalRanking() {
     modal.id = 'final-ranking-modal'; 
     modal.innerHTML = `
         <div class="modal-content ranking-modal">
-            <div class="modal-header text-center"><h2 class="text-4xl font-bold">🏆 최종 순위 발표 🏆</h2></div>
+            <div class="modal-header flex justify-between items-center">
+                <h2 class="text-4xl font-bold">🏆 최종 순위 발표 🏆</h2>
+                <button onclick="closeFinalRankingModal()" class="text-white text-4xl hover:text-gray-300 transition">&times;</button>
+            </div>
             <div class="modal-body p-8">
                 <div class="ranking-container">${teamRankings.map((team, rank) => `
                     <div class="ranking-item-compact rank-${rank + 1}" data-rank="${rank + 1}">
@@ -1154,6 +1185,12 @@ function showFinalRanking() {
     setTimeout(() => { if (typeof confetti === 'function') confetti({ particleCount: 300, spread: 90, origin: { y: 0.4 } }); }, 500); 
 }
 
+// 최종 랭킹 모달 닫기 함수
+function closeFinalRankingModal() {
+    const modal = document.getElementById('final-ranking-modal');
+    if (modal) modal.remove();
+}
+
 // 키보드 단축키 처리
 function handleKeyPress(e) { 
     if (quizModal.classList.contains('hidden')) return; 
@@ -1167,6 +1204,7 @@ function handleKeyPress(e) {
 window.closeScoreStatusModal = closeScoreStatusModal;
 window.showScoreStatusModal = showScoreStatusModal;
 window.adjustTeamScore = adjustTeamScore;
+window.closeFinalRankingModal = closeFinalRankingModal;
 window.retryYouTube = retryYouTube;
 window.openYouTubeDirectly = openYouTubeDirectly;
 window.copyYouTubeLink = copyYouTubeLink;
