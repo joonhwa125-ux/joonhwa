@@ -1,17 +1,17 @@
-// Quiz Data with YouTube Links
+// Quiz Data with YouTube Links - 모든 URL을 embed 형식으로 수정
 const quizData = [
     { 
         bonus: true, 
         question: "다음은 악인의 운명에 관한 말씀입니다.<span class='context'>빈칸에 들어갈 말을 순서대로 말하세요.</span><span class='quote'>\"바람에 나는 (  )와 같고 (  )을 견디지 못하며\n(  )들의 모임에 들지 못하며 그 길은 (  )할 것이다\"</span>", 
         answer: "겨, 심판, 의인, 망", 
         hint: "시편 1편",
-        youtube: "https://youtu.be/PrpqHpHTW3Q?si=e_GeAxKTaC58eTqx"
+        youtube: "PrpqHpHTW3Q"
     },
     { 
         question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
         answer: "방패, 영광", 
         hint: "시편 3편",
-        youtube: "https://www.youtube.com/embed/3dZ8hq5d7HI"
+        youtube: "https://www.youtube.com/watch?v=R_Xu2ir5qqI&list=RDR_Xu2ir5qqI&start_radio=1"
     },
     { 
         type: 'multiple-choice', 
@@ -19,7 +19,7 @@ const quizData = [
         options: ["용암을 내뿜는 화산", "오물을 쏟아내는 하수구", "열린 무덤", "독을 내뿜는 거미줄"], 
         answerIndex: 2, 
         hint: "시편 5편",
-        youtube: "https://www.youtube.com/embed/VKiMRJNGlng"
+        youtube: "https://www.youtube.com/watch?v=cjQ7d4_OUWw&list=RDcjQ7d4_OUWw&start_radio=1"
     },
     { 
         type: 'multiple-choice', 
@@ -27,7 +27,7 @@ const quizData = [
         options: ["하나님의 공의", "하나님 없는 인생들의 승리", "원수의 멸망", "이방 나라들의 심판"], 
         answerIndex: 1, 
         hint: "시편 9편",
-        youtube: "https://www.youtube.com/embed/RBmg0hQh8nQ"
+        youtube: "https://youtu.be/_zxVFaOS6Rg"
     },
     { 
         type: 'multiple-choice', 
@@ -35,7 +35,7 @@ const quizData = [
         options: ["(1) 반석", "(2) 요새", "(3) 창", "(4) 구원의 뿔"], 
         answerIndex: 2, 
         hint: "시편 18편",
-        youtube: "https://www.youtube.com/embed/fvKM6MZniNA"
+        youtube: "https://youtu.be/jrfwR4i53w4"
     },
     { 
         bonus: true, 
@@ -43,7 +43,7 @@ const quizData = [
         question: "하나님의 말씀에 대한 명칭과 그 기능을 연결하세요.", 
         answer: '1-ㄴ, 2-ㄷ, 3-ㄱ, 4-ㄹ', 
         hint: "시편 19편",
-        youtube: "https://www.youtube.com/embed/BzpBqaRurFk",
+        youtube: "https://www.youtube.com/watch?v=StRI2O-dT50",
         matchingData: { 
             left: ['1. 여호와의 율법', '2. 여호와의 증거', '3. 여호와의 교훈', '4. 여호와의 계명'], 
             right: ['ㄱ. 마음을 기쁘게 함', 'ㄴ. 영혼을 소성시킴', 'ㄷ. 우둔한 자로 지혜롭게 함', 'ㄹ. 눈을 밝게 함'], 
@@ -56,7 +56,7 @@ const quizData = [
         options: ["시편 12편", "시편 22편", "시편 33편", "시편 43편"], 
         answerIndex: 1, 
         hint: "엘리 엘리 라마 사막다니",
-        youtube: "https://www.youtube.com/embed/9qQ5KKzAGVw"
+        youtube: "https://www.youtube.com/watch?v=FpWLfu3bsZA"
     },
     { 
         type: 'multiple-choice', 
@@ -64,7 +64,7 @@ const quizData = [
         options: ["하늘", "산", "주의 지성소", "궁전"], 
         answerIndex: 2, 
         hint: "시편 28편",
-        youtube: "https://www.youtube.com/embed/VlB4m5v3gTI"
+        youtube: "https://www.youtube.com/watch?v=wkdkMxGVOKQ"
     },
     { 
         type: 'multiple-choice', 
@@ -72,7 +72,7 @@ const quizData = [
         options: ["자기의 죄악이 드러나지 않을 것임", "자신의 연약함", "자신의 의로움", "악을 거절함"], 
         answerIndex: 0, 
         hint: "시편 36편",
-        youtube: "https://www.youtube.com/embed/vfF5Y3aT1Wc"
+        youtube: "https://www.youtube.com/watch?v=1M3IusEoXt8"
     },
     { 
         type: 'multiple-choice', 
@@ -80,14 +80,14 @@ const quizData = [
         options: ["악인의 보복을 받을까봐", "남의 일에 간섭할 필요가 없기에", "악인의 번영은 일시적이기 때문에", "사람은 자신의 운명대로 사는 것이므로"], 
         answerIndex: 2, 
         hint: "시편 37편",
-        youtube: "https://www.youtube.com/embed/o_3oBc5Zcss"
+        youtube: "https://www.youtube.com/watch?v=NATmz9TGpdk"
     },
     { 
         bonus: true, 
         question: "'마스길'이란 히브리어는 무슨 뜻입니까?", 
         answer: "교훈, 교훈시", 
         hint: "시편 32편",
-        youtube: "https://www.youtube.com/embed/DXDGE_lRI0E"
+        youtube: "https://www.youtube.com/watch?v=lYM5nQwuZ90"
     },
     { 
         type: 'multiple-choice', 
@@ -95,7 +95,7 @@ const quizData = [
         options: ["만군의 여호와께서 우리와 함께 하시니", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
         answerIndex: 0, 
         hint: "시편 46편",
-        youtube: "https://www.youtube.com/embed/kNMUur0mJTQ"
+        youtube: "https://www.youtube.com/watch?v=ElYObIDOUoM"
     },
     { 
         type: 'multiple-choice', 
@@ -103,19 +103,19 @@ const quizData = [
         options: ["거룩한 산", "하나님의 요새", "시온 산", "하나님의 성"], 
         answerIndex: 1, 
         hint: "시편 48편",
-        youtube: "https://www.youtube.com/embed/i0AgENR1FhM"
+        youtube: "https://www.youtube.com/watch?v=Zo9CLo7PQrw&feature=youtu.be"
     },
     { 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"사람은 존귀하나 장구하지 못함이여\n(         ) 같도다\"</span>", 
         answer: "멸망하는 짐승", 
         hint: "시편 49편",
-        youtube: "https://www.youtube.com/embed/L6tC9BWKe3o"
+        youtube: "https://www.youtube.com/watch?v=ISHuuFoLQbU"
     },
     { 
         question: "다윗이 밧세바와 동침한 후 지은\n회개의 시는 시편 몇 편입니까?", 
         answer: "시편 51편", 
         hint: "시편의 표제에 기록되어 있습니다.",
-        youtube: "https://www.youtube.com/embed/E1BciSW9nwM"
+        youtube: "https://www.youtube.com/watch?v=zkVzW3zGl3A&feature=youtu.be"
     },
     { 
         type: 'multiple-choice', 
@@ -123,7 +123,7 @@ const quizData = [
         options: ["연약한 심령", "값비싼 번제", "상한 심령", "자신의 의"], 
         answerIndex: 2, 
         hint: "시편 51편",
-        youtube: "https://www.youtube.com/embed/FJO_vTKEwD4"
+        youtube: "https://www.youtube.com/watch?v=nP_eoEPW12g"
     },
     { 
         type: 'multiple-choice', 
@@ -131,20 +131,20 @@ const quizData = [
         options: ["골수와 기름진 것", "주의 인자하심", "탈취한 물건을 나누는 것", "주님의 권능"], 
         answerIndex: 1, 
         hint: "시편 63편",
-        youtube: "https://www.youtube.com/embed/e4XqJdgXF_Q"
+        youtube: "https://www.youtube.com/watch?v=u1Zk32exTvg"
     },
     { 
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나은즉\n악인의 장막에 사는 것보다\n내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나음즉\n악인의 장막에 사는 것보다\n내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
         answer: "문지기", 
         hint: "시편 84편",
-        youtube: "https://www.youtube.com/embed/jkQAJZNxXD8"
+        youtube: "https://www.youtube.com/watch?v=a4eUJNLjxjw&feature=youtu.be"
     },
     { 
         bonus: true, 
         question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도\n그 연수의 자랑은 (  )와 (  )뿐이요\n신속히 가니 우리가 (  )가나이다...\n우리에게 우리의 날 (  )함을 가르치사\n지혜로운 마음을 얻게 하소서\"</span>", 
         answer: "수고, 슬픔, 날아가, 계수", 
         hint: "시편 90편",
-        youtube: "https://www.youtube.com/embed/pQELN4VQ9Vg"
+        youtube: "https://www.youtube.com/watch?v=vJmqCi4a2vg"
     },
     { 
         type: 'multiple-choice', 
@@ -152,40 +152,40 @@ const quizData = [
         options: ["르비딤", "양식", "므리바", "맛사"], 
         answerIndex: 1, 
         hint: "시편 95편",
-        youtube: "https://www.youtube.com/embed/K2Mfq6gn5NI"
+        youtube: "https://www.youtube.com/watch?v=rndS3FU-Qso"
     },
     { 
         bonus: true, 
         question: "시편은 모두 몇 권, 몇 편으로 구성되어 있습니까?", 
         answer: "5권, 150편", 
         hint: "모세오경",
-        youtube: "https://www.youtube.com/embed/j9phNEaPrv8"
+        youtube: "https://www.youtube.com/watch?v=8cVZ-S3Z4-4&list=RD8cVZ-S3Z4-4&start_radio=1"
     },
     { 
         bonus: true, 
         question: "'할렐루야'의 뜻은 무엇입니까?", 
         answer: "여호와를 찬양하라", 
         hint: "시편 111편",
-        youtube: "https://www.youtube.com/embed/LcBNZmz1tOI"
+        youtube: "https://www.youtube.com/watch?v=CeHkhgQdyGI"
     },
     { 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고\n즐겁게 헌신하니 (         ) 같은\n주의 청년들이 주께 나오는도다\"</span>", 
         answer: "새벽 이슬", 
         hint: "시편 110편",
-        youtube: "https://www.youtube.com/embed/dUrLqDBLzqA"
+        youtube: "https://www.youtube.com/watch?v=QXhsA621WZA&feature=youtu.be"
     },
     { 
         bonus: true, 
         question: "하나님의 지존하심을 나타내는 말씀입니다.<span class='context'>빈칸을 순서대로 채우세요.</span><span class='quote'>\"높은 곳에 앉으셨으나 (   ) 낮추사\n천지를 살피시고 (   ) 자를 먼지 더미에서 일으키시며\n궁핍한 자를 (   ) 더미에서 들어 세워...\"</span>", 
         answer: "스스로, 가난한, 거름", 
         hint: "시편 113편",
-        youtube: "https://www.youtube.com/embed/3F50tC4T4AM"
+        youtube: "https://www.youtube.com/watch?v=AEf_pX52Z-0&feature=youtu.be"
     },
     { 
         question: "성경 전체 가운데 가장 짧은 장은 어디입니까?", 
         answer: "시편 117편", 
-        hint: "이 2절로 되어있습니다.",
-        youtube: "https://www.youtube.com/embed/xQwnH8th_fs"
+        hint: "2절로 되어있습니다.",
+        youtube: "https://www.youtube.com/watch?v=B5kV3pk_7_s&list=RDB5kV3pk_7_s&start_radio=1"
     },
     { 
         type: 'multiple-choice', 
@@ -193,7 +193,7 @@ const quizData = [
         options: ["등", "정금", "꿀", "소금"], 
         answerIndex: 3, 
         hint: "시편 119편",
-        youtube: "https://www.youtube.com/embed/Wc5EHhS7eHw"
+        youtube: "https://www.youtube.com/watch?v=cGUz6ByIxxw"
     },
     { 
         type: 'multiple-choice', 
@@ -201,24 +201,45 @@ const quizData = [
         options: ["거짓된 혀", "젊은 자의 자식", "노인의 지혜", "부자의 재물"], 
         answerIndex: 1, 
         hint: "시편 127편",
-        youtube: "https://www.youtube.com/embed/3qA_HvF5UXo"
+        youtube: "https://www.youtube.com/watch?v=iqBneGgE5rI"
     },
     { 
         type: 'multiple-choice', 
         question: "다음 중 시편의 저자가 아닌 사람은 누구입니까?", 
         options: ["다윗", "엘리사", "모세", "솔로몬"], 
         answerIndex: 1, 
-        hint: "",
-        youtube: "https://www.youtube.com/embed/j9phNEaPrv8"
+        hint: "선지자",
+        youtube: "https://www.youtube.com/watch?v=vQeAmrM17BM&list=RDvQeAmrM17BM&start_radio=1"
     },
     { 
         bonus: true, 
-        question: "할렐루야로 시작하여 할렐루야로 끝나는\n'할렐루야 시'는 총 몇 개입니까?", 
+        question: "할렐루야로 시작하여 할렐루야로 끝나는\n'할렐루야 시'는 이 몇 개입니까?", 
         answer: "8개", 
         hint: "시편 106, 113, 135, 146, 147, 148, 149, 150편",
-        youtube: "https://www.youtube.com/embed/Kkr9uyd-3iA"
+        youtube: "https://www.youtube.com/watch?v=50Pzah2Ia3Q&list=RD50Pzah2Ia3Q&start_radio=1"
     }
 ];
+
+// 유튜브 URL 처리 함수 추가
+function getYouTubeEmbedUrl(videoId) {
+    if (!videoId) return null;
+    
+    // 이미 embed URL인 경우 그대로 반환
+    if (videoId.includes('embed/')) {
+        return videoId;
+    }
+    
+    // watch?v= 형식에서 video ID만 추출
+    let extractedId = videoId;
+    if (videoId.includes('watch?v=')) {
+        extractedId = videoId.split('watch?v=')[1].split('&')[0];
+    } else if (videoId.includes('youtu.be/')) {
+        extractedId = videoId.split('youtu.be/')[1].split('?')[0];
+    }
+    
+    // embed URL로 변환하고 필요한 매개변수 추가
+    return `https://www.youtube.com/embed/${extractedId}?autoplay=0&rel=0&modestbranding=1&playsinline=1`;
+}
 
 const rounds = [
     { 
@@ -554,12 +575,27 @@ function openQuizModalWithScoreInput(index) {
         document.getElementById('hint-text').textContent = data.hint;
     }
     
+    // 유튜브 관련 수정된 부분
     const youtubeBtn = document.getElementById('youtube-btn');
+    const youtubePlayer = document.getElementById('youtube-player');
+    
     if (data.youtube) {
-        document.getElementById('youtube-player').src = data.youtube;
-        youtubeBtn.classList.remove('hidden');
+        const embedUrl = getYouTubeEmbedUrl(data.youtube);
+        if (embedUrl) {
+            youtubePlayer.src = embedUrl;
+            youtubeBtn.classList.remove('hidden');
+            
+            // iframe 로드 에러 처리
+            youtubePlayer.onerror = function() {
+                console.error('유튜브 영상 로드 실패:', embedUrl);
+                showYouTubeError();
+            };
+        } else {
+            youtubeBtn.classList.add('hidden');
+        }
     } else {
         youtubeBtn.classList.add('hidden');
+        youtubePlayer.src = '';
     }
     
     if (data.type === 'multiple-choice') {
@@ -575,6 +611,43 @@ function openQuizModalWithScoreInput(index) {
     quizModal.classList.remove('hidden');
 }
 
+// 유튜브 에러 처리 함수
+function showYouTubeError() {
+    const youtubeContainer = document.getElementById('youtube-container');
+    const youtubePlayer = document.getElementById('youtube-player');
+    
+    youtubePlayer.style.display = 'none';
+    
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'youtube-error';
+    errorMessage.innerHTML = `
+        <div class="error-content">
+            <span>⚠️ 영상을 불러올 수 없습니다</span>
+            <button onclick="retryYouTube()" class="retry-btn">다시 시도</button>
+        </div>
+    `;
+    
+    youtubeContainer.appendChild(errorMessage);
+}
+
+// 유튜브 재시도 함수
+function retryYouTube() {
+    const data = quizData[currentQuestionIndex];
+    const youtubePlayer = document.getElementById('youtube-player');
+    const errorMessage = document.querySelector('.youtube-error');
+    
+    if (errorMessage) {
+        errorMessage.remove();
+    }
+    
+    youtubePlayer.style.display = 'block';
+    
+    if (data.youtube) {
+        const embedUrl = getYouTubeEmbedUrl(data.youtube);
+        youtubePlayer.src = embedUrl + '&t=' + new Date().getTime(); // 캐시 방지
+    }
+}
+
 function resetModal() {
     document.getElementById('hint-box').classList.remove('show');
     document.getElementById('youtube-container').classList.add('hidden');
@@ -582,6 +655,12 @@ function resetModal() {
     document.getElementById('youtube-player').src = '';
     document.getElementById('matching-question-container').innerHTML = '';
     document.getElementById('matching-question-container').classList.add('hidden');
+    
+    // 유튜브 에러 메시지 제거
+    const errorMessage = document.querySelector('.youtube-error');
+    if (errorMessage) {
+        errorMessage.remove();
+    }
     
     // 점수 입력 사이드바 숨기기
     const scoreInputBox = document.getElementById('score-input-box');
@@ -1287,7 +1366,7 @@ function showFinalRanking() {
                         </div>
                         <div class="stat-box">
                             <div class="stat-number">${completedQuestionsHistory.length}</div>
-                            <div class="stat-label">총 문제 수</div>
+                            <div class="stat-label">이 문제 수</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-number">${Math.round(teamScores.reduce((a, b) => a + b, 0) / 4)}</div>
@@ -1390,7 +1469,7 @@ window.closeScoreStatusModal = closeScoreStatusModal;
 window.showScoreStatusModal = showScoreStatusModal;
 window.closeFinalRanking = closeFinalRanking;
 window.adjustTeamScore = adjustTeamScore;
+window.retryYouTube = retryYouTube;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', init);
-
