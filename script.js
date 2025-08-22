@@ -4,13 +4,13 @@ const quizData = [
         bonus: true, 
         question: "다음은 악인의 운명에 관한 말씀입니다.<span class='context'>빈칸에 들어갈 말을 순서대로 말하세요.</span><span class='quote'>\"바람에 나는 (  )와 같고 (  )을 견디지 못하며\n(  )들의 모임에 들지 못하며 그 길은 (  )할 것이다\"</span>", 
         answer: "겨, 심판, 의인, 망", 
-        hint: "시편 1편 - 복 있는 사람",
-        youtube: "https://www.youtube.com/embed/J5cQ5B-RlMg"
+        hint: "시편 1편",
+        youtube: "https://www.youtube.com/watch?v=PrpqHpHTW3Q"
     },
     { 
         question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
         answer: "방패, 영광", 
-        hint: "시편 3편 - 나의 방패",
+        hint: "시편 3편",
         youtube: "https://www.youtube.com/embed/3dZ8hq5d7HI"
     },
     { 
@@ -34,7 +34,7 @@ const quizData = [
         question: "다음 번호에 해당하는 낱말 중 틀린 것은?<span class='quote'>\"여호와는 나의 (1)이시요 나의 (2)시요...\n내가 그 안에 피할 나의 바위시오 나의 (3)시요\n나의 (4)이시요 나의 산성이시로다\"</span>", 
         options: ["(1) 반석", "(2) 요새", "(3) 창", "(4) 구원의 뿔"], 
         answerIndex: 2, 
-        hint: "정답은 '방패'입니다. (시편 18편)",
+        hint: "시편 18편",
         youtube: "https://www.youtube.com/embed/fvKM6MZniNA"
     },
     { 
@@ -42,7 +42,7 @@ const quizData = [
         type: 'matching', 
         question: "하나님의 말씀에 대한 명칭과 그 기능을 연결하세요.", 
         answer: '1-ㄴ, 2-ㄷ, 3-ㄱ, 4-ㄹ', 
-        hint: "시편 19편 - 여호와의 율법은 완전하여",
+        hint: "시편 19편",
         youtube: "https://www.youtube.com/embed/BzpBqaRurFk",
         matchingData: { 
             left: ['1. 여호와의 율법', '2. 여호와의 증거', '3. 여호와의 교훈', '4. 여호와의 계명'], 
@@ -55,7 +55,7 @@ const quizData = [
         question: "시편 중 예수님의 십자가 고난과\n실제적인 연관이 있는 시는 몇 편입니까?", 
         options: ["시편 12편", "시편 22편", "시편 33편", "시편 43편"], 
         answerIndex: 1, 
-        hint: "'엘리 엘리 라마 사박다니' (시편 22:1)",
+        hint: "엘리 엘리 라마 사막다니",
         youtube: "https://www.youtube.com/embed/9qQ5KKzAGVw"
     },
     { 
@@ -79,14 +79,14 @@ const quizData = [
         question: "행악자들에 대하여 불평하지 말아야 할 이유는?", 
         options: ["악인의 보복을 받을까봐", "남의 일에 간섭할 필요가 없기에", "악인의 번영은 일시적이기 때문에", "사람은 자신의 운명대로 사는 것이므로"], 
         answerIndex: 2, 
-        hint: "시편 37편 - 악을 행하는 자들 때문에 불평하지 말라",
+        hint: "시편 37편",
         youtube: "https://www.youtube.com/embed/o_3oBc5Zcss"
     },
     { 
         bonus: true, 
         question: "'마스길'이란 히브리어는 무슨 뜻입니까?", 
         answer: "교훈, 교훈시", 
-        hint: "시편 32편의 표제에 처음 등장합니다.",
+        hint: "시편 32편",
         youtube: "https://www.youtube.com/embed/DXDGE_lRI0E"
     },
     { 
@@ -94,7 +94,7 @@ const quizData = [
         question: "시편 46편에 세 차례 반복되어 등장하는 구절은?", 
         options: ["만군의 여호와께서 우리와 함께 하시니", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
         answerIndex: 0, 
-        hint: "시편 46편 - 하나님은 우리의 피난처",
+        hint: "시편 46편",
         youtube: "https://www.youtube.com/embed/kNMUur0mJTQ"
     },
     { 
@@ -122,7 +122,7 @@ const quizData = [
         question: "하나님이 구하시는 제사는 다음 중 어느 것입니까?", 
         options: ["연약한 심령", "값비싼 번제", "상한 심령", "자신의 의"], 
         answerIndex: 2, 
-        hint: "시편 51편 - 상한 심령",
+        hint: "시편 51편",
         youtube: "https://www.youtube.com/embed/FJO_vTKEwD4"
     },
     { 
@@ -136,14 +136,14 @@ const quizData = [
     { 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나은즉\n악인의 장막에 사는 것보다\n내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
         answer: "문지기", 
-        hint: "시편 84편 - 주의 장막",
+        hint: "시편 84편",
         youtube: "https://www.youtube.com/embed/jkQAJZNxXD8"
     },
     { 
         bonus: true, 
         question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도\n그 연수의 자랑은 (  )와 (  )뿐이요\n신속히 가니 우리가 (  )가나이다...\n우리에게 우리의 날 (  )함을 가르치사\n지혜로운 마음을 얻게 하소서\"</span>", 
         answer: "수고, 슬픔, 날아가, 계수", 
-        hint: "시편 90편 - 모세의 기도",
+        hint: "시편 90편",
         youtube: "https://www.youtube.com/embed/pQELN4VQ9Vg"
     },
     { 
@@ -158,14 +158,14 @@ const quizData = [
         bonus: true, 
         question: "시편은 모두 몇 권, 몇 편으로 구성되어 있습니까?", 
         answer: "5권, 150편", 
-        hint: "모세오경도 5권입니다.",
+        hint: "모세오경",
         youtube: "https://www.youtube.com/embed/j9phNEaPrv8"
     },
     { 
         bonus: true, 
         question: "'할렐루야'의 뜻은 무엇입니까?", 
         answer: "여호와를 찬양하라", 
-        hint: "할렐(찬양하라) + 야(여호와)",
+        hint: "시편 111편",
         youtube: "https://www.youtube.com/embed/LcBNZmz1tOI"
     },
     { 
@@ -192,7 +192,7 @@ const quizData = [
         question: "주의 말씀에 대한 비유로 사용된 표현이 아닌 것은?", 
         options: ["등", "정금", "꿀", "소금"], 
         answerIndex: 3, 
-        hint: "시편 119편 - 주의 말씀",
+        hint: "시편 119편",
         youtube: "https://www.youtube.com/embed/Wc5EHhS7eHw"
     },
     { 
@@ -208,7 +208,7 @@ const quizData = [
         question: "다음 중 시편의 저자가 아닌 사람은 누구입니까?", 
         options: ["다윗", "엘리사", "모세", "솔로몬"], 
         answerIndex: 1, 
-        hint: "엘리사는 선지자였습니다.",
+        hint: "",
         youtube: "https://www.youtube.com/embed/j9phNEaPrv8"
     },
     { 
