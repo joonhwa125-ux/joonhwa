@@ -226,55 +226,64 @@ function getYouTubeEmbedUrl(videoInput) {
     
     console.log('YouTube URL 처리 시작:', videoInput);
     
-    // 이미 embed URL인 경우 그대로 반환
-    if (videoInput.includes('embed/')) {
-        return videoInput;
-    }
-    
     let videoId = '';
     
     try {
-        // 다양한 YouTube URL 형식 처리
-        if (videoInput.includes('youtube.com/watch')) {
-            // https://www.youtube.com/watch?v=VIDEO_ID 형식
-            const urlParams = new URLSearchParams(videoInput.split('?')[1]);
-            videoId = urlParams.get('v');
-        } else if (videoInput.includes('youtu.be/')) {
-            // https://youtu.be/VIDEO_ID 형식
-            videoId = videoInput.split('youtu.be/')[1].split('?')[0].split('&')[0];
-        } else if (videoInput.includes('youtube.com/embed/')) {
-            // 이미 embed 형식
-            videoId = videoInput.split('embed/')[1].split('?')[0];
-        } else if (videoInput.length === 11 && /^[a-zA-Z0-9_-]+$/.test(videoInput)) {
-            // 순수 비디오 ID (11자리)
-            videoId = videoInput;
-        } else {
-            // URL에서 마지막 부분 추출 시도
-            const parts = videoInput.split('/').pop().split('?')[0];
-            if (parts.length === 11) {
-                videoId = parts;
+        // 1. 이미 embed URL인 경우
+        if (videoInput.includes('embed/')) {
+            videoId = videoInput.split('embed/')[1].split('?')[0].split('/')[0];
+        }
+        // 2. watch?v= 형식 처리 (가장 일반적)
+        else if (videoInput.includes('watch?v=')) {
+            try {
+                const url = new URL(videoInput);
+                videoId = url.searchParams.get('v');
+            } catch {
+                // URL 파싱 실패 시 정규표현식 사용
+                const match = videoInput.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+                videoId = match ? match[1] : null;
             }
+        }
+        // 3. youtu.be 단축 URL
+        else if (videoInput.includes('youtu.be/')) {
+            videoId = videoInput.split('youtu.be/')[1].split('?')[0].split('&')[0].split('/')[0];
+        }
+        // 4. YouTube Shorts URL
+        else if (videoInput.includes('youtube.com/shorts/')) {
+            videoId = videoInput.split('shorts/')[1].split('?')[0].split('/')[0];
+        }
+        // 5. 순수 비디오 ID (11자리 영숫자)
+        else if (/^[a-zA-Z0-9_-]{11}$/.test(videoInput.trim())) {
+            videoId = videoInput.trim();
+        }
+        // 6. 마지막 시도: URL에서 11자리 패턴 찾기
+        else {
+            const match = videoInput.match(/[a-zA-Z0-9_-]{11}/);
+            videoId = match ? match[0] : null;
         }
         
         // 비디오 ID 검증
-        if (!videoId || videoId.length !== 11) {
-            console.error('유효하지 않은 YouTube 비디오 ID:', videoId);
+        if (!videoId || !/^[a-zA-Z0-9_-]{11}$/.test(videoId)) {
+            console.error('유효하지 않은 YouTube 비디오 ID:', videoId, '원본:', videoInput);
             return null;
         }
         
         console.log('추출된 비디오 ID:', videoId);
         
-        // 안정적인 embed URL 생성
-        const embedUrl = `https://www.youtube.com/embed/${videoId}?` +
-            'autoplay=0&' +           // 자동재생 비활성화
-            'rel=0&' +               // 관련 동영상 비활성화  
-            'modestbranding=1&' +    // YouTube 로고 최소화
-            'playsinline=1&' +       // 모바일에서 인라인 재생
-            'enablejsapi=1&' +       // JavaScript API 활성화
-            'origin=' + encodeURIComponent(window.location.origin); // 출처 명시
-            
-        console.log('생성된 embed URL:', embedUrl);
-        return embedUrl;
+        // 여러 백업 URL 생성 시도
+        const embedUrls = [
+            // 기본 embed URL
+            `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&playsinline=1`,
+            // nocookie 도메인 사용
+            `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&playsinline=1`,
+            // 최소한의 파라미터
+            `https://www.youtube.com/embed/${videoId}?autoplay=0`,
+            // 파라미터 없는 순수 URL
+            `https://www.youtube.com/embed/${videoId}`
+        ];
+        
+        console.log('생성된 embed URLs:', embedUrls);
+        return embedUrls;
         
     } catch (error) {
         console.error('YouTube URL 파싱 중 오류:', error, videoInput);
@@ -621,39 +630,27 @@ function openQuizModalWithScoreInput(index) {
     const youtubePlayer = document.getElementById('youtube-player');
     
     if (data.youtube) {
-        const embedUrl = getYouTubeEmbedUrl(data.youtube);
-        if (embedUrl) {
+        const embedUrls = getYouTubeEmbedUrl(data.youtube);
+        if (embedUrls && embedUrls.length > 0) {
+            // 전역 변수에 URL 목록 저장 (재시도용)
+            currentYouTubeUrls = embedUrls;
+            
             // 로딩 상태 표시
             showYouTubeLoading();
             
-            // iframe 로드 완료/에러 처리
-            youtubePlayer.onload = function() {
-                console.log('YouTube 영상 로드 완료');
-                hideYouTubeLoading();
-            };
+            // 순차적으로 URL 시도
+            tryYouTubeUrls(embedUrls, 0);
             
-            youtubePlayer.onerror = function() {
-                console.error('유튜브 영상 로드 실패:', embedUrl);
-                hideYouTubeLoading();
-                showYouTubeError();
-            };
-            
-            // URL 설정 및 버튼 표시
-            youtubePlayer.src = embedUrl;
             youtubeBtn.classList.remove('hidden');
-            
-            // 타임아웃 설정 (10초 후 로딩 숨김)
-            setTimeout(() => {
-                hideYouTubeLoading();
-            }, 10000);
-            
         } else {
             console.warn('YouTube URL 처리 실패:', data.youtube);
+            currentYouTubeUrls = null;
             youtubeBtn.classList.add('hidden');
         }
     } else {
         youtubeBtn.classList.add('hidden');
         youtubePlayer.src = '';
+        currentYouTubeUrls = null;
     }
     
     if (data.type === 'multiple-choice') {
@@ -668,6 +665,75 @@ function openQuizModalWithScoreInput(index) {
     
     quizModal.classList.remove('hidden');
 }
+
+// YouTube URL들을 순차적으로 시도하는 함수
+function tryYouTubeUrls(urls, index) {
+    if (index >= urls.length) {
+        console.error('모든 YouTube URL 시도 실패');
+        hideYouTubeLoading();
+        showYouTubeError();
+        return;
+    }
+    
+    const youtubePlayer = document.getElementById('youtube-player');
+    const currentUrl = urls[index];
+    
+    console.log(`YouTube URL 시도 ${index + 1}/${urls.length}:`, currentUrl);
+    
+    // 이전 이벤트 리스너 제거
+    youtubePlayer.onload = null;
+    youtubePlayer.onerror = null;
+    
+    // 로드 성공 처리
+    youtubePlayer.onload = function() {
+        console.log('YouTube 영상 로드 성공:', currentUrl);
+        hideYouTubeLoading();
+        
+        // 실제로 콘텐츠가 로드되었는지 확인
+        setTimeout(() => {
+            try {
+                // iframe이 실제로 콘텐츠를 로드했는지 간접적으로 확인
+                if (youtubePlayer.contentWindow) {
+                    console.log('YouTube 콘텐츠 확인 완료');
+                }
+            } catch (e) {
+                // 크로스 오리진 제한으로 에러가 날 수 있지만 정상
+                console.log('YouTube 로드 완료 (CORS 제한)');
+            }
+        }, 1000);
+    };
+    
+    // 로드 실패 처리
+    youtubePlayer.onerror = function() {
+        console.warn(`YouTube URL 실패 ${index + 1}/${urls.length}:`, currentUrl);
+        
+        // 다음 URL 시도
+        setTimeout(() => {
+            tryYouTubeUrls(urls, index + 1);
+        }, 500);
+    };
+    
+    // 타임아웃 설정 (각 URL당 8초)
+    const timeoutId = setTimeout(() => {
+        console.warn(`YouTube URL 타임아웃 ${index + 1}/${urls.length}:`, currentUrl);
+        
+        // 다음 URL 시도
+        tryYouTubeUrls(urls, index + 1);
+    }, 8000);
+    
+    // 성공 시 타임아웃 취소
+    const originalOnload = youtubePlayer.onload;
+    youtubePlayer.onload = function() {
+        clearTimeout(timeoutId);
+        if (originalOnload) originalOnload();
+    };
+    
+    // URL 설정
+    youtubePlayer.src = currentUrl;
+}
+
+// 수동 재시도를 위한 전역 변수
+let currentYouTubeUrls = null;
 
 // 유튜브 로딩 상태 표시
 function showYouTubeLoading() {
@@ -721,6 +787,7 @@ function showYouTubeError() {
             <div class="error-actions">
                 <button onclick="retryYouTube()" class="retry-btn">다시 시도</button>
                 <button onclick="skipYouTube()" class="skip-btn">건너뛰기</button>
+                <button onclick="openYouTubeDirectly()" class="direct-btn">직접 열기</button>
             </div>
         </div>
     `;
@@ -730,7 +797,6 @@ function showYouTubeError() {
 
 // 개선된 유튜브 재시도 함수
 function retryYouTube() {
-    const data = quizData[currentQuestionIndex];
     const youtubePlayer = document.getElementById('youtube-player');
     const youtubeContainer = document.getElementById('youtube-container');
     
@@ -743,23 +809,19 @@ function retryYouTube() {
     
     // 플레이어 다시 표시
     youtubePlayer.style.display = 'block';
+    youtubePlayer.src = ''; // 기존 src 초기화
     
-    if (data.youtube) {
-        // 로딩 표시
+    if (currentYouTubeUrls && currentYouTubeUrls.length > 0) {
+        console.log('YouTube 재시도 시작');
         showYouTubeLoading();
         
-        // 캐시 방지를 위한 타임스탬프 추가
-        const embedUrl = getYouTubeEmbedUrl(data.youtube);
-        const retryUrl = embedUrl + '&retry=' + new Date().getTime();
-        
-        console.log('YouTube 재시도:', retryUrl);
-        
-        // 재시도 타임아웃 설정
+        // 다시 처음부터 모든 URL 시도
         setTimeout(() => {
-            hideYouTubeLoading();
-        }, 8000);
-        
-        youtubePlayer.src = retryUrl;
+            tryYouTubeUrls(currentYouTubeUrls, 0);
+        }, 500);
+    } else {
+        console.error('재시도할 YouTube URL이 없습니다');
+        showYouTubeError();
     }
 }
 
@@ -786,6 +848,30 @@ function skipYouTube() {
     }, 2000);
 }
 
+// YouTube 직접 열기 함수 (새로운 기능)
+function openYouTubeDirectly() {
+    const data = quizData[currentQuestionIndex];
+    if (data && data.youtube && currentYouTubeUrls && currentYouTubeUrls.length > 0) {
+        // 원본 YouTube URL 생성
+        let originalUrl = '';
+        
+        if (data.youtube.includes('youtube.com') || data.youtube.includes('youtu.be')) {
+            originalUrl = data.youtube;
+        } else {
+            // 비디오 ID만 있는 경우
+            const videoId = data.youtube.length === 11 ? data.youtube : 
+                           currentYouTubeUrls[0].split('embed/')[1].split('?')[0];
+            originalUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        }
+        
+        // 새 창에서 YouTube 열기
+        window.open(originalUrl, '_blank', 'noopener,noreferrer');
+        
+        // 건너뛰기 처리
+        skipYouTube();
+    }
+}
+
 function resetModal() {
     document.getElementById('hint-box').classList.remove('show');
     document.getElementById('youtube-container').classList.add('hidden');
@@ -803,6 +889,9 @@ function resetModal() {
     if (errorMessage) errorMessage.remove();
     if (loader) loader.remove();
     youtubePlayer.style.display = 'block'; // 플레이어 다시 표시
+    
+    // YouTube URL 목록 초기화
+    currentYouTubeUrls = null;
     
     // 점수 입력 사이드바 숨기기
     const scoreInputBox = document.getElementById('score-input-box');
@@ -1613,6 +1702,7 @@ window.closeFinalRanking = closeFinalRanking;
 window.adjustTeamScore = adjustTeamScore;
 window.retryYouTube = retryYouTube;
 window.skipYouTube = skipYouTube;
+window.openYouTubeDirectly = openYouTubeDirectly;
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', init);
