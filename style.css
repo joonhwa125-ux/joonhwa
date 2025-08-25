@@ -1436,3 +1436,33 @@ body {
         font-size: 1.2rem;
     }
 }
+/* style.css 파일의 맨 아래에 추가될 내용 */
+
+/* ✨ 요청하신 모래 효과 애니메이션 ✨ */
+.option-btn.dissolve-like-sand {
+    /* 애니메이션 적용 */
+    animation: dissolve-effect 1s ease-in-out forwards;
+    
+    /* 애니메이션이 진행되는 동안의 스타일 */
+    background: #d1d5db; /* 모래와 비슷한 회색톤 */
+    border-color: #9ca3af;
+    color: transparent; /* 글자 숨김 */
+    pointer-events: none; /* 중복 클릭 방지 */
+}
+
+@keyframes dissolve-effect {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+    50% {
+        opacity: 0.5;
+        filter: blur(2px) grayscale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.8);
+        filter: blur(5px) grayscale(1);
+    }
+}
