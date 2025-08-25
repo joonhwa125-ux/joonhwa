@@ -55,7 +55,7 @@ const quizData = [
         question: "시편 중 예수님의 십자가 고난과\n실제적인 연관이 있는 시는 몇 편입니까?", 
         options: ["시편 12편", "시편 22편", "시편 33편", "시편 43편"], 
         answerIndex: 1, 
-        hint: "엘리 엘리 라마 사막다니",
+        hint: "엘리 엘리 라마 사박다니",
         youtube: "Ivp6Tb3pc24"
     },
     { 
@@ -142,7 +142,7 @@ const quizData = [
     { 
         bonus: true, 
         question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도\n그 연수의 자랑은 (  )와 (  )뿐이요\n신속히 가니 우리가 (  )가나이다...\n우리에게 우리의 날 (  )함을 가르치사\n지혜로운 마음을 얻게 하소서\"</span>", 
-        answer: "수고, 슬픔, 날아가, 계수", 
+        answer: "수고, 슬픔, 날아, 계수", 
         hint: "시편 90편",
         youtube: "KWltmGAN3eY"
     },
@@ -272,11 +272,11 @@ const roundPhrases = ["주께서나와함께하심이라", "여호와는나의�
 // 상태 변수
 let currentQuestionIndex = -1;
 let currentRoundIndex = 0;
-let completedQuestionsInRound = 0;
+// let completedQuestionsInRound = 0; // 💥 REMOVED: Replaced by gameState
 let teamScores = [0, 0, 0, 0];
 let teamNames = ['1팀', '2팀', '3팀', '4팀'];
 let incorrectAttempts = 0;
-let completedQuestionsHistory = [];
+// let completedQuestionsHistory = []; // 💥 REMOVED: Replaced by gameState
 let synth;
 let currentYouTubeUrl = null;
 let youtubeLoadTimeout;
@@ -288,9 +288,9 @@ let gameState = {
     savedTeamScores: [0, 0, 0, 0],
     currentScreen: 'start', // 'start', 'roundIntro', 'game'
     roundStates: [
-        { completedQuestions: [], completedCount: 0, flippedCards: [] },
-        { completedQuestions: [], completedCount: 0, flippedCards: [] },
-        { completedQuestions: [], completedCount: 0, flippedCards: [] }
+        { completedCount: 0, flippedCards: [] },
+        { completedCount: 0, flippedCards: [] },
+        { completedCount: 0, flippedCards: [] }
     ]
 };
 
@@ -309,74 +309,39 @@ function restoreGameState() {
     teamScores = [...gameState.savedTeamScores];
 }
 
-// 현재 라운드 상태 저장 (개선됨)
+// 현재 라운드 상태 저장 (수정됨)
 function saveCurrentRoundState() {
-    if (currentRoundIndex >= 0 && currentRoundIndex < gameState.roundStates.length) {
-        const flippedCards = getFlippedCardStates();
-        gameState.roundStates[currentRoundIndex] = {
-            completedQuestions: [...completedQuestionsHistory],
-            completedCount: completedQuestionsInRound,
-            flippedCards: flippedCards
-        };
-        console.log(`라운드 ${currentRoundIndex + 1} 상태 저장:`, gameState.roundStates[currentRoundIndex]);
-    }
+    if (currentRoundIndex < 0 || currentRoundIndex >= gameState.roundStates.length) return;
+    
+    // 1. 현재 DOM에서 플립된 카드들의 인덱스를 가져옵니다.
+    const flippedCardIndices = Array.from(document.querySelectorAll('#quiz-grid .quiz-card.flipped'))
+                                    .map(card => parseInt(card.dataset.index));
+
+    // 2. gameState에 직접 저장합니다.
+    const currentState = gameState.roundStates[currentRoundIndex];
+    currentState.flippedCards = flippedCardIndices;
+    currentState.completedCount = flippedCardIndices.length; // 완료된 문제 수는 플립된 카드 수와 동일합니다.
+
+    console.log(`[Save] Round ${currentRoundIndex + 1} state saved. Flipped cards:`, currentState.flippedCards);
 }
 
-// 라운드 상태 복원 (개선됨)
+// 라운드 상태 복원 (수정됨)
 function restoreRoundState(roundIndex) {
-    if (roundIndex >= 0 && roundIndex < gameState.roundStates.length) {
-        const roundState = gameState.roundStates[roundIndex];
-        console.log(`라운드 ${roundIndex + 1} 상태 복원:`, roundState);
-        
-        completedQuestionsHistory = [...(roundState.completedQuestions || [])];
-        completedQuestionsInRound = roundState.completedCount || 0;
-        
-        // DOM이 준비된 후 카드 상태 복원
-        if (document.getElementById('quiz-grid').children.length > 0) {
-            restoreFlippedCardStates(roundState.flippedCards || []);
-            updateNextRoundButton();
-        } else {
-            // DOM이 아직 준비되지 않은 경우 짧은 지연 후 재시도
-            setTimeout(() => {
-                restoreFlippedCardStates(roundState.flippedCards || []);
-                updateNextRoundButton();
-            }, 50);
-        }
-    } else {
-        console.log('유효하지 않은 라운드 인덱스:', roundIndex);
+    const roundState = gameState.roundStates[roundIndex];
+    if (!roundState || !roundState.flippedCards || roundState.flippedCards.length === 0) {
+        console.log(`[Restore] No state to restore for Round ${roundIndex + 1}.`);
+        updateNextRoundButton(); // 복원할 게 없어도 다음 라운드 버튼 상태는 확인해야 함
+        return; // 복원할 상태가 없으면 종료
     }
-}
 
-// 현재 플립된 카드들의 상태를 가져오기 (개선됨)
-function getFlippedCardStates() {
-    const flippedCards = [];
-    const quizGrid = document.getElementById('quiz-grid');
-    if (!quizGrid) return flippedCards;
-    
-    quizGrid.querySelectorAll('.quiz-card.flipped').forEach(card => {
-        const index = parseInt(card.dataset.index);
-        if (!isNaN(index)) {
-            flippedCards.push(index);
-        }
-    });
-    console.log('저장된 플립 카드들:', flippedCards);
-    return flippedCards;
-}
+    console.log(`[Restore] Restoring state for Round ${roundIndex + 1}. Flipped cards:`, roundState.flippedCards);
 
-// 플립된 카드 상태 복원 (개선됨)
-function restoreFlippedCardStates(flippedCardIndices) {
-    const round = rounds[currentRoundIndex];
-    const phrase = roundPhrases[currentRoundIndex];
     const quizGrid = document.getElementById('quiz-grid');
-    
-    if (!quizGrid || !flippedCardIndices || !Array.isArray(flippedCardIndices)) {
-        console.log('카드 상태 복원 실패: 데이터 없음');
-        return;
-    }
-    
-    console.log('복원할 플립 카드들:', flippedCardIndices);
-    
-    flippedCardIndices.forEach(qIndex => {
+    const phrase = roundPhrases[roundIndex];
+    const round = rounds[roundIndex];
+
+    // 저장된 '플립된 카드 인덱스' 목록을 순회하며 복원
+    roundState.flippedCards.forEach(qIndex => {
         const card = quizGrid.querySelector(`[data-index="${qIndex}"]`);
         if (card && !card.classList.contains('flipped')) {
             card.classList.add('flipped');
@@ -386,22 +351,26 @@ function restoreFlippedCardStates(flippedCardIndices) {
             const charIndex = sortedIndices.indexOf(qIndex);
             if (phrase && charIndex >= 0 && charIndex < phrase.length) {
                 const backElement = card.querySelector('.quiz-card-back');
-                if (backElement) {
-                    backElement.textContent = phrase[charIndex];
-                }
+                if (backElement) backElement.textContent = phrase[charIndex];
             }
         }
     });
-    console.log('카드 상태 복원 완료');
+
+    // 다음 라운드 버튼 상태 업데이트
+    updateNextRoundButton();
 }
 
-// 다음 라운드 버튼 상태 업데이트
+// 다음 라운드 버튼 상태 업데이트 (수정됨)
 function updateNextRoundButton() {
     const round = rounds[currentRoundIndex];
-    if (completedQuestionsInRound === round.questionIndices.length) {
-        const nextBtn = document.getElementById('next-round-btn');
+    const completedCount = gameState.roundStates[currentRoundIndex].completedCount || 0;
+
+    const nextBtn = document.getElementById('next-round-btn');
+    if (completedCount === round.questionIndices.length) {
         nextBtn.classList.remove('hidden');
         nextBtn.textContent = currentRoundIndex < rounds.length - 1 ? '다음 라운드' : '퀴즈 종료!';
+    } else {
+        nextBtn.classList.add('hidden');
     }
 }
 
@@ -470,12 +439,11 @@ function startGame() {
     const inputs = document.querySelectorAll('.team-name-input'); 
     inputs.forEach((input, index) => { if (input.value.trim()) teamNames[index] = input.value.trim(); }); 
     
-    saveGameState(); // 상태 저장
+    saveGameState();
     gameState.isGameStarted = true;
     
     teamScores = [0, 0, 0, 0]; 
     currentRoundIndex = 0; 
-    completedQuestionsHistory = []; 
     startScreen.classList.add('hidden'); 
     showRoundIntro(); 
 }
@@ -484,7 +452,7 @@ function startGame() {
 function showRoundIntro() { 
     const round = rounds[currentRoundIndex]; 
     document.getElementById('round-title').textContent = round.title; 
-    document.getElementById('round-description').innerHTML = round.description; // innerHTML 사용
+    document.getElementById('round-description').innerHTML = round.description;
     roundIntro.classList.remove('hidden'); 
     gameScreen.classList.add('hidden'); 
     gameState.currentScreen = 'roundIntro';
@@ -496,15 +464,12 @@ function startRound() {
     roundIntro.classList.add('hidden'); 
     gameScreen.classList.remove('hidden'); 
     gameState.currentScreen = 'game';
-    setupRoundWithHiddenScoreboard();
     
-    // 저장된 라운드 상태 복원
-    restoreRoundState(currentRoundIndex);
+    setupRoundWithHiddenScoreboard();
 }
 
 // 다음 라운드로 이동
 function nextRound() { 
-    // 현재 라운드 상태 저장
     saveCurrentRoundState();
     
     if (currentRoundIndex < rounds.length - 1) { 
@@ -520,28 +485,28 @@ function resetGame() {
     if (confirm('게임을 초기화하시겠습니까?')) location.reload(); 
 }
 
-// 라운드 설정 (점수판 숨김 처리 포함) - 단순화됨
+// 라운드 설정 (점수판 숨김 처리 포함) - 수정됨
 function setupRoundWithHiddenScoreboard() { 
     const round = rounds[currentRoundIndex]; 
     const quizGrid = document.getElementById('quiz-grid'); 
     const progressContainer = document.getElementById('round-progress-container'); 
     
-    // 항상 새로 생성 (상태는 나중에 복원)
     quizGrid.innerHTML = ''; 
     progressContainer.innerHTML = ''; 
     
-    // 새 라운드인 경우에만 초기화 (저장된 상태가 없는 경우)
-    if (!gameState.roundStates[currentRoundIndex].completedQuestions.length) {
-        completedQuestionsInRound = 0; 
-    }
-    
-    // 라운드 진행도 탭(북마크) 생성
     rounds.forEach((_, index) => { 
         const bookmark = document.createElement('button'); 
         bookmark.className = 'bookmark'; 
         bookmark.textContent = `${index + 1} 라운드`; 
-        if (index < currentRoundIndex) bookmark.classList.add('completed'); 
-        else if (index === currentRoundIndex) bookmark.classList.add('active'); 
+        
+        const roundState = gameState.roundStates[index];
+        if (roundState && roundState.completedCount === rounds[index].questionIndices.length) {
+            bookmark.classList.add('completed');
+        }
+        
+        if (index === currentRoundIndex) {
+            bookmark.classList.add('active');
+        }
         
         bookmark.addEventListener('click', () => switchToRound(index));
         progressContainer.appendChild(bookmark); 
@@ -549,7 +514,6 @@ function setupRoundWithHiddenScoreboard() {
     
     document.getElementById('next-round-btn').classList.add('hidden'); 
     
-    // 퀴즈 카드 생성
     const sortedIndices = [...round.questionIndices].sort((a, b) => a - b); 
     sortedIndices.forEach((qIndex, localIndex) => { 
         const data = quizData[qIndex]; 
@@ -557,11 +521,14 @@ function setupRoundWithHiddenScoreboard() {
         const card = createQuizCard(qIndex, localIndex, data); 
         quizGrid.appendChild(card); 
     }); 
+
+    // ★★★ DOM 생성이 끝난 직후, 해당 라운드의 상태를 즉시 복원합니다. ★★★
+    restoreRoundState(currentRoundIndex);
     
     hideScoreboardAndAddButton(); 
 }
 
-// 퀴즈 카드 DOM 요소 생성
+// 퀴즈 카드 DOM 요소 생성 (수정됨)
 function createQuizCard(qIndex, localIndex, data) { 
     const card = document.createElement('div'); 
     card.className = 'quiz-card'; 
@@ -569,41 +536,38 @@ function createQuizCard(qIndex, localIndex, data) {
     card.innerHTML = `<div class="quiz-card-inner"><div class="quiz-card-face quiz-card-front ${data.bonus ? 'bonus' : ''}"><span class="card-number">${localIndex + 1}</span></div><div class="quiz-card-face quiz-card-back"></div></div>`; 
     
     card.addEventListener('click', () => { 
-        // 이미 플립된 카드라면 모달만 열기
+        openQuizModalWithScoreInput(qIndex); 
+        
         if (card.classList.contains('flipped')) { 
-            openQuizModalWithScoreInput(qIndex); 
             return; 
         }
         
         try { playFlipSound(); } catch (e) { console.error(e); } 
-        openQuizModalWithScoreInput(qIndex); 
         
-        // 상태 업데이트
-        if (!completedQuestionsHistory.includes(qIndex)) {
-            completedQuestionsHistory.push(qIndex); 
-        }
         card.classList.add('flipped'); 
-        completedQuestionsInRound++; 
         
-        console.log('카드 클릭:', qIndex, 'completedQuestionsHistory:', completedQuestionsHistory);
+        // ★★★ 전역 변수 대신 gameState를 직접 업데이트 ★★★
+        const currentState = gameState.roundStates[currentRoundIndex];
+        if (!currentState.flippedCards.includes(qIndex)) {
+            currentState.flippedCards.push(qIndex);
+        }
+        currentState.completedCount = currentState.flippedCards.length;
         
-        // 현재 라운드 상태 즉시 저장
-        saveCurrentRoundState();
+        console.log(`[Click] Card ${qIndex} flipped. Round ${currentRoundIndex + 1} completed count: ${currentState.completedCount}`);
         
-        // 카드 뒷면에 글자 표시
         const phrase = roundPhrases[currentRoundIndex]; 
         const round = rounds[currentRoundIndex]; 
         const sortedIndices = [...round.questionIndices].sort((a, b) => a - b); 
         const charIndex = sortedIndices.indexOf(qIndex); 
-        if (phrase && charIndex < phrase.length) { 
+        if (phrase && charIndex >= 0 && charIndex < phrase.length) { 
             card.querySelector('.quiz-card-back').textContent = phrase[charIndex]; 
         } 
         
-        // 모든 문제를 풀면 다음 라운드 버튼 표시
         updateNextRoundButton();
     }); 
     return card; 
 }
+
 
 // 점수판 숨기고 '점수 현황 보기' 버튼을 header에 추가
 function hideScoreboardAndAddButton() { 
@@ -621,7 +585,6 @@ function openQuizModalWithScoreInput(index) {
     initializeScoreInputInModal();
     addScoreInputToModal();
     
-    // 라운드-문제번호 형식으로 표시
     const questionNumber = getQuestionNumber(index);
     document.getElementById('question-number').textContent = questionNumber;
     
@@ -629,7 +592,6 @@ function openQuizModalWithScoreInput(index) {
     const answerText = data.answer || (data.options ? data.options[data.answerIndex] : '');
     document.getElementById('answer-text').textContent = answerText;
     
-    // 힌트 버튼 설정
     if (data.hint) {
         document.getElementById('hint-text').textContent = data.hint;
         document.getElementById('hint-btn').classList.remove('hidden');
@@ -637,7 +599,6 @@ function openQuizModalWithScoreInput(index) {
         document.getElementById('hint-btn').classList.add('hidden');
     }
     
-    // YouTube 버튼 설정
     const youtubeBtn = document.getElementById('youtube-btn');
     if (data.youtube) {
         currentYouTubeUrl = getYouTubeEmbedUrl(data.youtube);
@@ -647,7 +608,6 @@ function openQuizModalWithScoreInput(index) {
         if (youtubeBtn) youtubeBtn.classList.add('hidden');
     }
     
-    // 문제 유형에 따른 UI 설정
     if (data.type === 'multiple-choice') {
         renderOptions(data);
         answerBtn.style.display = 'none';
@@ -666,10 +626,11 @@ function getQuestionNumber(questionIndex) {
         const round = rounds[roundIndex];
         const questionPosition = round.questionIndices.indexOf(questionIndex);
         if (questionPosition !== -1) {
-            return `${roundIndex + 1}-${questionPosition + 1}`;
+            const completedCount = gameState.roundStates[roundIndex].completedCount || 0;
+            return `${roundIndex + 1} 라운드 (${completedCount}/${round.questionIndices.length})`;
         }
     }
-    return questionIndex + 1; // 기본값 (라운드를 찾지 못한 경우)
+    return questionIndex + 1;
 }
 
 // YouTube 영상 로드
@@ -799,18 +760,14 @@ function closeModal() {
 
 // 힌트 표시/숨기기
 function showHint() {
-    // 현재 정답 화면이 표시되어 있는지 확인
     const isAnswerViewVisible = !answerView.classList.contains('hidden');
     
     if (isAnswerViewVisible) {
-        // 정답 화면에서 힌트를 누르면 문제 화면으로 돌아가기
         showQuestionView();
-        // 그리고 힌트 박스 표시
         setTimeout(() => {
             document.getElementById('hint-box').classList.add('show');
         }, 100);
     } else {
-        // 문제 화면에서는 단순히 힌트 박스 토글
         document.getElementById('hint-box').classList.toggle('show');
     }
 }
@@ -839,15 +796,16 @@ function showAnswerWithScoreInput() {
     setTimeout(() => { 
         questionView.classList.add('hidden'); 
         answerView.classList.remove('hidden', 'fade-out'); 
-        questionViewBtn.classList.remove('hidden'); 
         document.getElementById('hint-box').classList.remove('show'); 
         const scoreInputBtn = document.getElementById('score-input-btn'); 
         if (scoreInputBtn) scoreInputBtn.classList.remove('hidden'); 
         if (data.type === 'matching') { 
+            questionViewBtn.classList.add('hidden');
             questionView.classList.remove('hidden', 'fade-out'); 
             document.getElementById('answer-display').classList.add('hidden'); 
             drawMatchingAnswerLines(data.matchingData); 
         } else { 
+            questionViewBtn.classList.remove('hidden');
             document.getElementById('answer-display').classList.remove('hidden'); 
         } 
     }, 400); 
@@ -900,7 +858,7 @@ function checkAnswer(button, selectedIndex, correctIndex) {
         try { playIncorrectSound(); } catch (e) { console.error(e); } 
         button.classList.add('incorrect'); 
         incorrectAttempts++; 
-        showFeedback(false); // 단순한 오답 피드백
+        showFeedback(false);
         if (incorrectAttempts >= 3) { 
             document.querySelectorAll('.option-btn').forEach(btn => { 
                 btn.disabled = true; 
@@ -1037,6 +995,18 @@ function showScoreAppliedFeedback() {
 }
 
 function showScoreInput() { 
+    const data = quizData[currentQuestionIndex];
+    
+    if (data && data.type === 'matching') {
+        const oldSvg = document.querySelector('#matching-question-container svg');
+        if (oldSvg) oldSvg.remove();
+        
+        answerView.classList.add('hidden');
+        questionView.classList.remove('hidden');
+        answerBtn.classList.remove('hidden');
+        questionViewBtn.classList.add('hidden');
+    }
+    
     selectedTeam = null; 
     selectedScore = null; 
     document.querySelectorAll('.team-select-btn, .score-select-btn').forEach(btn => btn.classList.remove('selected')); 
@@ -1076,6 +1046,7 @@ function showScoreStatusModal() {
     const modal = document.createElement('div'); 
     modal.className = 'modal-overlay'; 
     modal.id = 'score-status-modal'; 
+    const completedCount = gameState.roundStates[currentRoundIndex].completedCount || 0;
     modal.innerHTML = `
         <div class="modal-content score-status-modal">
             <div class="modal-header flex justify-between items-center">
@@ -1083,7 +1054,7 @@ function showScoreStatusModal() {
                 <button onclick="closeScoreStatusModal()" class="text-white text-4xl">&times;</button>
             </div>
             <div class="modal-body p-6">
-                <div class="mb-6"><strong>${rounds[currentRoundIndex].title}</strong> (${completedQuestionsInRound}/${rounds[currentRoundIndex].questionIndices.length} 완료)</div>
+                <div class="mb-6"><strong>${rounds[currentRoundIndex].title}</strong> (${completedCount}/${rounds[currentRoundIndex].questionIndices.length} 완료)</div>
                 <div class="score-status-container">
                     <h3 class="ranking-title">🏆 현재 순위</h3>
                     <div class="ranking-grid">
@@ -1122,7 +1093,6 @@ function adjustTeamScore(teamIndex, adjustment) {
     try { playSound(adjustment > 0 ? "C5" : "A3", "16n"); } catch (e) { console.error(e); } 
 }
 
-// 랭킹 아이템 HTML 생성 로직을 함수로 분리
 function createRankingItemHTML(team, rank) {
     return `
         <div class="ranking-item-compact rank-${rank + 1}">
@@ -1145,7 +1115,6 @@ function updateModalScoresAndRankings() {
     const teamRankings = teamNames.map((name, index) => ({ name, score: teamScores[index], index })).sort((a, b) => b.score - a.score); 
     const rankingList = document.querySelector('.ranking-list'); 
     if(rankingList) {
-        // 분리된 함수를 사용하여 중복 제거
         rankingList.innerHTML = teamRankings.map((team, rank) => createRankingItemHTML(team, rank)).join('');
     }
 }
@@ -1155,38 +1124,43 @@ function closeScoreStatusModal() {
     if (modal) modal.remove(); 
 }
 
-// 점수 조정 섹션 접기/펼치기 함수
 function toggleScoreAdjustment() {
     const content = document.getElementById('score-adjustment-content');
     content.classList.toggle('expanded');
 }
 
 function getRankEmoji(rank) { 
-    return ['🥇', '🥈', '🥉'][rank - 1] || '🅿'; 
+    return ['🥇', '🥈', '🥉'][rank - 1] || '🏿'; 
 }
 
 /**
- * 지정된 라운드로 게임 화면을 전환하는 함수 (상태 보존 개선)
+ * 지정된 라운드로 게임 화면을 전환하는 함수 (수정됨)
  * @param {number} targetRoundIndex - 이동할 라운드의 인덱스
  */
 function switchToRound(targetRoundIndex) {
-    // 현재 보고 있는 라운드를 다시 클릭하면 아무것도 하지 않음
-    if (targetRoundIndex === currentRoundIndex) return;
+    if (targetRoundIndex === currentRoundIndex && gameState.currentScreen === 'game') return;
 
-    console.log(`Switching from round ${currentRoundIndex + 1} to ${targetRoundIndex + 1}`);
+    console.log(`[Switching] Round ${currentRoundIndex + 1} -> ${targetRoundIndex + 1}`);
 
-    // 1. 현재 라운드의 진행 상태를 저장합니다.
-    saveCurrentRoundState();
+    // 1. (가장 중요) 현재 라운드의 진행 상태를 "먼저" 저장합니다.
+    if (gameState.currentScreen === 'game') {
+        saveCurrentRoundState();
+    }
 
     // 2. 현재 라운드 인덱스를 목표 라운드로 변경합니다.
     currentRoundIndex = targetRoundIndex;
 
-    // 3. 퀴즈 그리드를 완전히 새로 생성합니다.
-    setupRoundWithHiddenScoreboard();
-
-    // 4. 목표 라운드의 저장된 상태를 복원합니다.
-    restoreRoundState(targetRoundIndex);
+    // 3. 게임 화면이 표시되어 있지 않으면 표시
+    if (gameState.currentScreen !== 'game') {
+        roundIntro.classList.add('hidden');
+        gameScreen.classList.remove('hidden');
+        gameState.currentScreen = 'game';
+    }
+    
+    // 4. 새 라운드 화면을 설정하고, 저장된 상태를 즉시 복원합니다.
+    setupRoundWithHiddenScoreboard(); 
 }
+
 
 // 최종 순위 표시
 function showFinalRanking() { 
@@ -1217,7 +1191,6 @@ function showFinalRanking() {
     setTimeout(() => { if (typeof confetti === 'function') confetti({ particleCount: 300, spread: 90, origin: { y: 0.4 } }); }, 500); 
 }
 
-// 최종 랭킹 모달 닫기 함수
 function closeFinalRankingModal() {
     const modal = document.getElementById('final-ranking-modal');
     if (modal) modal.remove();
@@ -1233,12 +1206,8 @@ function handleKeyPress(e) {
 }
 
 // --- 십자말 퀴즈 통합 로직 (수정됨) ---
-
 function setupCrossword() {
-    // 크로스워드 전용 변수들을 함수 내부로 이동
-    let crosswordSelectedIntersections = new Set(); // 크로스워드 전용 선택 기록
     const puzzleData = [
-        // 가로 단어들 (상>하, 좌>우 순서로 1-7번)
         { id: 1, word: "여호와", clue: "'스스로 계신 자'라는 뜻을 가진 하나님의 고유한 이름입니다.", orientation: 'horizontal', start: [0, 0] },
         { id: 2, word: "이스라엘", clue: "야곱이 하나님과 겨루어 이긴 후에 받은 새 이름이며, 그의 후손으로 이루어진 민족을 가리킵니다.", orientation: 'horizontal', start: [1, 5] },
         { id: 3, word: "나단", clue: "다윗 왕 시대의 선지자로, 다윗의 죄를 책망하고 하나님의 뜻을 전했습니다.", orientation: 'horizontal', start: [2, 2] },
@@ -1246,8 +1215,6 @@ function setupCrossword() {
         { id: 5, word: "예루살렘", clue: "다윗 왕이 수도로 삼은 곳이며, 하나님의 성전이 세워졌던 거룩한 도시입니다.", orientation: 'horizontal', start: [6, 3] },
         { id: 6, word: "시편", clue: "구약성경에 포함된 150편의 시와 찬양, 기도의 모음집입니다.", orientation: 'horizontal', start: [7, 0] },
         { id: 7, word: "의인", clue: "하나님 앞에서 올바르고 정의롭게 사는 사람을 뜻합니다.", orientation: 'horizontal', start: [8, 7] },
-        
-        // 세로 단어들 (상>하, 좌>우 순서로 8-15번)
         { id: 8, word: "여두둔", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 시편 표제에 그의 이름이 언급됩니다.", orientation: 'vertical', start: [0, 0] },
         { id: 9, word: "마스길", clue: "시편의 표제 중 하나로, '교훈' 또는 '지혜의 시'를 의미합니다.", orientation: 'vertical', start: [0, 6] },
         { id: 10, word: "엘리", clue: "'나의 하나님'이라는 뜻으로, 예수님께서 십자가에서 외치신 말씀(시편 22편)에 나오는 단어입니다.", orientation: 'vertical', start: [1, 8] },
@@ -1273,7 +1240,6 @@ function setupCrossword() {
         if (!grid) return;
         grid.innerHTML = '';
         
-        // CSS 미디어 쿼리와 동기화하여 JS에서 셀 크기 조정
         const cellSize = window.innerWidth < 400 ? 35 : (window.innerWidth < 600 ? 42 : 55);
         grid.style.gridTemplateRows = `repeat(${GRID_ROWS}, ${cellSize}px)`;
         grid.style.gridTemplateColumns = `repeat(${GRID_COLS}, ${cellSize}px)`;
@@ -1310,22 +1276,16 @@ function setupCrossword() {
             }
         });
     }
-    
-    let selectedIntersections = new Set(); // 이미 선택한 교차점들을 추적
 
     function handleCellClick(e) {
         const cell = e.target.closest('.word-cell');
         if (!cell) return;
         document.querySelectorAll('.cell.highlight').forEach(c => c.classList.remove('highlight'));
-        const wordIds = cell.dataset.words.split(',').filter(Boolean);
 
-        // 셀의 위치 정보 가져오기
         const cellIndex = Array.from(grid.children).indexOf(cell);
         const row = Math.floor(cellIndex / GRID_COLS);
         const col = cellIndex % GRID_COLS;
-        const cellKey = `${row}-${col}`;
 
-        // 실제 교차점인지 확인 - 해당 위치에서 가로와 세로 단어가 실제로 만나는지 체크
         const wordsAtThisPosition = [];
         puzzleData.forEach(wordData => {
             const { word, orientation, start, id } = wordData;
@@ -1341,7 +1301,6 @@ function setupCrossword() {
                     checkRow += i;
                 }
                 
-                // 현재 클릭한 셀 위치와 일치하는지 확인
                 if (checkRow === row && checkCol === col) {
                     wordsAtThisPosition.push({ id, orientation });
                     break;
@@ -1349,13 +1308,11 @@ function setupCrossword() {
             }
         });
 
-        // 가로와 세로 단어가 실제로 만나는지 확인
         const horizontalWords = wordsAtThisPosition.filter(w => w.orientation === 'horizontal');
         const verticalWords = wordsAtThisPosition.filter(w => w.orientation === 'vertical');
-        const isRealIntersection = horizontalWords.length > 0 && verticalWords.length > 0;
+        const isIntersection = horizontalWords.length > 0 && verticalWords.length > 0;
 
-        // 실제 교차점이고, 아직 선택하지 않았고, 정답이 공개되지 않은 경우에만 선택 버튼 표시
-        if (isRealIntersection && !selectedIntersections.has(cellKey) && !cell.classList.contains('correct')) {
+        if (isIntersection) {
             clueText.innerHTML = '어떤 문제를 푸시겠어요?';
             document.getElementById('main-buttons').classList.add('hidden');
             choiceButtons.classList.remove('hidden');
@@ -1366,23 +1323,24 @@ function setupCrossword() {
                 const button = document.createElement('button');
                 button.textContent = `${wordData.id}번 (${wordData.orientation === 'horizontal' ? '가로' : '세로'})`;
                 button.onclick = () => {
-                    selectedIntersections.add(cellKey); // 선택했음을 기록
                     showClueForWord(wordData);
                 };
                 choiceButtons.appendChild(button);
             });
             modal.classList.remove('hidden');
         } else {
-            // 일반 단어 셀이거나 이미 선택했거나 답이 공개된 경우 바로 첫 번째 단어로 이동
-            const firstWordId = wordsAtThisPosition.length > 0 ? wordsAtThisPosition[0].id : wordIds[0];
-            const wordData = puzzleData.find(w => w.id == firstWordId);
-            if (wordData) showClueForWord(wordData);
+            if (wordsAtThisPosition.length > 0) {
+                const wordData = puzzleData.find(w => w.id == wordsAtThisPosition[0].id);
+                if (wordData) showClueForWord(wordData);
+            }
         }
     }
 
     function showClueForWord(wordData) {
         document.getElementById('main-buttons').classList.remove('hidden');
         choiceButtons.classList.add('hidden');
+        choiceButtons.innerHTML = '';
+        
         currentWord = wordData;
         if (currentWord) {
             highlightWordCells(currentWord);
@@ -1420,6 +1378,9 @@ function setupCrossword() {
         modal.classList.add('hidden');
         document.querySelectorAll('.cell.highlight').forEach(c => c.classList.remove('highlight'));
         currentWord = null;
+        choiceButtons.innerHTML = '';
+        choiceButtons.classList.add('hidden');
+        document.getElementById('main-buttons').classList.remove('hidden');
     }
 
     if (grid) {
@@ -1429,7 +1390,6 @@ function setupCrossword() {
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
         initializeGrid();
         populateGrid();
-        // 창 크기 변경 시 그리드 다시 그리기 (반응형 대응)
         window.addEventListener('resize', initializeGrid);
     }
 }
@@ -1446,10 +1406,9 @@ window.copyYouTubeLink = copyYouTubeLink;
 
 // DOM 로딩 완료 후 스크립트 초기화
 document.addEventListener('DOMContentLoaded', () => {
-    init(); // 기존 퀴즈 앱 초기화
-    setupCrossword(); // 십자말 퀴즈 초기화
+    init();
+    setupCrossword();
 
-    // 화면 전환 이벤트 리스너 추가
     const startScreen = document.getElementById('start-screen');
     const crosswordScreen = document.getElementById('crossword-screen');
     
