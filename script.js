@@ -1,48 +1,178 @@
-// Quiz Data with YouTube Links
+// =================================================================================
+// 퀴즈 데이터 (2024년 8월 25일 업데이트)
+// =================================================================================
 const quizData = [
-    { 
+    // 1라운드: 시편에 대하여 (8문제)
+    { // 0
+        type: 'multiple-choice', 
+        question: "시편 중 예수님의 십자가 고난과 실제적인 연관이 있는 시는 몇 편입니까?", 
+        options: ["시편 12편", "시편 22편", "시편 33편", "시편 43편"], 
+        answerIndex: 1, 
+        hint: "엘리 엘리 라마 사박다니",
+        youtube: "Ivp6Tb3pc24"
+    },
+    { // 1
+        bonus: true, 
+        question: "'마스길'이란 히브리어는 무슨 뜻입니까?", 
+        answer: "교훈 또는 교훈시", 
+        hint: "시편 32편의 표제를 참고하세요.",
+        youtube: "lYM5nQwuZ90"
+    },
+    { // 2
+        bonus: true, 
+        question: "시편은 모두 몇 권, 몇 편으로 구성되어 있습니까?", 
+        answer: "5권, 150편", 
+        hint: "모세오경과 관련이 있습니다.",
+        youtube: "C-DXVoQOnW8"
+    },
+    { // 3
+        question: "성경 전체 가운데 가장 짧은 장은 어디입니까?", 
+        answer: "시편 117편", 
+        hint: "단 2절로 되어있습니다.",
+        youtube: "B5kV3pk_7_s"
+    },
+    { // 4
+        type: 'multiple-choice', 
+        question: "다음 중 시편의 저자가 아닌 사람은 누구입니까?", 
+        options: ["다윗", "엘리사", "모세", "솔로몬"], 
+        answerIndex: 1, 
+        hint: "열왕기하에 등장하는 선지자입니다.",
+        youtube: "8cVZ-S3Z4-4"
+    },
+    { // 5
+        bonus: true, 
+        question: "할렐루야로 시작하여 할렐루야로 끝나는 '할렐루야 시'는 몇 개입니까?", 
+        answer: "8개", 
+        hint: "시편 106, 113, 135, 146-150편",
+        youtube: "5zB7GuYv1Qk"
+    },
+    { // 6
+        type: 'multiple-choice', 
+        question: "시편 46편에 세 차례 반복되어 등장하는 구절은?", 
+        options: ["만군의 여호와께서 우리와 함께 하시니", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
+        answerIndex: 0, 
+        hint: "야곱의 하나님은 우리의 피난처시로다",
+        youtube: "ElYObIDOUoM"
+    },
+    { // 7
+        bonus: true, 
+        question: "'할렐루야'의 뜻은 무엇입니까?", 
+        answer: "여호와를 찬양하라", 
+        hint: "시편의 마지막 편(150편)의 주제입니다.",
+        youtube: "CeHkhgQdyGI"
+    },
+
+    // 2라운드: 우리를 향하여 (11문제)
+    { // 8
+        type: 'multiple-choice', 
+        question: "광야에서 이스라엘 백성이 하나님을 시험하였던 장소와 관련 없는 것은?", 
+        options: ["르비딤", "양식", "므리바", "맛사"], 
+        answerIndex: 1, 
+        hint: "시편 95편 8-9절",
+        youtube: "rndS3FU-Qso"
+    },
+    { // 9
         bonus: true, 
         question: "다음은 악인의 운명에 관한 말씀입니다.<span class='context'>빈칸에 들어갈 말을 순서대로 말하세요.</span><span class='quote'>\"바람에 나는 (  )와 같고 (  )을 견디지 못하며\n(  )들의 모임에 들지 못하며 그 길은 (  )할 것이다\"</span>", 
         answer: "겨, 심판, 의인, 망", 
         hint: "시편 1편",
         youtube: "PrpqHpHTW3Q"
     },
-    { 
-        question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
-        answer: "방패, 영광", 
-        hint: "시편 3편",
-        youtube: "R_Xu2ir5qqI"
-    },
-    { 
+    { // 10
         type: 'multiple-choice', 
-        question: "다윗은 속이고 아첨하는 악인의 목구멍이\n마치 무엇과 같다고 했습니까?", 
+        question: "다윗은 속이고 아첨하는 악인의 목구멍이 마치 무엇과 같다고 했습니까?", 
         options: ["용암을 내뿜는 화산", "오물을 쏟아내는 하수구", "열린 무덤", "독을 내뿜는 거미줄"], 
         answerIndex: 2, 
-        hint: "시편 5편",
+        hint: "시편 5편 9절",
         youtube: "FINEjhf4tN8"
     },
-    { 
+    { // 11
         type: 'multiple-choice', 
         question: "시편 9편에서 시인이 원하지 않는 것은 무엇입니까?", 
         options: ["하나님의 공의", "하나님 없는 인생들의 승리", "원수의 멸망", "이방 나라들의 심판"], 
         answerIndex: 1, 
-        hint: "시편 9편",
+        hint: "시편 9편 19절",
         youtube: "_zxVFaOS6Rg"
     },
-    { 
+    { // 12
         type: 'multiple-choice', 
-        question: "다음 번호에 해당하는 낱말 중 틀린 것은?<span class='quote'>\"여호와는 나의 (1)이시요 나의 (2)시요...\n내가 그 안에 피할 나의 바위시오 나의 (3)시요\n나의 (4)이시요 나의 산성이시로다\"</span>", 
+        question: "악인들이 스스로 자랑하는 것은 무엇입니까?", 
+        options: ["자기의 죄악이 드러나지 않을 것임", "자신의 연약함", "자신의 의로움", "악을 거절함"], 
+        answerIndex: 0, 
+        hint: "시편 36편 2절",
+        youtube: "1M3IusEoXt8"
+    },
+    { // 13
+        type: 'multiple-choice', 
+        question: "행악자들에 대하여 불평하지 말아야 할 이유는?", 
+        options: ["악인의 보복을 받을까봐", "남의 일에 간섭할 필요가 없기에", "악인의 번영은 일시적이기 때문에", "사람은 자신의 운명대로 사는 것이므로"], 
+        answerIndex: 2, 
+        hint: "시편 37편 1-2절",
+        youtube: "NATmz9TGpdk"
+    },
+    { // 14
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"사람은 존귀하나 장구하지 못함이여 (         ) 같도다\"</span>", 
+        answer: "멸망하는 짐승", 
+        hint: "시편 49편 20절",
+        youtube: "ISHuuFoLQbU"
+    },
+    { // 15
+        question: "다윗이 밧세바와 동침한 후 지은 회개의 시는 시편 몇 편입니까?", 
+        answer: "시편 51편", 
+        hint: "시편의 표제에 기록되어 있습니다.",
+        youtube: "XCw-swDk9Bs"
+    },
+    { // 16
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나음즉 악인의 장막에 사는 것보다 내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
+        answer: "문지기", 
+        hint: "시편 84편 10절",
+        youtube: "a4eUJNLjxjw"
+    },
+    { // 17
+        bonus: true, 
+        question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도 그 연수의 자랑은 (  )와 (  )뿐이요 신속히 가니 우리가 (  )가나이다...우리에게 우리의 날 (  )함을 가르치사 지혜로운 마음을 얻게 하소서\"</span>", 
+        answer: "수고, 슬픔, 날아, 계수", 
+        hint: "시편 90편 10, 12절",
+        youtube: "KWltmGAN3eY"
+    },
+    { // 18
+        type: 'multiple-choice', 
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"(         )은/는 장사의 수중의 화살 같으니\"</span>", 
+        options: ["거짓된 혀", "젊은 자의 자식", "노인의 지혜", "부자의 재물"], 
+        answerIndex: 1, 
+        hint: "시편 127편 4절",
+        youtube: "CYS9IxsR7P4"
+    },
+
+    // 3라운드: 하나님을 향하여 (10문제)
+    { // 19
+        type: 'multiple-choice', 
+        question: "다윗은 기도할 때 어디를 향하여 손을 들고 기도하였습니까?", 
+        options: ["하늘", "산", "주의 지성소", "궁전"], 
+        answerIndex: 2, 
+        hint: "시편 28편 2절",
+        youtube: "wkdkMxGVOKQ"
+    },
+    { // 20
+        question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
+        answer: "방패, 영광", 
+        hint: "시편 3편 3절",
+        youtube: "R_Xu2ir5qqI"
+    },
+    { // 21
+        type: 'multiple-choice', 
+        question: "다음 번호에 해당하는 낱말 중 틀린 것은?<span class='quote'>\"여호와는 나의 (1)이시요 나의 (2)시요...\n내가 그 안에 피할 나의 바위시요 나의 (3)시요\n나의 (4)이시요 나의 산성이시로다\"</span>", 
         options: ["(1) 반석", "(2) 요새", "(3) 창", "(4) 구원의 뿔"], 
         answerIndex: 2, 
-        hint: "시편 18편",
+        hint: "시편 18편 2절",
         youtube: "jrfwR4i53w4"
     },
-    { 
+    { // 22
         bonus: true, 
         type: 'matching', 
         question: "하나님의 말씀에 대한 명칭과 그 기능을 연결하세요.", 
         answer: '1-ㄴ, 2-ㄷ, 3-ㄱ, 4-ㄹ', 
-        hint: "시편 19편",
+        hint: "시편 19편 7-8절",
         youtube: "StRI2O-dT50",
         matchingData: { 
             left: ['1. 여호와의 율법', '2. 여호와의 증거', '3. 여호와의 교훈', '4. 여호와의 계명'], 
@@ -50,54 +180,7 @@ const quizData = [
             connections: [1, 2, 0, 3] 
         } 
     },
-    { 
-        type: 'multiple-choice', 
-        question: "시편 중 예수님의 십자가 고난과\n실제적인 연관이 있는 시는 몇 편입니까?", 
-        options: ["시편 12편", "시편 22편", "시편 33편", "시편 43편"], 
-        answerIndex: 1, 
-        hint: "엘리 엘리 라마 사박다니",
-        youtube: "Ivp6Tb3pc24"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "다윗은 기도할 때 어디를 향하여\n손을 들고 기도하였습니까?", 
-        options: ["하늘", "산", "주의 지성소", "궁전"], 
-        answerIndex: 2, 
-        hint: "시편 28편",
-        youtube: "wkdkMxGVOKQ"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "악인들이 스스로 자랑하는 것은 무엇입니까?", 
-        options: ["자기의 죄악이 드러나지 않을 것임", "자신의 연약함", "자신의 의로움", "악을 거절함"], 
-        answerIndex: 0, 
-        hint: "시편 36편",
-        youtube: "1M3IusEoXt8"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "행악자들에 대하여 불평하지 말아야 할 이유는?", 
-        options: ["악인의 보복을 받을까봐", "남의 일에 간섭할 필요가 없기에", "악인의 번영은 일시적이기 때문에", "사람은 자신의 운명대로 사는 것이므로"], 
-        answerIndex: 2, 
-        hint: "시편 37편",
-        youtube: "NATmz9TGpdk"
-    },
-    { 
-        bonus: true, 
-        question: "'마스길'이란 히브리어는 무슨 뜻입니까?", 
-        answer: "교훈, 교훈시", 
-        hint: "시편 32편",
-        youtube: "lYM5nQwuZ90"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "시편 46편에 세 차례 반복되어 등장하는 구절은?", 
-        options: ["만군의 여호와께서 우리와 함께 하시니", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
-        answerIndex: 0, 
-        hint: "시편 46편",
-        youtube: "ElYObIDOUoM"
-    },
-    { 
+    { // 23
         type: 'multiple-choice', 
         question: "나머지 셋과 공통된 의미를 지닌 표현이 아닌 것은?", 
         options: ["거룩한 산", "하나님의 요새", "시온 산", "하나님의 성"], 
@@ -105,188 +188,92 @@ const quizData = [
         hint: "시편 48편",
         youtube: "i0AgENR1FhM"
     },
-    { 
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"사람은 존귀하나 장구하지 못함이여\n(         ) 같도다\"</span>", 
-        answer: "멸망하는 짐승", 
-        hint: "시편 49편",
-        youtube: "ISHuuFoLQbU"
-    },
-    { 
-        question: "다윗이 밧세바와 동침한 후 지은\n회개의 시는 시편 몇 편입니까?", 
-        answer: "시편 51편", 
-        hint: "시편의 표제에 기록되어 있습니다.",
-        youtube: "XCw-swDk9Bs"
-    },
-    { 
+    { // 24
         type: 'multiple-choice', 
         question: "하나님이 구하시는 제사는 다음 중 어느 것입니까?", 
         options: ["연약한 심령", "값비싼 번제", "상한 심령", "자신의 의"], 
         answerIndex: 2, 
-        hint: "시편 51편",
+        hint: "시편 51편 17절",
         youtube: "zkVzW3zGl3A"
     },
-    { 
+    { // 25
         type: 'multiple-choice', 
         question: "빈칸에 들어갈 말은?<span class='quote'>\"(         )이 생명보다 나으므로\n내 입술이 주를 찬양할 것이라\"</span>", 
         options: ["골수와 기름진 것", "주의 인자하심", "탈취한 물건을 나누는 것", "주님의 권능"], 
         answerIndex: 1, 
-        hint: "시편 63편",
+        hint: "시편 63편 3절",
         youtube: "u1Zk32exTvg"
     },
-    { 
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나음즉\n악인의 장막에 사는 것보다\n내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
-        answer: "문지기", 
-        hint: "시편 84편",
-        youtube: "a4eUJNLjxjw"
-    },
-    { 
-        bonus: true, 
-        question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도\n그 연수의 자랑은 (  )와 (  )뿐이요\n신속히 가니 우리가 (  )가나이다...\n우리에게 우리의 날 (  )함을 가르치사\n지혜로운 마음을 얻게 하소서\"</span>", 
-        answer: "수고, 슬픔, 날아, 계수", 
-        hint: "시편 90편",
-        youtube: "KWltmGAN3eY"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "광야에서 이스라엘 백성이 하나님을 시험하였던\n장소와 관련 없는 것은?", 
-        options: ["르비딤", "양식", "므리바", "맛사"], 
-        answerIndex: 1, 
-        hint: "시편 95편",
-        youtube: "rndS3FU-Qso"
-    },
-    { 
-        bonus: true, 
-        question: "시편은 모두 몇 권, 몇 편으로 구성되어 있습니까?", 
-        answer: "5권, 150편", 
-        hint: "모세오경",
-        youtube: "C-DXVoQOnW8"
-    },
-    { 
-        bonus: true, 
-        question: "'할렐루야'의 뜻은 무엇입니까?", 
-        answer: "여호와를 찬양하라", 
-        hint: "시편 111편",
-        youtube: "CeHkhgQdyGI"
-    },
-    { 
+    { // 26
         question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고\n즐겁게 헌신하니 (         ) 같은\n주의 청년들이 주께 나오는도다\"</span>", 
         answer: "새벽 이슬", 
-        hint: "시편 110편",
+        hint: "시편 110편 3절",
         youtube: "QXhsA621WZA"
     },
-    { 
+    { // 27
         bonus: true, 
         question: "하나님의 지존하심을 나타내는 말씀입니다.<span class='context'>빈칸을 순서대로 채우세요.</span><span class='quote'>\"높은 곳에 앉으셨으나 (   ) 낮추사\n천지를 살피시고 (   ) 자를 먼지 더미에서 일으키시며\n궁핍한 자를 (   ) 더미에서 들어 세워...\"</span>", 
         answer: "스스로, 가난한, 거름", 
-        hint: "시편 113편",
+        hint: "시편 113편 5-7절",
         youtube: "AEf_pX52Z-0"
     },
-    { 
-        question: "성경 전체 가운데 가장 짧은 장은 어디입니까?", 
-        answer: "시편 117편", 
-        hint: "이 2절로 되어있습니다.",
-        youtube: "B5kV3pk_7_s"
-    },
-    { 
+    { // 28
         type: 'multiple-choice', 
         question: "주의 말씀에 대한 비유로 사용된 표현이 아닌 것은?", 
         options: ["등", "정금", "꿀", "소금"], 
         answerIndex: 3, 
         hint: "시편 119편",
         youtube: "cGUz6ByIxxw"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"(         )은/는 장사의 수중의 화살 같으니\"</span>", 
-        options: ["거짓된 혀", "젊은 자의 자식", "노인의 지혜", "부자의 재물"], 
-        answerIndex: 1, 
-        hint: "시편 127편",
-        youtube: "CYS9IxsR7P4"
-    },
-    { 
-        type: 'multiple-choice', 
-        question: "다음 중 시편의 저자가 아닌 사람은 누구입니까?", 
-        options: ["다윗", "엘리사", "모세", "솔로몬"], 
-        answerIndex: 1, 
-        hint: "",
-        youtube: "8cVZ-S3Z4-4"
-    },
-    { 
-        bonus: true, 
-        question: "할렐루야로 시작하여 할렐루야로 끝나는\n'할렐루야 시'는 이 몇 개입니까?", 
-        answer: "8개", 
-        hint: "시편 106, 113, 135, 146, 147, 148, 149, 150편",
-        youtube: "5zB7GuYv1Qk"
     }
 ];
 
-// YouTube 비디오 ID를 추출하여 임베드 URL을 생성하는 함수
-function getYouTubeEmbedUrl(videoInput) {
-    if (!videoInput) return null;
-    let videoId = null;
-    const patterns = [
-        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/,
-        /(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]{11})/,
-        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
-        /(?:https?:\/\/)?(?:www\.)?youtube-nocookie\.com\/embed\/([a-zA-Z0-9_-]{11})/,
-        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/
-    ];
-    for (const pattern of patterns) {
-        const match = videoInput.match(pattern);
-        if (match && match[1]) {
-            videoId = match[1];
-            break;
-        }
-    }
-    if (!videoId && /^[a-zA-Z0-9_-]{11}$/.test(videoInput.trim())) {
-        videoId = videoInput.trim();
-    }
-    if (!videoId) {
-        console.error('유효한 YouTube 비디오 ID를 추출할 수 없습니다:', videoInput);
-        return null;
-    }
-    return `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`;
-}
-
-// 라운드 구성 데이터
+// =================================================================================
+// 라운드 구성 데이터 (2024년 8월 25일 업데이트)
+// =================================================================================
 const rounds = [
     { 
-        title: "1라운드: 하나님을 향하여", 
-        description: "하나님의 성품, 말씀, 그리고 우리와의 관계에 대한 질문들을 통해<br>하나님이 어떤 분이신지 알아봅시다.", 
-        questionIndices: [1, 11, 12, 16, 23, 4, 5, 25, 15, 21, 22] 
+        title: "1라운드: 시편에 대하여", 
+        description: "시편 자체의 구성, 특징, 배경 지식, 그리고 시편에 대한 기본적인 이해를 묻는 질문들입니다.", 
+        questionIndices: [0, 1, 2, 3, 4, 5, 6, 7] // 8문제
     },
     { 
         title: "2라운드: 우리를 향하여", 
-        description: "의인과 악인의 삶, 그리고 성도의 지혜에 대한 질문들을 통해 시편이 우리의 삶에 어떻게 적용되는지 살펴봅시다.", 
-        questionIndices: [0, 2, 3, 8, 9, 13, 14, 18, 17, 26] 
+        description: "시편을 통해 배우는 인간의 삶, 회개, 죄, 운명, 지혜 등 '우리'의 내면과 삶의 태도에 대한 내용을 다룹니다.", 
+        questionIndices: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] // 11문제
     },
     { 
-        title: "3라운드: 시편에 대하여", 
-        description: "시편의 저자, 역사적 배경, 구조 등 시편 자체에 대한 흥미로운 사실들을 알아봅시다.", 
-        questionIndices: [6, 7, 19, 27, 10, 20, 24, 28] 
+        title: "3라운드: 하나님을 향하여", 
+        description: "시편에 나타난 하나님의 성품, 이름, 속성, 하나님을 향한 우리의 고백과 찬양, 그리고 우리의 신앙적 태도를 다룹니다.", 
+        questionIndices: [19, 20, 21, 22, 23, 24, 25, 26, 27, 28] // 10문제
     }
 ];
 
-const roundPhrases = ["주께서나와함께하심이라", "여호와는나의목자시니", "내잔이넘치나이다"];
+// =================================================================================
+// 라운드 완료 문구 (2024년 8월 25일 업데이트)
+// =================================================================================
+const roundPhrases = [
+    "내잔이넘치나이다", 
+    "주께서나와함께하심이라", 
+    "여호와는나의목자시니"
+];
+
 
 // 상태 변수
 let currentQuestionIndex = -1;
 let currentRoundIndex = 0;
-// let completedQuestionsInRound = 0; // 💥 REMOVED: Replaced by gameState
 let teamScores = [0, 0, 0, 0];
 let teamNames = ['1팀', '2팀', '3팀', '4팀'];
 let incorrectAttempts = 0;
-// let completedQuestionsHistory = []; // 💥 REMOVED: Replaced by gameState
-let synth;
 let currentYouTubeUrl = null;
 let youtubeLoadTimeout;
+let hasAnswerBeenRevealed = false;
 
-// 게임 상태 관리 - 라운드별 상태 저장
+// 게임 상태 관리
 let gameState = {
     isGameStarted: false,
     savedTeamNames: ['1팀', '2팀', '3팀', '4팀'],
     savedTeamScores: [0, 0, 0, 0],
-    currentScreen: 'start', // 'start', 'roundIntro', 'game'
+    currentScreen: 'start',
     roundStates: [
         { completedCount: 0, flippedCards: [] },
         { completedCount: 0, flippedCards: [] },
@@ -298,85 +285,10 @@ let gameState = {
 let selectedTeam = null;
 let selectedScore = null;
 
-// 상태 저장 및 복원 함수
-function saveGameState() {
-    gameState.savedTeamNames = [...teamNames];
-    gameState.savedTeamScores = [...teamScores];
-}
-
-function restoreGameState() {
-    teamNames = [...gameState.savedTeamNames];
-    teamScores = [...gameState.savedTeamScores];
-}
-
-// 현재 라운드 상태 저장 (수정됨)
-function saveCurrentRoundState() {
-    if (currentRoundIndex < 0 || currentRoundIndex >= gameState.roundStates.length) return;
-    
-    // 1. 현재 DOM에서 플립된 카드들의 인덱스를 가져옵니다.
-    const flippedCardIndices = Array.from(document.querySelectorAll('#quiz-grid .quiz-card.flipped'))
-                                    .map(card => parseInt(card.dataset.index));
-
-    // 2. gameState에 직접 저장합니다.
-    const currentState = gameState.roundStates[currentRoundIndex];
-    currentState.flippedCards = flippedCardIndices;
-    currentState.completedCount = flippedCardIndices.length; // 완료된 문제 수는 플립된 카드 수와 동일합니다.
-
-    console.log(`[Save] Round ${currentRoundIndex + 1} state saved. Flipped cards:`, currentState.flippedCards);
-}
-
-// 라운드 상태 복원 (수정됨)
-function restoreRoundState(roundIndex) {
-    const roundState = gameState.roundStates[roundIndex];
-    if (!roundState || !roundState.flippedCards || roundState.flippedCards.length === 0) {
-        console.log(`[Restore] No state to restore for Round ${roundIndex + 1}.`);
-        updateNextRoundButton(); // 복원할 게 없어도 다음 라운드 버튼 상태는 확인해야 함
-        return; // 복원할 상태가 없으면 종료
-    }
-
-    console.log(`[Restore] Restoring state for Round ${roundIndex + 1}. Flipped cards:`, roundState.flippedCards);
-
-    const quizGrid = document.getElementById('quiz-grid');
-    const phrase = roundPhrases[roundIndex];
-    const round = rounds[roundIndex];
-
-    // 저장된 '플립된 카드 인덱스' 목록을 순회하며 복원
-    roundState.flippedCards.forEach(qIndex => {
-        const card = quizGrid.querySelector(`[data-index="${qIndex}"]`);
-        if (card && !card.classList.contains('flipped')) {
-            card.classList.add('flipped');
-            
-            // 카드 뒷면에 글자 표시
-            const sortedIndices = [...round.questionIndices].sort((a, b) => a - b);
-            const charIndex = sortedIndices.indexOf(qIndex);
-            if (phrase && charIndex >= 0 && charIndex < phrase.length) {
-                const backElement = card.querySelector('.quiz-card-back');
-                if (backElement) backElement.textContent = phrase[charIndex];
-            }
-        }
-    });
-
-    // 다음 라운드 버튼 상태 업데이트
-    updateNextRoundButton();
-}
-
-// 다음 라운드 버튼 상태 업데이트 (수정됨)
-function updateNextRoundButton() {
-    const round = rounds[currentRoundIndex];
-    const completedCount = gameState.roundStates[currentRoundIndex].completedCount || 0;
-
-    const nextBtn = document.getElementById('next-round-btn');
-    if (completedCount === round.questionIndices.length) {
-        nextBtn.classList.remove('hidden');
-        nextBtn.textContent = currentRoundIndex < rounds.length - 1 ? '다음 라운드' : '퀴즈 종료!';
-    } else {
-        nextBtn.classList.add('hidden');
-    }
-}
-
 // DOM 요소 변수
 let startScreen, roundIntro, gameScreen, quizModal, questionView, answerView, answerBtn, questionViewBtn, feedbackModal, feedbackText;
 
+// 초기화 함수
 function init() {
     startScreen = document.getElementById('start-screen');
     roundIntro = document.getElementById('round-intro');
@@ -397,20 +309,66 @@ function init() {
     gameState.currentScreen = 'start';
 }
 
-// 사운드 초기화 및 재생 함수
-function initializeAudio() { 
-    if (typeof Tone !== 'undefined' && !synth) { 
-        synth = new Tone.Synth().toDestination(); 
-    } 
-    if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') { 
-        Tone.context.resume(); 
-    } 
+// ✨ 사운드 재생 함수 수정: 매번 새로운 synth 인스턴스 생성
+function playSound(notes, duration, synthType = 'Synth') {
+    if (typeof Tone === 'undefined') return;
+    if (Tone.context.state !== 'running') {
+        Tone.context.resume();
+    }
+    
+    const synth = new Tone[synthType]().toDestination();
+    const now = Tone.now();
+
+    if (Array.isArray(notes)) {
+        notes.forEach((note, i) => {
+            synth.triggerAttackRelease(note, duration, now + i * 0.1);
+        });
+    } else {
+        synth.triggerAttackRelease(notes, duration, now);
+    }
+    
+    setTimeout(() => {
+        if (synth) synth.dispose();
+    }, (Array.isArray(notes) ? notes.length : 1) * 100 + 500);
 }
-const playSound = (note, duration) => { if (synth) synth.triggerAttackRelease(note, duration); };
+
 const playFlipSound = () => playSound("G5", "16n");
-const playCorrectSound = () => { if (synth) { const now = Tone.now(); synth.triggerAttackRelease("C5", "16n", now); synth.triggerAttackRelease("E5", "16n", now + 0.1); synth.triggerAttackRelease("G5", "16n", now + 0.2); } };
-const playIncorrectSound = () => { if (synth) { const now = Tone.now(); synth.triggerAttackRelease("A3", "16n", now); synth.triggerAttackRelease("E3", "16n", now + 0.1); } };
-const playRoundStartSound = () => { if (synth) { const now = Tone.now(); synth.triggerAttackRelease("C4", "8n", now); synth.triggerAttackRelease("E4", "8n", now + 0.15); synth.triggerAttackRelease("G4", "8n", now + 0.3); } };
+const playCorrectSound = () => playSound(["C5", "E5", "G5"], "16n");
+const playIncorrectSound = () => playSound(["A3", "E3"], "16n");
+const playRoundStartSound = () => playSound(["C4", "E4", "G4"], "8n");
+
+// ✨ 특별 보너스 사운드 효과
+function playSpecialBonusSound() {
+    if (typeof Tone === 'undefined') return;
+    if (Tone.context.state !== 'running') {
+        Tone.context.resume();
+    }
+
+    const now = Tone.now();
+    
+    // 1. 메인 멜로디 (상승하는 아르페지오)
+    const melodySynth = new Tone.Synth({
+        oscillator: { type: 'fatsawtooth' },
+        envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 0.2 }
+    }).toDestination();
+    const melodyNotes = ["C5", "E5", "G5", "C6", "E6", "G6", "C7"];
+    melodyNotes.forEach((note, i) => {
+        melodySynth.triggerAttackRelease(note, "16n", now + i * 0.1);
+    });
+
+    // 2. 벨 효과음 (마무리 악센트)
+    const bellSynth = new Tone.Synth({
+        oscillator: { type: 'triangle' },
+        envelope: { attack: 0.005, decay: 0.3, sustain: 0.1, release: 1 }
+    }).toDestination();
+    bellSynth.triggerAttackRelease("G7", "8n", now + melodyNotes.length * 0.1);
+
+    setTimeout(() => {
+        if (melodySynth) melodySynth.dispose();
+        if (bellSynth) bellSynth.dispose();
+    }, 1500);
+}
+
 
 // 이벤트 리스너 설정
 function setupEventListeners() {
@@ -435,7 +393,9 @@ function setupEventListeners() {
 
 // 게임 시작
 function startGame() { 
-    try { initializeAudio(); } catch (error) { console.error("사운드 초기화 중 오류:", error); } 
+    if (typeof Tone !== 'undefined' && Tone.context.state !== 'running') {
+        Tone.context.resume();
+    }
     const inputs = document.querySelectorAll('.team-name-input'); 
     inputs.forEach((input, index) => { if (input.value.trim()) teamNames[index] = input.value.trim(); }); 
     
@@ -465,7 +425,7 @@ function startRound() {
     gameScreen.classList.remove('hidden'); 
     gameState.currentScreen = 'game';
     
-    setupRoundWithHiddenScoreboard();
+    setupRound();
 }
 
 // 다음 라운드로 이동
@@ -485,8 +445,8 @@ function resetGame() {
     if (confirm('게임을 초기화하시겠습니까?')) location.reload(); 
 }
 
-// 라운드 설정 (점수판 숨김 처리 포함) - 수정됨
-function setupRoundWithHiddenScoreboard() { 
+// 라운드 설정
+function setupRound() { 
     const round = rounds[currentRoundIndex]; 
     const quizGrid = document.getElementById('quiz-grid'); 
     const progressContainer = document.getElementById('round-progress-container'); 
@@ -514,21 +474,17 @@ function setupRoundWithHiddenScoreboard() {
     
     document.getElementById('next-round-btn').classList.add('hidden'); 
     
-    const sortedIndices = [...round.questionIndices].sort((a, b) => a - b); 
-    sortedIndices.forEach((qIndex, localIndex) => { 
+    round.questionIndices.forEach((qIndex, localIndex) => { 
         const data = quizData[qIndex]; 
         if (!data) return; 
         const card = createQuizCard(qIndex, localIndex, data); 
         quizGrid.appendChild(card); 
     }); 
 
-    // ★★★ DOM 생성이 끝난 직후, 해당 라운드의 상태를 즉시 복원합니다. ★★★
     restoreRoundState(currentRoundIndex);
-    
-    hideScoreboardAndAddButton(); 
 }
 
-// 퀴즈 카드 DOM 요소 생성 (수정됨)
+// 퀴즈 카드 생성
 function createQuizCard(qIndex, localIndex, data) { 
     const card = document.createElement('div'); 
     card.className = 'quiz-card'; 
@@ -536,29 +492,68 @@ function createQuizCard(qIndex, localIndex, data) {
     card.innerHTML = `<div class="quiz-card-inner"><div class="quiz-card-face quiz-card-front ${data.bonus ? 'bonus' : ''}"><span class="card-number">${localIndex + 1}</span></div><div class="quiz-card-face quiz-card-back"></div></div>`; 
     
     card.addEventListener('click', () => { 
-        openQuizModalWithScoreInput(qIndex); 
-        
-        if (card.classList.contains('flipped')) { 
-            return; 
+        if (card.classList.contains('flipped')) {
+            openQuizModalWithScoreInput(qIndex);
+            return;
         }
+
+        try { playFlipSound(); } catch (e) { console.error(e); }
+        card.classList.add('flipped');
         
-        try { playFlipSound(); } catch (e) { console.error(e); } 
-        
-        card.classList.add('flipped'); 
-        
-        // ★★★ 전역 변수 대신 gameState를 직접 업데이트 ★★★
+        if (data.bonus) {
+            const animation = document.createElement('div');
+            animation.className = 'bonus-animation-fullscreen';
+            // ✨ SVG 인라인 코드로 순금 면류관 구현
+            animation.innerHTML = `
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="gold_grad_crown" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color:rgb(255,255,224);stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:rgb(255,215,0);stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgb(184,134,11);stop-opacity:1" />
+                        </radialGradient>
+                        <filter id="glow_crown">
+                            <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g style="filter:url(#glow_crown);">
+                        <path d="M 30 150 L 170 150 L 170 120 L 30 120 Z" fill="url(#gold_grad_crown)" stroke="#8B4513" stroke-width="4"/>
+                        <path d="M 30 120 L 40 50 L 100 90 L 160 50 L 170 120 Z" fill="url(#gold_grad_crown)" stroke="#8B4513" stroke-width="4"/>
+                        <circle cx="40" cy="50" r="12" fill="#E41B17" stroke="#800000" stroke-width="2"/>
+                        <circle cx="100" cy="90" r="15" fill="#4876FF" stroke="#000080" stroke-width="2"/>
+                        <circle cx="160" cy="50" r="12" fill="#52D017" stroke="#008000" stroke-width="2"/>
+                        <circle cx="70" cy="135" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
+                        <circle cx="100" cy="135" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
+                        <circle cx="130" cy="135" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
+                    </g>
+                </svg>`;
+            document.body.appendChild(animation);
+
+            try { playSpecialBonusSound(); } catch (e) { console.error(e); }
+            
+            setTimeout(() => animation.remove(), 1500);
+            
+            setTimeout(() => {
+                openQuizModalWithScoreInput(qIndex);
+            }, 1500);
+        } else {
+            openQuizModalWithScoreInput(qIndex);
+        }
+
         const currentState = gameState.roundStates[currentRoundIndex];
         if (!currentState.flippedCards.includes(qIndex)) {
             currentState.flippedCards.push(qIndex);
         }
         currentState.completedCount = currentState.flippedCards.length;
         
-        console.log(`[Click] Card ${qIndex} flipped. Round ${currentRoundIndex + 1} completed count: ${currentState.completedCount}`);
-        
         const phrase = roundPhrases[currentRoundIndex]; 
         const round = rounds[currentRoundIndex]; 
-        const sortedIndices = [...round.questionIndices].sort((a, b) => a - b); 
-        const charIndex = sortedIndices.indexOf(qIndex); 
+        const charIndex = round.questionIndices.indexOf(qIndex);
+
         if (phrase && charIndex >= 0 && charIndex < phrase.length) { 
             card.querySelector('.quiz-card-back').textContent = phrase[charIndex]; 
         } 
@@ -569,24 +564,19 @@ function createQuizCard(qIndex, localIndex, data) {
 }
 
 
-// 점수판 숨기고 '점수 현황 보기' 버튼을 header에 추가
-function hideScoreboardAndAddButton() { 
-    const scoreBoard = document.getElementById('score-board'); 
-    scoreBoard.style.display = 'none'; 
-}
-
-// 퀴즈 모달 열기 (점수 입력 기능 포함)
+// 퀴즈 모달 열기
 function openQuizModalWithScoreInput(index) {
     currentQuestionIndex = index;
     incorrectAttempts = 0;
+    hasAnswerBeenRevealed = false;
     const data = quizData[index];
     
     resetModal();
     initializeScoreInputInModal();
     addScoreInputToModal();
     
-    const questionNumber = getQuestionNumber(index);
-    document.getElementById('question-number').textContent = questionNumber;
+    const questionNumberLabel = getQuestionNumberLabel(index);
+    document.getElementById('modal-question-title').textContent = `문제 ${questionNumberLabel}`;
     
     document.getElementById('question-text').innerHTML = data.question;
     const answerText = data.answer || (data.options ? data.options[data.answerIndex] : '');
@@ -620,113 +610,15 @@ function openQuizModalWithScoreInput(index) {
     quizModal.classList.remove('hidden');
 }
 
-// 문제 번호를 라운드-순서 형식으로 반환하는 함수
-function getQuestionNumber(questionIndex) {
-    for (let roundIndex = 0; roundIndex < rounds.length; roundIndex++) {
-        const round = rounds[roundIndex];
-        const questionPosition = round.questionIndices.indexOf(questionIndex);
+// 문제 번호 라벨 반환 함수 (N-N 형식)
+function getQuestionNumberLabel(questionIndex) {
+    for (let i = 0; i < rounds.length; i++) {
+        const questionPosition = rounds[i].questionIndices.indexOf(questionIndex);
         if (questionPosition !== -1) {
-            const completedCount = gameState.roundStates[roundIndex].completedCount || 0;
-            return `${roundIndex + 1} 라운드 (${completedCount}/${round.questionIndices.length})`;
+            return `${i + 1}-${questionPosition + 1}`;
         }
     }
-    return questionIndex + 1;
-}
-
-// YouTube 영상 로드
-function loadYouTubeVideo() {
-    const youtubePlayer = document.getElementById('youtube-player');
-    if (!currentYouTubeUrl) {
-        showYouTubeError();
-        return;
-    }
-    showYouTubeLoading();
-    let isLoaded = false;
-    youtubePlayer.onload = function() {
-        if(isLoaded) return;
-        isLoaded = true;
-        clearTimeout(youtubeLoadTimeout);
-        hideYouTubeLoading();
-        console.log('YouTube 영상 로드 완료');
-    };
-    youtubeLoadTimeout = setTimeout(() => {
-        if(isLoaded) return;
-        isLoaded = true;
-        hideYouTubeLoading();
-        showYouTubeError();
-        console.warn('YouTube 영상 로드 타임아웃');
-    }, 8000);
-    youtubePlayer.src = currentYouTubeUrl;
-}
-
-// YouTube 로딩/오류 UI 함수들
-function showYouTubeLoading() { 
-    hideYouTubeError(); 
-    const container = document.getElementById('youtube-container'); 
-    const existingLoader = document.getElementById('youtube-loader');
-    if (existingLoader) existingLoader.remove();
-    const loader = document.createElement('div'); 
-    loader.id = 'youtube-loader'; 
-    loader.className = 'youtube-loader'; 
-    loader.innerHTML = '<div style="text-align: center; padding: 2rem; color: #666;">영상을 불러오는 중...</div>';
-    container.appendChild(loader); 
-    document.getElementById('youtube-player').src = 'about:blank'; 
-}
-function hideYouTubeLoading() { 
-    clearTimeout(youtubeLoadTimeout);
-    const loader = document.getElementById('youtube-loader'); 
-    if (loader) loader.remove(); 
-}
-function showYouTubeError() { 
-    hideYouTubeLoading(); 
-    const container = document.getElementById('youtube-container'); 
-    const existingError = document.getElementById('youtube-error');
-    if (existingError) existingError.remove();
-    const videoId = currentYouTubeUrl ? currentYouTubeUrl.match(/embed\/([a-zA-Z0-9_-]{11})/)?.[1] || 'N/A' : 'N/A';
-    const errorDiv = document.createElement('div'); 
-    errorDiv.id = 'youtube-error'; 
-    errorDiv.className = 'youtube-error'; 
-    errorDiv.innerHTML = `
-        <div style="text-align: center; padding: 2rem; background: #fee; border: 1px solid #fcc; border-radius: 8px; color: #c66;">
-            <p style="margin-bottom: 1rem;">⚠️ 영상을 불러올 수 없습니다</p>
-            <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
-                <button onclick="retryYouTube()" style="padding: 0.5rem 1rem; background: #4a90e2; color: white; border: none; border-radius: 4px; cursor: pointer;">🔄 다시 시도</button>
-                <button onclick="openYouTubeDirectly()" style="padding: 0.5rem 1rem; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer;">🎬 YouTube에서 보기</button>
-                <button onclick="copyYouTubeLink()" style="padding: 0.5rem 1rem; background: #27ae60; color: white; border: none; border-radius: 4px; cursor: pointer;">📋 링크 복사</button>
-            </div>
-            <small style="display: block; margin-top: 0.5rem; opacity: 0.7;">비디오 ID: ${videoId}</small>
-        </div>
-    `; 
-    container.appendChild(errorDiv); 
-}
-function hideYouTubeError() { 
-    const error = document.getElementById('youtube-error'); 
-    if (error) error.remove(); 
-}
-function retryYouTube() { 
-    hideYouTubeError(); 
-    loadYouTubeVideo(); 
-}
-function openYouTubeDirectly() { 
-    if (currentYouTubeUrl) {
-        const videoId = currentYouTubeUrl.match(/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
-        if (videoId) {
-            window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
-        }
-    }
-}
-function copyYouTubeLink() { 
-    if (currentYouTubeUrl) {
-        const videoId = currentYouTubeUrl.match(/embed\/([a-zA-Z0-9_-]{11})/)?.[1];
-        if (videoId) {
-            const url = `https://www.youtube.com/watch?v=${videoId}`;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('링크가 복사되었습니다!');
-            }).catch(() => {
-                prompt('링크를 수동으로 복사하세요:', url);
-            });
-        }
-    }
+    return 'N/A';
 }
 
 // 모달 초기화
@@ -737,8 +629,6 @@ function resetModal() {
     document.getElementById('youtube-player').src = 'about:blank';
     document.getElementById('matching-question-container').innerHTML = '';
     document.getElementById('matching-question-container').classList.add('hidden');
-    hideYouTubeLoading();
-    hideYouTubeError();
     clearTimeout(youtubeLoadTimeout);
     const scoreInputBox = document.getElementById('score-input-box');
     if (scoreInputBox) scoreInputBox.classList.remove('show');
@@ -747,6 +637,7 @@ function resetModal() {
     questionView.classList.remove('hidden', 'fade-out');
     answerView.classList.add('hidden', 'fade-out');
     answerBtn.classList.remove('hidden');
+    answerBtn.style.display = 'block';
     questionViewBtn.classList.add('hidden');
     document.getElementById('answer-display').classList.remove('hidden');
 }
@@ -758,7 +649,7 @@ function closeModal() {
     resetModal();
 }
 
-// 힌트 표시/숨기기
+// 힌트 표시
 function showHint() {
     const isAnswerViewVisible = !answerView.classList.contains('hidden');
     
@@ -772,27 +663,13 @@ function showHint() {
     }
 }
 
-// YouTube 영상 표시/숨기기
-function toggleYoutube() {
-    const youtubeContainer = document.getElementById('youtube-container');
-    const isHidden = youtubeContainer.classList.toggle('hidden');
-    if (!isHidden && currentYouTubeUrl) {
-        const youtubePlayer = document.getElementById('youtube-player');
-        if (youtubePlayer.src.includes('blank') || youtubePlayer.src === '') {
-            loadYouTubeVideo();
-        }
-    } else if (isHidden) {
-        document.getElementById('youtube-player').src = 'about:blank';
-        hideYouTubeLoading();
-        hideYouTubeError();
-    }
-}
-
-// 정답 공개 및 점수 입력 버튼 표시
+// 정답 공개
 function showAnswerWithScoreInput() { 
+    hasAnswerBeenRevealed = true;
     const data = quizData[currentQuestionIndex]; 
     questionView.classList.add('fade-out'); 
-    answerBtn.classList.add('hidden'); 
+    answerBtn.style.display = 'none';
+    
     setTimeout(() => { 
         questionView.classList.add('hidden'); 
         answerView.classList.remove('hidden', 'fade-out'); 
@@ -826,7 +703,9 @@ function showQuestionView() {
     setTimeout(() => { 
         answerView.classList.add('hidden'); 
         questionView.classList.remove('hidden', 'fade-out'); 
-        answerBtn.classList.remove('hidden'); 
+        if (!hasAnswerBeenRevealed) {
+             answerBtn.style.display = 'block';
+        }
     }, 400); 
 }
 
@@ -876,7 +755,7 @@ function showScoreInputButton() {
     if (scoreInputBtn) scoreInputBtn.classList.remove('hidden'); 
 }
 
-// 정답/오답 피드백 표시
+// 피드백 표시
 function showFeedback(isCorrect, triggerConfetti = false) { 
     feedbackText.textContent = isCorrect ? "정답입니다!" : "아쉬워요"; 
     feedbackText.style.color = isCorrect ? 'var(--success)' : 'var(--error)'; 
@@ -900,7 +779,7 @@ function renderMatchingQuestion(data) {
     container.classList.remove('hidden'); 
 }
 
-// 짝짓기 문제 정답 라인 그리기
+// 짝짓기 정답 라인 그리기
 function drawMatchingAnswerLines(data) { 
     const container = document.getElementById('matching-question-container'); 
     const oldSvg = container.querySelector('svg'); 
@@ -930,7 +809,7 @@ function drawMatchingAnswerLines(data) {
     }); 
 }
 
-// --- 점수 입력 관련 함수들 ---
+// 점수 입력 사이드바 생성
 function createScoreInputSidebar() { 
     const scoreInputHTML = `<div id="score-input-box" class="score-input-box"><div class="score-input-title">🏆 점수 입력</div><div class="team-selection mb-4"><div class="selection-label">승리 팀 선택:</div><div class="team-buttons">${teamNames.map((name, index) => `<button class="team-select-btn" data-team="${index}">${name}</button>`).join('')}</div></div><div class="score-selection mb-4"><div class="selection-label">획득 점수:</div><div class="score-buttons">${[1, 2, 3, 4, 5].map(score => `<button class="score-select-btn" data-score="${score}">${score}점</button>`).join('')}</div></div><div class="score-input-actions"><button id="apply-score-btn" class="apply-score-btn" disabled>점수 적용</button><button id="cancel-score-btn" class="cancel-score-btn">취소</button></div><div class="current-selection mt-4"><div id="selection-display" class="selection-display">팀과 점수를 선택해주세요</div></div></div>`; 
     document.getElementById('hint-box').insertAdjacentHTML('afterend', scoreInputHTML); 
@@ -1003,7 +882,7 @@ function showScoreInput() {
         
         answerView.classList.add('hidden');
         questionView.classList.remove('hidden');
-        answerBtn.classList.remove('hidden');
+        answerBtn.style.display = 'none';
         questionViewBtn.classList.add('hidden');
     }
     
@@ -1040,7 +919,7 @@ function addScoreInputToModal() {
     document.getElementById('hint-btn').insertAdjacentElement('afterend', scoreInputBtn); 
 }
 
-// --- 점수 현황판 모달 관련 함수들 ---
+// 점수 현황 모달
 function showScoreStatusModal() { 
     const teamRankings = teamNames.map((name, index) => ({ name, score: teamScores[index], index })).sort((a, b) => b.score - a.score); 
     const modal = document.createElement('div'); 
@@ -1086,13 +965,6 @@ function showScoreStatusModal() {
     modal.addEventListener('click', e => { if (e.target === modal) closeScoreStatusModal(); }); 
 }
 
-function adjustTeamScore(teamIndex, adjustment) { 
-    if (teamScores[teamIndex] + adjustment < 0) return; 
-    teamScores[teamIndex] += adjustment; 
-    updateModalScoresAndRankings(); 
-    try { playSound(adjustment > 0 ? "C5" : "A3", "16n"); } catch (e) { console.error(e); } 
-}
-
 function createRankingItemHTML(team, rank) {
     return `
         <div class="ranking-item-compact rank-${rank + 1}">
@@ -1103,6 +975,13 @@ function createRankingItemHTML(team, rank) {
             </div>
             <div class="rank-icon">${getRankEmoji(rank + 1)}</div>
         </div>`;
+}
+
+function adjustTeamScore(teamIndex, adjustment) { 
+    if (teamScores[teamIndex] + adjustment < 0) return; 
+    teamScores[teamIndex] += adjustment; 
+    updateModalScoresAndRankings(); 
+    try { playSound(adjustment > 0 ? "C5" : "A3", "16n"); } catch (e) { console.error(e); } 
 }
 
 function updateModalScoresAndRankings() { 
@@ -1130,37 +1009,87 @@ function toggleScoreAdjustment() {
 }
 
 function getRankEmoji(rank) { 
-    return ['🥇', '🥈', '🥉'][rank - 1] || '🏿'; 
+    return ['🥇', '🥈', '🥉'][rank - 1] || '🎯'; 
 }
 
-/**
- * 지정된 라운드로 게임 화면을 전환하는 함수 (수정됨)
- * @param {number} targetRoundIndex - 이동할 라운드의 인덱스
- */
+// 라운드 전환
 function switchToRound(targetRoundIndex) {
     if (targetRoundIndex === currentRoundIndex && gameState.currentScreen === 'game') return;
 
-    console.log(`[Switching] Round ${currentRoundIndex + 1} -> ${targetRoundIndex + 1}`);
-
-    // 1. (가장 중요) 현재 라운드의 진행 상태를 "먼저" 저장합니다.
     if (gameState.currentScreen === 'game') {
         saveCurrentRoundState();
     }
 
-    // 2. 현재 라운드 인덱스를 목표 라운드로 변경합니다.
     currentRoundIndex = targetRoundIndex;
 
-    // 3. 게임 화면이 표시되어 있지 않으면 표시
     if (gameState.currentScreen !== 'game') {
         roundIntro.classList.add('hidden');
         gameScreen.classList.remove('hidden');
         gameState.currentScreen = 'game';
     }
     
-    // 4. 새 라운드 화면을 설정하고, 저장된 상태를 즉시 복원합니다.
-    setupRoundWithHiddenScoreboard(); 
+    setupRound(); 
 }
 
+// 현재 라운드 상태 저장
+function saveCurrentRoundState() {
+    if (currentRoundIndex < 0 || currentRoundIndex >= gameState.roundStates.length) return;
+    
+    const flippedCardIndices = Array.from(document.querySelectorAll('#quiz-grid .quiz-card.flipped'))
+                                    .map(card => parseInt(card.dataset.index));
+
+    const currentState = gameState.roundStates[currentRoundIndex];
+    currentState.flippedCards = flippedCardIndices;
+    currentState.completedCount = flippedCardIndices.length;
+}
+
+// 라운드 상태 복원
+function restoreRoundState(roundIndex) {
+    const roundState = gameState.roundStates[roundIndex];
+    if (!roundState || !roundState.flippedCards || roundState.flippedCards.length === 0) {
+        updateNextRoundButton();
+        return;
+    }
+
+    const quizGrid = document.getElementById('quiz-grid');
+    const phrase = roundPhrases[roundIndex];
+    const round = rounds[roundIndex];
+
+    roundState.flippedCards.forEach(qIndex => {
+        const card = quizGrid.querySelector(`[data-index="${qIndex}"]`);
+        if (card && !card.classList.contains('flipped')) {
+            card.classList.add('flipped');
+            
+            const charIndex = round.questionIndices.indexOf(qIndex);
+            if (phrase && charIndex >= 0 && charIndex < phrase.length) {
+                const backElement = card.querySelector('.quiz-card-back');
+                if (backElement) backElement.textContent = phrase[charIndex];
+            }
+        }
+    });
+
+    updateNextRoundButton();
+}
+
+// 다음 라운드 버튼 업데이트
+function updateNextRoundButton() {
+    const round = rounds[currentRoundIndex];
+    const completedCount = gameState.roundStates[currentRoundIndex].completedCount || 0;
+
+    const nextBtn = document.getElementById('next-round-btn');
+    if (completedCount === round.questionIndices.length) {
+        nextBtn.classList.remove('hidden');
+        nextBtn.textContent = currentRoundIndex < rounds.length - 1 ? '다음 라운드' : '퀴즈 종료!';
+    } else {
+        nextBtn.classList.add('hidden');
+    }
+}
+
+// 게임 상태 저장
+function saveGameState() {
+    gameState.savedTeamNames = [...teamNames];
+    gameState.savedTeamScores = [...teamScores];
+}
 
 // 최종 순위 표시
 function showFinalRanking() { 
@@ -1196,16 +1125,64 @@ function closeFinalRankingModal() {
     if (modal) modal.remove();
 }
 
-// 키보드 단축키 처리
+// YouTube 관련 함수들
+function getYouTubeEmbedUrl(videoInput) {
+    if (!videoInput) return null;
+    let videoId = null;
+    const patterns = [
+        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/,
+        /(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]{11})/,
+        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+        /(?:https?:\/\/)?(?:www\.)?youtube-nocookie\.com\/embed\/([a-zA-Z0-9_-]{11})/,
+        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/
+    ];
+    for (const pattern of patterns) {
+        const match = videoInput.match(pattern);
+        if (match && match[1]) {
+            videoId = match[1];
+            break;
+        }
+    }
+    if (!videoId && /^[a-zA-Z0-9_-]{11}$/.test(videoInput.trim())) {
+        videoId = videoInput.trim();
+    }
+    if (!videoId) {
+        console.error('유효한 YouTube 비디오 ID를 추출할 수 없습니다:', videoInput);
+        return null;
+    }
+    return `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`;
+}
+
+function toggleYoutube() {
+    const youtubeContainer = document.getElementById('youtube-container');
+    const isHidden = youtubeContainer.classList.toggle('hidden');
+    if (!isHidden && currentYouTubeUrl) {
+        const youtubePlayer = document.getElementById('youtube-player');
+        if (youtubePlayer.src.includes('blank') || youtubePlayer.src === '') {
+            loadYouTubeVideo();
+        }
+    } else if (isHidden) {
+        document.getElementById('youtube-player').src = 'about:blank';
+    }
+}
+
+function loadYouTubeVideo() {
+    const youtubePlayer = document.getElementById('youtube-player');
+    if (!currentYouTubeUrl) return;
+    
+    youtubePlayer.src = currentYouTubeUrl;
+}
+
+// 키보드 단축키
 function handleKeyPress(e) { 
     if (quizModal.classList.contains('hidden')) return; 
     const keyMap = { h: 'hint-btn', a: 'answer-btn', q: 'question-view-btn', s: 'score-input-btn' }; 
     const btn = document.getElementById(keyMap[e.key.toLowerCase()]); 
-    if (btn && !btn.classList.contains('hidden')) btn.click(); 
+    if (btn && btn.style.display !== 'none' && !btn.classList.contains('hidden')) btn.click(); 
     if (e.key === 'Escape') closeModal(); 
 }
 
-// --- 십자말 퀴즈 통합 로직 (수정됨) ---
+// 십자말 퀴즈 설정
 function setupCrossword() {
     const puzzleData = [
         { id: 1, word: "여호와", clue: "'스스로 계신 자'라는 뜻을 가진 하나님의 고유한 이름입니다.", orientation: 'horizontal', start: [0, 0] },
@@ -1215,7 +1192,7 @@ function setupCrossword() {
         { id: 5, word: "예루살렘", clue: "다윗 왕이 수도로 삼은 곳이며, 하나님의 성전이 세워졌던 거룩한 도시입니다.", orientation: 'horizontal', start: [6, 3] },
         { id: 6, word: "시편", clue: "구약성경에 포함된 150편의 시와 찬양, 기도의 모음집입니다.", orientation: 'horizontal', start: [7, 0] },
         { id: 7, word: "의인", clue: "하나님 앞에서 올바르고 정의롭게 사는 사람을 뜻합니다.", orientation: 'horizontal', start: [8, 7] },
-        { id: 8, word: "여두둔", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 시편 표제에 그의 이름이 언급됩니다.", orientation: 'vertical', start: [0, 0] },
+        { id: 8, word: "여둔둔", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 시편 표제에 그의 이름이 언급됩니다.", orientation: 'vertical', start: [0, 0] },
         { id: 9, word: "마스길", clue: "시편의 표제 중 하나로, '교훈' 또는 '지혜의 시'를 의미합니다.", orientation: 'vertical', start: [0, 6] },
         { id: 10, word: "엘리", clue: "'나의 하나님'이라는 뜻으로, 예수님께서 십자가에서 외치신 말씀(시편 22편)에 나오는 단어입니다.", orientation: 'vertical', start: [1, 8] },
         { id: 11, word: "나사렛", clue: "예수님께서 어린 시절을 보내신 갈릴리 지방의 한 동네입니다.", orientation: 'vertical', start: [2, 2] },
@@ -1400,11 +1377,8 @@ window.showScoreStatusModal = showScoreStatusModal;
 window.adjustTeamScore = adjustTeamScore;
 window.toggleScoreAdjustment = toggleScoreAdjustment;
 window.closeFinalRankingModal = closeFinalRankingModal;
-window.retryYouTube = retryYouTube;
-window.openYouTubeDirectly = openYouTubeDirectly;
-window.copyYouTubeLink = copyYouTubeLink;
 
-// DOM 로딩 완료 후 스크립트 초기화
+// DOM 로딩 완료 후 초기화
 document.addEventListener('DOMContentLoaded', () => {
     init();
     setupCrossword();
