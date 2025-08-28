@@ -233,18 +233,21 @@ const quizData = [
 const rounds = [
     { 
         title: "1라운드: 시편에 대하여", 
-        description: "시편 자체의 구성, 특징, 배경 지식, 그리고 시편에 대한 기본적인 이해를 묻는 질문들입니다.", 
-        questionIndices: [0, 1, 2, 3, 4, 5, 6, 7] // 8문제
+        description: "방주=완주. 모든 일에는 처음이 있지요? <br> 필사를 시작하며 새롭게 알게된 시편에 대해 알아보아요!", 
+        questionIndices: [0, 1, 2, 3, 4, 5, 6, 7], // 8문제
+        introVideo: '노아_영상 1.mp4' // 1라운드 인트로 영상 추가
     },
     { 
         title: "2라운드: 우리를 향하여", 
-        description: "시편을 통해 배우는 인간의 삶, 회개, 죄, 운명, 지혜 등 '우리'의 내면과 삶의 태도에 대한 내용을 다룹니다.", 
-        questionIndices: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18] // 11문제
+        description: "시편을 통해 '우리'를 돌아보며 믿음을 더 다듬었던 순간들을 떠올려보아요!", 
+        questionIndices: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], // 11문제
+        introVideo: '노아_영상 2.mp4' // 2라운드 인트로 영상 추가
     },
     { 
         title: "3라운드: 하나님을 향하여", 
-        description: "시편에 나타난 하나님의 성품, 이름, 속성, 하나님을 향한 우리의 고백과 찬양, 그리고 우리의 신앙적 태도를 다룹니다.", 
-        questionIndices: [19, 20, 21, 22, 23, 24, 25, 26, 27, 28] // 10문제
+        description: "시편 말씀을 통해 하나님께서 어떤 분이신지 <br> 우리의 어떤 모습을 원하시는지 기억해보아요!", 
+        questionIndices: [19, 20, 21, 22, 23, 24, 25, 26, 27, 28], // 10문제
+        introVideo: '노아_영상 3.mp4' // 3라운드 인트로 영상 추가
     }
 ];
 
@@ -409,12 +412,42 @@ function startGame() {
 }
 
 // 라운드 소개 화면 표시
-function showRoundIntro() { 
-    const round = rounds[currentRoundIndex]; 
-    document.getElementById('round-title').textContent = round.title; 
-    document.getElementById('round-description').innerHTML = round.description;
-    roundIntro.classList.remove('hidden'); 
-    gameScreen.classList.add('hidden'); 
+function showRoundIntro() {
+    const round = rounds[currentRoundIndex];
+    document.getElementById('round-title').textContent = round.title;
+    const descriptionEl = document.getElementById('round-description');
+    descriptionEl.innerHTML = round.description;
+
+    // 이전 미디어 요소(비디오)가 있다면 제거
+    const existingMedia = document.getElementById('round-intro-media-container');
+    if (existingMedia) {
+        existingMedia.remove();
+    }
+    
+    // HTML에 있을 수 있는 기존 로딩 스피너를 제거
+    const loadingSpinner = roundIntro.querySelector('.animate-spin');
+    if (loadingSpinner) {
+        loadingSpinner.remove();
+    }
+
+    // 미디어를 담을 컨테이너 생성
+    const mediaContainer = document.createElement('div');
+    mediaContainer.id = 'round-intro-media-container';
+    mediaContainer.className = 'my-4';
+
+    if (round.introVideo) {
+        // 영상이 있으면 비디오 태그 삽입
+        mediaContainer.innerHTML = `
+            <video src="${round.introVideo}" autoplay loop muted playsinline class="rounded-lg max-w-full h-auto mx-auto" style="max-height: 300px; object-fit: cover;"></video>
+        `;
+    } 
+    // 영상이 없는 라운드는 아무것도 표시하지 않음
+
+    // 설명 요소 다음에 미디어 컨테이너 삽입
+    descriptionEl.after(mediaContainer);
+
+    roundIntro.classList.remove('hidden');
+    gameScreen.classList.add('hidden');
     gameState.currentScreen = 'roundIntro';
 }
 
@@ -503,34 +536,10 @@ function createQuizCard(qIndex, localIndex, data) {
         if (data.bonus) {
             const animation = document.createElement('div');
             animation.className = 'bonus-animation-fullscreen';
-            // ✨ SVG 인라인 코드로 순금 면류관 구현
-            animation.innerHTML = `
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <radialGradient id="gold_grad_crown" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                            <stop offset="0%" style="stop-color:rgb(255,255,224);stop-opacity:1" />
-                            <stop offset="50%" style="stop-color:rgb(255,215,0);stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:rgb(184,134,11);stop-opacity:1" />
-                        </radialGradient>
-                        <filter id="glow_crown">
-                            <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                    <g style="filter:url(#glow_crown);">
-                        <path d="M 30 150 L 170 150 L 170 120 L 30 120 Z" fill="url(#gold_grad_crown)" stroke="#8B4513" stroke-width="4"/>
-                        <path d="M 30 120 L 40 50 L 100 90 L 160 50 L 170 120 Z" fill="url(#gold_grad_crown)" stroke="#8B4513" stroke-width="4"/>
-                        <circle cx="40" cy="50" r="12" fill="#E41B17" stroke="#800000" stroke-width="2"/>
-                        <circle cx="100" cy="90" r="15" fill="#4876FF" stroke="#000080" stroke-width="2"/>
-                        <circle cx="160" cy="50" r="12" fill="#52D017" stroke="#008000" stroke-width="2"/>
-                        <circle cx="70" cy="135" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
-                        <circle cx="100" cy="135" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
-                        <circle cx="130" cy="135" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
-                    </g>
-                </svg>`;
+            // =================================================================
+            // 요청하신 대로 보너스 애니메이션 이미지 크기를 2배로 수정했습니다.
+            // =================================================================
+            animation.innerHTML = `<img src="순금 면류관.svg" alt="보너스 왕관" style="width: 600px; height: 600px; filter: drop-shadow(0 0 15px rgba(255, 223, 0, 0.8));">`;
             document.body.appendChild(animation);
 
             try { playSpecialBonusSound(); } catch (e) { console.error(e); }
