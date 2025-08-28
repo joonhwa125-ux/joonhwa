@@ -67,7 +67,6 @@
                 <h2 id="round-title" class="text-5xl font-bold mb-4"></h2>
                 <p id="round-description" class="text-xl mb-8 leading-relaxed"></p>
                 <div class="flex justify-center mb-8">
-                    <div class="loading-spinner"></div>
                 </div>
                 <button id="round-start-btn" class="btn-3d">라운드 시작</button>
             </div>
@@ -94,7 +93,8 @@
         <div id="quiz-modal" class="modal-overlay hidden">
             <div class="modal-content">
                 <div class="modal-header flex justify-between items-center">
-                    <h3 class="text-3xl font-bold">문제 <span id="question-number"></span></h3>
+                    <!-- 문제 번호 표시 형식 변경 -->
+                    <h3 id="modal-question-title" class="text-3xl font-bold">문제 1-1</h3>
                     <button id="close-modal" class="text-white text-4xl hover:text-gray-300 transition">×</button>
                 </div>
                 <div class="modal-body p-8 overflow-y-auto">
