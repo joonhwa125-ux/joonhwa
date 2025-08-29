@@ -41,23 +41,23 @@ const quizData = [
     },
     { // 5
         bonus: true, 
-        question: "할렐루야로 시작하여 할렐루야로 끝나는 '할렐루야 시'는 몇 개입니까?", 
-        answer: "8개", 
-        hint: "시편 106, 113, 135, 146-150편",
+        question: "할렐루야로 시작하여 할렐루야로 끝나는 '할렐루야 시편'는 몇 편인가요?", 
+        answer: "시편 146-150편", 
+        hint: "시편 146편 이후",
         youtube: "5zB7GuYv1Qk"
     },
     { // 6
         type: 'multiple-choice', 
-        question: "시편 46편에 세 차례 반복되어 등장하는 구절은?", 
-        options: ["만군의 여호와께서 우리와 함께 하시니", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
+        question: "시편 46편에 세 차례 반복되어 등장하는 구절은 무엇입니까?", 
+        options: ["하나님은 우리의 피난처시다", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
         answerIndex: 0, 
-        hint: "야곱의 하나님은 우리의 피난처시로다",
+        hint: "시편 46편",
         youtube: "ElYObIDOUoM"
     },
     { // 7
         bonus: true, 
         question: "'할렐루야'의 뜻은 무엇입니까?", 
-        answer: "여호와를 찬양하라", 
+        answer: "여호와를 찬송하라", 
         hint: "시편의 마지막 편(150편)의 주제입니다.",
         youtube: "CeHkhgQdyGI"
     },
@@ -68,12 +68,12 @@ const quizData = [
         question: "광야에서 이스라엘 백성이 하나님을 시험하였던 장소와 관련 없는 것은?", 
         options: ["르비딤", "양식", "므리바", "맛사"], 
         answerIndex: 1, 
-        hint: "시편 95편 8-9절",
+        hint: "시편 95편",
         youtube: "rndS3FU-Qso"
     },
     { // 9
         bonus: true, 
-        question: "다음은 악인의 운명에 관한 말씀입니다.<span class='context'>빈칸에 들어갈 말을 순서대로 말하세요.</span><span class='quote'>\"바람에 나는 (  )와 같고 (  )을 견디지 못하며\n(  )들의 모임에 들지 못하며 그 길은 (  )할 것이다\"</span>", 
+        question: "다음은 악인의 운명에 관한 말씀입니다.<span class='context'>빈칸에 들어갈 말을 순서대로 말하세요.</span><span class='quote'>\"바람에 나는 (  )와 같고 (  )을 견디지 못하며<br>(  )들의 모임에 들지 못하며 그 길은 (  )할 것이다\"</span>", 
         answer: "겨, 심판, 의인, 망", 
         hint: "시편 1편",
         youtube: "PrpqHpHTW3Q"
@@ -83,7 +83,7 @@ const quizData = [
         question: "다윗은 속이고 아첨하는 악인의 목구멍이 마치 무엇과 같다고 했습니까?", 
         options: ["용암을 내뿜는 화산", "오물을 쏟아내는 하수구", "열린 무덤", "독을 내뿜는 거미줄"], 
         answerIndex: 2, 
-        hint: "시편 5편 9절",
+        hint: "시편 5편",
         youtube: "FINEjhf4tN8"
     },
     { // 11
@@ -91,7 +91,7 @@ const quizData = [
         question: "시편 9편에서 시인이 원하지 않는 것은 무엇입니까?", 
         options: ["하나님의 공의", "하나님 없는 인생들의 승리", "원수의 멸망", "이방 나라들의 심판"], 
         answerIndex: 1, 
-        hint: "시편 9편 19절",
+        hint: "시편 9편",
         youtube: "_zxVFaOS6Rg"
     },
     { // 12
@@ -99,7 +99,7 @@ const quizData = [
         question: "악인들이 스스로 자랑하는 것은 무엇입니까?", 
         options: ["자기의 죄악이 드러나지 않을 것임", "자신의 연약함", "자신의 의로움", "악을 거절함"], 
         answerIndex: 0, 
-        hint: "시편 36편 2절",
+        hint: "시편 36편",
         youtube: "1M3IusEoXt8"
     },
     { // 13
@@ -111,10 +111,10 @@ const quizData = [
         youtube: "NATmz9TGpdk"
     },
     { // 14
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"사람은 존귀하나 장구하지 못함이여 (         ) 같도다\"</span>", 
-        answer: "멸망하는 짐승", 
-        hint: "시편 49편 20절",
-        youtube: "ISHuuFoLQbU"
+        question: "( ) 안에 들어갈 말은 무엇입니까?<span class='quote'>\"(   )로 제사를 드리는 자가 나를 (   )롭게 하나니<br>그의 (   )를 옳게 하는 자에게 내가 하나님의 (   )을 보이리라\"</span>", 
+        answer: "감사, 영화, 행위, 구원", 
+        hint: "시편 50편",
+        youtube: "5wJsKlEX9lo" // ✨ 1. 유튜브 링크 수정됨
     },
     { // 15
         question: "다윗이 밧세바와 동침한 후 지은 회개의 시는 시편 몇 편입니까?", 
@@ -123,14 +123,14 @@ const quizData = [
         youtube: "XCw-swDk9Bs"
     },
     { // 16
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나음즉 악인의 장막에 사는 것보다 내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 궁정에서의 한 날이 다른 곳에서의 천 날보다 나음즉<br>악인의 장막에 사는 것보다 내 하나님의 성전 (   )로 있는 것이 좋사오니\"</span>", 
         answer: "문지기", 
-        hint: "시편 84편 10절",
+        hint: "시편 84편",
         youtube: "a4eUJNLjxjw"
     },
     { // 17
         bonus: true, 
-        question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도 그 연수의 자랑은 (  )와 (  )뿐이요 신속히 가니 우리가 (  )가나이다...우리에게 우리의 날 (  )함을 가르치사 지혜로운 마음을 얻게 하소서\"</span>", 
+        question: "빈칸을 순서대로 채우세요.<span class='quote'>\"우리의 연수가 칠십이요 강건하면 팔십이라도 그 연수의 자랑은 (  )와 (  )뿐이요 <br>신속히 가니 우리가 (  )가나이다...우리에게 우리의 날 (  )함을 가르치사 지혜로운 마음을 얻게 하소서\"</span>", 
         answer: "수고, 슬픔, 날아, 계수", 
         hint: "시편 90편 10, 12절",
         youtube: "KWltmGAN3eY"
@@ -154,17 +154,17 @@ const quizData = [
         youtube: "wkdkMxGVOKQ"
     },
     { // 20
-        question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요\n나의 머리를 드시는 자이시니이다\"</span>", 
+        question: "다윗이 대적들로부터 조롱당할 때 하나님께 고백한 내용입니다.<span class='context'>빈칸에 들어갈 말은 무엇입니까?</span><span class='quote'>\"여호와여 주는 나의 (  )시요 나의 (  )이시요<br>나의 머리를 드시는 자이시니이다\"</span>", 
         answer: "방패, 영광", 
-        hint: "시편 3편 3절",
+        hint: "시편 3편",
         youtube: "R_Xu2ir5qqI"
     },
     { // 21
         type: 'multiple-choice', 
-        question: "다음 번호에 해당하는 낱말 중 틀린 것은?<span class='quote'>\"여호와는 나의 (1)이시요 나의 (2)시요...\n내가 그 안에 피할 나의 바위시요 나의 (3)시요\n나의 (4)이시요 나의 산성이시로다\"</span>", 
+        question: "다음 번호에 해당하는 낱말 중 틀린 것은?<span class='quote'>\"나의 힘이신 여호와여 내가 주를 사랑하나이다. <br> 여호와는 나의 (1)이시요 나의 (2)시요...<br>내가 그 안에 피할 나의 바위시요 나의 (3)시요<br>나의 (4)이시요 나의 산성이시로다\"</span>", 
         options: ["(1) 반석", "(2) 요새", "(3) 창", "(4) 구원의 뿔"], 
         answerIndex: 2, 
-        hint: "시편 18편 2절",
+        hint: "시편 18편",
         youtube: "jrfwR4i53w4"
     },
     { // 22
@@ -172,7 +172,7 @@ const quizData = [
         type: 'matching', 
         question: "하나님의 말씀에 대한 명칭과 그 기능을 연결하세요.", 
         answer: '1-ㄴ, 2-ㄷ, 3-ㄱ, 4-ㄹ', 
-        hint: "시편 19편 7-8절",
+        hint: "시편 19편",
         youtube: "StRI2O-dT50",
         matchingData: { 
             left: ['1. 여호와의 율법', '2. 여호와의 증거', '3. 여호와의 교훈', '4. 여호와의 계명'], 
@@ -193,27 +193,27 @@ const quizData = [
         question: "하나님이 구하시는 제사는 다음 중 어느 것입니까?", 
         options: ["연약한 심령", "값비싼 번제", "상한 심령", "자신의 의"], 
         answerIndex: 2, 
-        hint: "시편 51편 17절",
+        hint: "시편 51편",
         youtube: "zkVzW3zGl3A"
     },
     { // 25
         type: 'multiple-choice', 
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"(         )이 생명보다 나으므로\n내 입술이 주를 찬양할 것이라\"</span>", 
+        question: "빈칸에 들어갈 말은 무엇입니까?<span class='quote'>\"(         )이 생명보다 나으므로 내 입술이 주를 찬양할 것이라\"</span>", 
         options: ["골수와 기름진 것", "주의 인자하심", "탈취한 물건을 나누는 것", "주님의 권능"], 
         answerIndex: 1, 
-        hint: "시편 63편 3절",
+        hint: "시편 63편",
         youtube: "u1Zk32exTvg"
     },
     { // 26
-        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고\n즐겁게 헌신하니 (         ) 같은\n주의 청년들이 주께 나오는도다\"</span>", 
+        question: "빈칸에 들어갈 말은?<span class='quote'>\"주의 권능의 날에 주의 백성이 거룩한 옷을 입고<br>즐겁게 헌신하니 (         ) 같은 주의 청년들이 주께 나오는도다\"</span>", 
         answer: "새벽 이슬", 
-        hint: "시편 110편 3절",
+        hint: "시편 110편",
         youtube: "QXhsA621WZA"
     },
     { // 27
         bonus: true, 
-        question: "하나님의 지존하심을 나타내는 말씀입니다.<span class='context'>빈칸을 순서대로 채우세요.</span><span class='quote'>\"높은 곳에 앉으셨으나 (   ) 낮추사\n천지를 살피시고 (   ) 자를 먼지 더미에서 일으키시며\n궁핍한 자를 (   ) 더미에서 들어 세워...\"</span>", 
-        answer: "스스로, 가난한, 거름", 
+        question: "하나님의 지존하심을 나타내는 말씀입니다.<span class='context'>빈칸을 순서대로 채우세요.</span><span class='quote'>\"높은 곳에 앉으셨으나 (   ) 낮추사 천지를 살피시고 (   ) 자를 먼지 더미에서 일으키시며<br>궁핍한 자를 (   ) 더미에서 들어 세워 지도자들 곧 그 백성의 지도자들과 함께 세우시며<br>또 (   )하지 못하던 여자를 집에 살게 하사 자녀들을 즐겁게 하는 어머니가 되게 하시는도다 \"</span>", 
+        answer: "스스로, 가난한, 거름, 임신", 
         hint: "시편 113편 5-7절",
         youtube: "AEf_pX52Z-0"
     },
@@ -239,13 +239,13 @@ const rounds = [
     },
     { 
         title: "2라운드: 우리를 향하여", 
-        description: "시편을 통해 '우리'를 돌아보며 믿음을 더 다듬었던 순간들을 떠올려보아요!", 
+        description: "시편을 통해 우리의 삶을 되돌아보며 믿음을 더욱 다듬었던 순간들을 떠올려보아요!", 
         questionIndices: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], // 11문제
         introVideo: '노아_영상 2.mp4' // 2라운드 인트로 영상 추가
     },
     { 
         title: "3라운드: 하나님을 향하여", 
-        description: "시편 말씀을 통해 하나님께서 어떤 분이신지 <br> 우리의 어떤 모습을 원하시는지 기억해보아요!", 
+        description: "시편 안에서 하나님께서 어떤 분이시고 <br> 우리에게 두신 하나님의 뜻이 무엇인지 묵상해보아요!", 
         questionIndices: [19, 20, 21, 22, 23, 24, 25, 26, 27, 28], // 10문제
         introVideo: '노아_영상 3.mp4' // 3라운드 인트로 영상 추가
     }
@@ -289,7 +289,7 @@ let selectedTeam = null;
 let selectedScore = null;
 
 // DOM 요소 변수
-let startScreen, roundIntro, gameScreen, quizModal, questionView, answerView, answerBtn, questionViewBtn, feedbackModal, feedbackText;
+let startScreen, roundIntro, gameScreen, quizModal, questionView, answerView, answerBtn, feedbackModal, feedbackText;
 
 // 초기화 함수
 function init() {
@@ -300,7 +300,6 @@ function init() {
     questionView = document.getElementById('question-view');
     answerView = document.getElementById('answer-view');
     answerBtn = document.getElementById('answer-btn');
-    questionViewBtn = document.getElementById('question-view-btn');
     feedbackModal = document.getElementById('feedback-modal');
     feedbackText = document.getElementById('feedback-text');
 
@@ -312,7 +311,7 @@ function init() {
     gameState.currentScreen = 'start';
 }
 
-// ✨ 사운드 재생 함수 수정: 매번 새로운 synth 인스턴스 생성
+// ✨ 사운드 재생 함수: 매번 새로운 synth 인스턴스 생성
 function playSound(notes, duration, synthType = 'Synth') {
     if (typeof Tone === 'undefined') return;
     if (Tone.context.state !== 'running') {
@@ -335,12 +334,78 @@ function playSound(notes, duration, synthType = 'Synth') {
     }, (Array.isArray(notes) ? notes.length : 1) * 100 + 500);
 }
 
-const playFlipSound = () => playSound("G5", "16n");
+// ✨ 일반 문제용 '반짝이는 벨소리' 효과
+function playSparkleSound() {
+    if (typeof Tone === 'undefined' || Tone.context.state !== 'running') {
+        Tone.context.resume();
+    };
+
+    const synth = new Tone.FMSynth({
+        volume: 6,
+        harmonicity: 2,
+        modulationIndex: 0.5,
+        envelope: { attack: 0.01, decay: 0.3, sustain: 0.1, release: 0.7 },
+        modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0, release: 0.7 }
+    });
+
+    const reverb = new Tone.Reverb({
+        decay: 0.5,
+        wet: 0.3
+    });
+    synth.chain(reverb, Tone.Destination);
+
+    const now = Tone.now();
+    synth.triggerAttackRelease("C5", "16n", now);
+    synth.triggerAttackRelease("G5", "16n", now + 0.1);
+    synth.triggerAttackRelease("C6", "16n", now + 0.2);
+
+    setTimeout(() => {
+        synth.dispose();
+        reverb.dispose();
+    }, 1000);
+}
+
+
+// ✨ 보너스 문제 선택 시 신비로운 소리 효과
+function playBonusSound() {
+    if (typeof Tone === 'undefined') return;
+    if (Tone.context.state !== 'running') {
+        Tone.context.resume();
+    }
+
+    const synth = new Tone.FMSynth({
+        volume: -8, 
+        harmonicity: 1.5,
+        modulationIndex: 1.2,
+        envelope: { attack: 0.01, decay: 0.3, sustain: 0.1, release: 0.7 },
+        modulationEnvelope: { attack: 0.01, decay: 0.2, sustain: 0, release: 0.7 }
+    });
+
+    const reverb = new Tone.Reverb(0.6);
+    const delay = new Tone.PingPongDelay("8n", 0.5);
+
+    synth.chain(delay, reverb, Tone.Destination);
+
+    const now = Tone.now();
+    const notes = ["C5", "E5", "G5", "C6"];
+    notes.forEach((note, i) => {
+        synth.triggerAttackRelease(note, "16n", now + i * 0.1);
+    });
+
+    setTimeout(() => {
+        synth.dispose();
+        reverb.dispose();
+        delay.dispose();
+    }, 1500);
+}
+
+
+// 기본 효과음 함수들
 const playCorrectSound = () => playSound(["C5", "E5", "G5"], "16n");
 const playIncorrectSound = () => playSound(["A3", "E3"], "16n");
 const playRoundStartSound = () => playSound(["C4", "E4", "G4"], "8n");
 
-// ✨ 특별 보너스 사운드 효과
+// ✨ 특별 보너스 사운드 효과 (보너스 문제 애니메이션 용)
 function playSpecialBonusSound() {
     if (typeof Tone === 'undefined') return;
     if (Tone.context.state !== 'running') {
@@ -349,7 +414,6 @@ function playSpecialBonusSound() {
 
     const now = Tone.now();
     
-    // 1. 메인 멜로디 (상승하는 아르페지오)
     const melodySynth = new Tone.Synth({
         oscillator: { type: 'fatsawtooth' },
         envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 0.2 }
@@ -359,7 +423,6 @@ function playSpecialBonusSound() {
         melodySynth.triggerAttackRelease(note, "16n", now + i * 0.1);
     });
 
-    // 2. 벨 효과음 (마무리 악센트)
     const bellSynth = new Tone.Synth({
         oscillator: { type: 'triangle' },
         envelope: { attack: 0.005, decay: 0.3, sustain: 0.1, release: 1 }
@@ -387,8 +450,7 @@ function setupEventListeners() {
             toggleYoutube();
         }
     });
-    answerBtn.addEventListener('click', showAnswerWithScoreInput);
-    questionViewBtn.addEventListener('click', showQuestionView);
+    answerBtn.addEventListener('click', toggleAnswerView); // ✨ 2. 토글 함수로 변경
     quizModal.addEventListener('click', (e) => { if (e.target === quizModal) closeModal(); });
     feedbackModal.addEventListener('click', (e) => { if (e.target === feedbackModal) hideFeedback(); });
     document.addEventListener('keydown', handleKeyPress);
@@ -418,32 +480,26 @@ function showRoundIntro() {
     const descriptionEl = document.getElementById('round-description');
     descriptionEl.innerHTML = round.description;
 
-    // 이전 미디어 요소(비디오)가 있다면 제거
     const existingMedia = document.getElementById('round-intro-media-container');
     if (existingMedia) {
         existingMedia.remove();
     }
     
-    // HTML에 있을 수 있는 기존 로딩 스피너를 제거
     const loadingSpinner = roundIntro.querySelector('.animate-spin');
     if (loadingSpinner) {
         loadingSpinner.remove();
     }
 
-    // 미디어를 담을 컨테이너 생성
     const mediaContainer = document.createElement('div');
     mediaContainer.id = 'round-intro-media-container';
     mediaContainer.className = 'my-4';
 
     if (round.introVideo) {
-        // 영상이 있으면 비디오 태그 삽입
         mediaContainer.innerHTML = `
             <video src="${round.introVideo}" autoplay loop muted playsinline class="rounded-lg max-w-full h-auto mx-auto" style="max-height: 300px; object-fit: cover;"></video>
         `;
     } 
-    // 영상이 없는 라운드는 아무것도 표시하지 않음
 
-    // 설명 요소 다음에 미디어 컨테이너 삽입
     descriptionEl.after(mediaContainer);
 
     roundIntro.classList.remove('hidden');
@@ -530,15 +586,19 @@ function createQuizCard(qIndex, localIndex, data) {
             return;
         }
 
-        try { playFlipSound(); } catch (e) { console.error(e); }
+        try {
+            if (data.bonus) {
+                playBonusSound();
+            } else {
+                playSparkleSound();
+            }
+        } catch (e) { console.error(e); }
+
         card.classList.add('flipped');
         
         if (data.bonus) {
             const animation = document.createElement('div');
             animation.className = 'bonus-animation-fullscreen';
-            // =================================================================
-            // 요청하신 대로 보너스 애니메이션 이미지 크기를 2배로 수정했습니다.
-            // =================================================================
             animation.innerHTML = `<img src="순금 면류관.svg" alt="보너스 왕관" style="width: 600px; height: 600px; filter: drop-shadow(0 0 15px rgba(255, 223, 0, 0.8));">`;
             document.body.appendChild(animation);
 
@@ -647,7 +707,7 @@ function resetModal() {
     answerView.classList.add('hidden', 'fade-out');
     answerBtn.classList.remove('hidden');
     answerBtn.style.display = 'block';
-    questionViewBtn.classList.add('hidden');
+    answerBtn.textContent = '정답 보기'; // ✨ 2. 버튼 텍스트 초기화
     document.getElementById('answer-display').classList.remove('hidden');
 }
 
@@ -672,26 +732,34 @@ function showHint() {
     }
 }
 
+// ✨ 2. 정답 보기/문제 보기 토글 함수 (신규)
+function toggleAnswerView() {
+    const isAnswerVisible = !answerView.classList.contains('hidden');
+    if (isAnswerVisible) {
+        showQuestionView();
+    } else {
+        showAnswerWithScoreInput();
+    }
+}
+
 // 정답 공개
 function showAnswerWithScoreInput() { 
     hasAnswerBeenRevealed = true;
     const data = quizData[currentQuestionIndex]; 
     questionView.classList.add('fade-out'); 
-    answerBtn.style.display = 'none';
+    answerBtn.textContent = '문제 보기'; // ✨ 2. 버튼 텍스트 변경
     
     setTimeout(() => { 
         questionView.classList.add('hidden'); 
         answerView.classList.remove('hidden', 'fade-out'); 
-        document.getElementById('hint-box').classList.remove('show'); 
+        document.getElementById('hint-box').classList.remove('show'); // ✨ 3. 힌트창 자동 닫기
         const scoreInputBtn = document.getElementById('score-input-btn'); 
         if (scoreInputBtn) scoreInputBtn.classList.remove('hidden'); 
         if (data.type === 'matching') { 
-            questionViewBtn.classList.add('hidden');
             questionView.classList.remove('hidden', 'fade-out'); 
             document.getElementById('answer-display').classList.add('hidden'); 
             drawMatchingAnswerLines(data.matchingData); 
         } else { 
-            questionViewBtn.classList.remove('hidden');
             document.getElementById('answer-display').classList.remove('hidden'); 
         } 
     }, 400); 
@@ -701,7 +769,6 @@ function showAnswerWithScoreInput() {
 function showQuestionView() { 
     const data = quizData[currentQuestionIndex]; 
     answerView.classList.add('fade-out'); 
-    questionViewBtn.classList.add('hidden'); 
     const scoreInputBtn = document.getElementById('score-input-btn'); 
     if (scoreInputBtn) scoreInputBtn.classList.add('hidden'); 
     hideScoreInput(); 
@@ -712,6 +779,7 @@ function showQuestionView() {
     setTimeout(() => { 
         answerView.classList.add('hidden'); 
         questionView.classList.remove('hidden', 'fade-out'); 
+        answerBtn.textContent = '정답 보기'; // ✨ 2. 버튼 텍스트 변경
         if (!hasAnswerBeenRevealed) {
              answerBtn.style.display = 'block';
         }
@@ -892,7 +960,6 @@ function showScoreInput() {
         answerView.classList.add('hidden');
         questionView.classList.remove('hidden');
         answerBtn.style.display = 'none';
-        questionViewBtn.classList.add('hidden');
     }
     
     selectedTeam = null; 
@@ -1185,7 +1252,7 @@ function loadYouTubeVideo() {
 // 키보드 단축키
 function handleKeyPress(e) { 
     if (quizModal.classList.contains('hidden')) return; 
-    const keyMap = { h: 'hint-btn', a: 'answer-btn', q: 'question-view-btn', s: 'score-input-btn' }; 
+    const keyMap = { h: 'hint-btn', a: 'answer-btn', s: 'score-input-btn' }; 
     const btn = document.getElementById(keyMap[e.key.toLowerCase()]); 
     if (btn && btn.style.display !== 'none' && !btn.classList.contains('hidden')) btn.click(); 
     if (e.key === 'Escape') closeModal(); 
@@ -1197,7 +1264,7 @@ function setupCrossword() {
         { id: 1, word: "여호와", clue: "'스스로 계신 자'라는 뜻을 가진 하나님의 고유한 이름입니다.", orientation: 'horizontal', start: [0, 0] },
         { id: 2, word: "이스라엘", clue: "야곱이 하나님과 겨루어 이긴 후에 받은 새 이름이며, 그의 후손으로 이루어진 민족을 가리킵니다.", orientation: 'horizontal', start: [1, 5] },
         { id: 3, word: "나단", clue: "다윗 왕 시대의 선지자로, 다윗의 죄를 책망하고 하나님의 뜻을 전했습니다.", orientation: 'horizontal', start: [2, 2] },
-        { id: 4, word: "아옐렛샤할", clue: "시편 22편의 표제로, '새벽의 암사슴'이라는 뜻을 가진 음악 용어입니다.", orientation: 'horizontal', start: [4, 0] },
+        { id: 4, word: "아얠렛샤할", clue: "시편 22편의 표제로, '새벽의 암사슴'이라는 뜻을 가진 음악 용어입니다.", orientation: 'horizontal', start: [4, 0] },
         { id: 5, word: "예루살렘", clue: "다윗 왕이 수도로 삼은 곳이며, 하나님의 성전이 세워졌던 거룩한 도시입니다.", orientation: 'horizontal', start: [6, 3] },
         { id: 6, word: "시편", clue: "구약성경에 포함된 150편의 시와 찬양, 기도의 모음집입니다.", orientation: 'horizontal', start: [7, 0] },
         { id: 7, word: "의인", clue: "하나님 앞에서 올바르고 정의롭게 사는 사람을 뜻합니다.", orientation: 'horizontal', start: [8, 7] },
