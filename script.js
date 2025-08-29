@@ -41,7 +41,7 @@ const quizData = [
     },
     { // 5
         bonus: true, 
-        question: "할렐루야로 시작하여 할렐루야로 끝나는 '할렐루야 시편'는 몇 편인가요?", 
+        question: "할렐루야로 시작하여 할렐루야로 끝나는 '할렐루야 시편'은 몇 편인가요?", 
         answer: "시편 146-150편", 
         hint: "시편 146편 이후",
         youtube: "5zB7GuYv1Qk"
