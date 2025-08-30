@@ -11,15 +11,13 @@ const quizData = [
         hint: "엘리 엘리 라마 사박다니",
         youtube: "Ivp6Tb3pc24"
     },
-    { // 1
-        bonus: true, 
+    { // 1 - 보너스에서 일반으로 변경
         question: "'마스길'이란 히브리어는 무슨 뜻입니까?", 
         answer: "교훈 또는 교훈시", 
         hint: "시편 32편의 표제를 참고하세요.",
         youtube: "lYM5nQwuZ90"
     },
-    { // 2
-        bonus: true, 
+    { // 2 - 보너스에서 일반으로 변경
         question: "시편은 모두 몇 권, 몇 편으로 구성되어 있습니까?", 
         answer: "5권, 150편", 
         hint: "모세오경과 관련이 있습니다.",
@@ -39,14 +37,14 @@ const quizData = [
         hint: "열왕기하에 등장하는 선지자입니다.",
         youtube: "8cVZ-S3Z4-4"
     },
-    { // 5
-        bonus: true, 
+    { // 5 - 보너스에서 일반으로 변경
         question: "할렐루야로 시작하여 할렐루야로 끝나는 '할렐루야 시편'은 몇 편인가요?", 
         answer: "시편 146-150편", 
         hint: "시편 146편 이후",
         youtube: "5zB7GuYv1Qk"
     },
-    { // 6
+    { // 6 - 일반에서 보너스로 변경
+        bonus: true,
         type: 'multiple-choice', 
         question: "시편 46편에 세 차례 반복되어 등장하는 구절은 무엇입니까?", 
         options: ["하나님은 우리의 피난처시다", "새벽에 하나님이 도우시리로다", "너희는 가만히 있어 내가 하나님 됨을 알지어다", "하나님은 온 땅의 왕이시라"], 
@@ -54,8 +52,7 @@ const quizData = [
         hint: "시편 46편",
         youtube: "ElYObIDOUoM"
     },
-    { // 7
-        bonus: true, 
+    { // 7 - 보너스에서 일반으로 변경
         question: "'할렐루야'의 뜻은 무엇입니까?", 
         answer: "여호와를 찬송하라", 
         hint: "시편의 마지막 편(150편)의 주제입니다.",
@@ -114,7 +111,7 @@ const quizData = [
         question: "( ) 안에 들어갈 말은 무엇입니까?<span class='quote'>\"(   )로 제사를 드리는 자가 나를 (   )롭게 하나니<br>그의 (   )를 옳게 하는 자에게 내가 하나님의 (   )을 보이리라\"</span>", 
         answer: "감사, 영화, 행위, 구원", 
         hint: "시편 50편",
-        youtube: "5wJsKlEX9lo" // ✨ 1. 유튜브 링크 수정됨
+        youtube: "5wJsKlEX9lo"
     },
     { // 15
         question: "다윗이 밧세바와 동침한 후 지은 회개의 시는 시편 몇 편입니까?", 
@@ -450,7 +447,7 @@ function setupEventListeners() {
             toggleYoutube();
         }
     });
-    answerBtn.addEventListener('click', toggleAnswerView); // ✨ 2. 토글 함수로 변경
+    answerBtn.addEventListener('click', toggleAnswerView);
     quizModal.addEventListener('click', (e) => { if (e.target === quizModal) closeModal(); });
     feedbackModal.addEventListener('click', (e) => { if (e.target === feedbackModal) hideFeedback(); });
     document.addEventListener('keydown', handleKeyPress);
@@ -707,7 +704,7 @@ function resetModal() {
     answerView.classList.add('hidden', 'fade-out');
     answerBtn.classList.remove('hidden');
     answerBtn.style.display = 'block';
-    answerBtn.textContent = '정답 보기'; // ✨ 2. 버튼 텍스트 초기화
+    answerBtn.textContent = '정답 보기';
     document.getElementById('answer-display').classList.remove('hidden');
 }
 
@@ -732,7 +729,7 @@ function showHint() {
     }
 }
 
-// ✨ 2. 정답 보기/문제 보기 토글 함수 (신규)
+// 정답 보기/문제 보기 토글 함수
 function toggleAnswerView() {
     const isAnswerVisible = !answerView.classList.contains('hidden');
     if (isAnswerVisible) {
@@ -747,12 +744,12 @@ function showAnswerWithScoreInput() {
     hasAnswerBeenRevealed = true;
     const data = quizData[currentQuestionIndex]; 
     questionView.classList.add('fade-out'); 
-    answerBtn.textContent = '문제 보기'; // ✨ 2. 버튼 텍스트 변경
+    answerBtn.textContent = '문제 보기';
     
     setTimeout(() => { 
         questionView.classList.add('hidden'); 
         answerView.classList.remove('hidden', 'fade-out'); 
-        document.getElementById('hint-box').classList.remove('show'); // ✨ 3. 힌트창 자동 닫기
+        document.getElementById('hint-box').classList.remove('show'); // 힌트창 자동 닫기
         const scoreInputBtn = document.getElementById('score-input-btn'); 
         if (scoreInputBtn) scoreInputBtn.classList.remove('hidden'); 
         if (data.type === 'matching') { 
@@ -779,7 +776,7 @@ function showQuestionView() {
     setTimeout(() => { 
         answerView.classList.add('hidden'); 
         questionView.classList.remove('hidden', 'fade-out'); 
-        answerBtn.textContent = '정답 보기'; // ✨ 2. 버튼 텍스트 변경
+        answerBtn.textContent = '정답 보기';
         if (!hasAnswerBeenRevealed) {
              answerBtn.style.display = 'block';
         }
@@ -888,7 +885,7 @@ function drawMatchingAnswerLines(data) {
 
 // 점수 입력 사이드바 생성
 function createScoreInputSidebar() { 
-    const scoreInputHTML = `<div id="score-input-box" class="score-input-box"><div class="score-input-title">🏆 점수 입력</div><div class="team-selection mb-4"><div class="selection-label">승리 팀 선택:</div><div class="team-buttons">${teamNames.map((name, index) => `<button class="team-select-btn" data-team="${index}">${name}</button>`).join('')}</div></div><div class="score-selection mb-4"><div class="selection-label">획득 점수:</div><div class="score-buttons">${[1, 2, 3, 4, 5].map(score => `<button class="score-select-btn" data-score="${score}">${score}점</button>`).join('')}</div></div><div class="score-input-actions"><button id="apply-score-btn" class="apply-score-btn" disabled>점수 적용</button><button id="cancel-score-btn" class="cancel-score-btn">취소</button></div><div class="current-selection mt-4"><div id="selection-display" class="selection-display">팀과 점수를 선택해주세요</div></div></div>`; 
+    const scoreInputHTML = `<div id="score-input-box" class="score-input-box"><div class="score-input-title">🏆 점수 입력</div><div class="team-selection mb-4"><div class="selection-label">승리 팀 선택:</div><div class="team-buttons">${teamNames.map((name, index) => `<button class="team-select-btn" data-team="${index}">${name}</button>`).join('')}</div></div><div class="score-selection mb-4"><div class="selection-label">획득 점수:</div><div class="score-buttons">${[1, 2, 3, 4, 5, 10].map(score => `<button class="score-select-btn" data-score="${score}">${score}점</button>`).join('')}</div></div><div class="score-input-actions"><button id="apply-score-btn" class="apply-score-btn" disabled>점수 적용</button><button id="cancel-score-btn" class="cancel-score-btn">취소</button></div><div class="current-selection mt-4"><div id="selection-display" class="selection-display">팀과 점수를 선택해주세요</div></div></div>`; 
     document.getElementById('hint-box').insertAdjacentHTML('afterend', scoreInputHTML); 
 }
 
@@ -950,24 +947,33 @@ function showScoreAppliedFeedback() {
     setTimeout(() => feedback.remove(), 3000); 
 }
 
-function showScoreInput() { 
-    const data = quizData[currentQuestionIndex];
+function toggleScoreInput() {
+    const scoreInputBox = document.getElementById('score-input-box');
+    const isShowing = scoreInputBox.classList.contains('show');
     
-    if (data && data.type === 'matching') {
-        const oldSvg = document.querySelector('#matching-question-container svg');
-        if (oldSvg) oldSvg.remove();
+    if (isShowing) {
+        // 점수 입력창 닫기
+        hideScoreInput();
+    } else {
+        // 점수 입력창 열기
+        const data = quizData[currentQuestionIndex];
         
-        answerView.classList.add('hidden');
-        questionView.classList.remove('hidden');
-        answerBtn.style.display = 'none';
+        if (data && data.type === 'matching') {
+            const oldSvg = document.querySelector('#matching-question-container svg');
+            if (oldSvg) oldSvg.remove();
+            
+            answerView.classList.add('hidden');
+            questionView.classList.remove('hidden');
+            answerBtn.style.display = 'none';
+        }
+        
+        selectedTeam = null; 
+        selectedScore = null; 
+        document.querySelectorAll('.team-select-btn, .score-select-btn').forEach(btn => btn.classList.remove('selected')); 
+        scoreInputBox.classList.add('show'); 
+        updateSelectionDisplay(); 
+        checkApplyButtonState();
     }
-    
-    selectedTeam = null; 
-    selectedScore = null; 
-    document.querySelectorAll('.team-select-btn, .score-select-btn').forEach(btn => btn.classList.remove('selected')); 
-    document.getElementById('score-input-box').classList.add('show'); 
-    updateSelectionDisplay(); 
-    checkApplyButtonState(); 
 }
 
 function hideScoreInput() { 
@@ -991,7 +997,7 @@ function addScoreInputToModal() {
     scoreInputBtn.id = 'score-input-btn'; 
     scoreInputBtn.className = 'btn-3d btn-score hidden'; 
     scoreInputBtn.textContent = '점수 입력'; 
-    scoreInputBtn.addEventListener('click', showScoreInput); 
+    scoreInputBtn.addEventListener('click', toggleScoreInput); 
     document.getElementById('hint-btn').insertAdjacentElement('afterend', scoreInputBtn); 
 }
 
@@ -1261,20 +1267,22 @@ function handleKeyPress(e) {
 // 십자말 퀴즈 설정
 function setupCrossword() {
     const puzzleData = [
+        // 가로 단어 (위에서 아래, 왼쪽에서 오른쪽 순서)
         { id: 1, word: "여호와", clue: "'스스로 계신 자'라는 뜻을 가진 하나님의 고유한 이름입니다.", orientation: 'horizontal', start: [0, 0] },
         { id: 2, word: "이스라엘", clue: "야곱이 하나님과 겨루어 이긴 후에 받은 새 이름이며, 그의 후손으로 이루어진 민족을 가리킵니다.", orientation: 'horizontal', start: [1, 5] },
         { id: 3, word: "나단", clue: "다윗 왕 시대의 선지자로, 다윗의 죄를 책망하고 하나님의 뜻을 전했습니다.", orientation: 'horizontal', start: [2, 2] },
-        { id: 4, word: "아얠렛샤할", clue: "시편 22편의 표제로, '새벽의 암사슴'이라는 뜻을 가진 음악 용어입니다.", orientation: 'horizontal', start: [4, 0] },
+        { id: 4, word: "아옐렛샤할", clue: "시편 22편의 표제로, '새벽의 암사슴'이라는 뜻을 가진 음악 용어입니다.", orientation: 'horizontal', start: [4, 0] },
         { id: 5, word: "예루살렘", clue: "다윗 왕이 수도로 삼은 곳이며, 하나님의 성전이 세워졌던 거룩한 도시입니다.", orientation: 'horizontal', start: [6, 3] },
         { id: 6, word: "시편", clue: "구약성경에 포함된 150편의 시와 찬양, 기도의 모음집입니다.", orientation: 'horizontal', start: [7, 0] },
         { id: 7, word: "의인", clue: "하나님 앞에서 올바르고 정의롭게 사는 사람을 뜻합니다.", orientation: 'horizontal', start: [8, 7] },
-        { id: 8, word: "여두둔", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 시편 표제에 그의 이름이 언급됩니다.", orientation: 'vertical', start: [0, 0] },
+        // 세로 단어
+        { id: 8, word: "여두둔", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 시편 표제에 그의 이름이 언급됩니다.", orientation: 'vertical', start: [0, 0], displayNumber: 1 },
         { id: 9, word: "마스길", clue: "시편의 표제 중 하나로, '교훈' 또는 '지혜의 시'를 의미합니다.", orientation: 'vertical', start: [0, 6] },
         { id: 10, word: "엘리", clue: "'나의 하나님'이라는 뜻으로, 예수님께서 십자가에서 외치신 말씀(시편 22편)에 나오는 단어입니다.", orientation: 'vertical', start: [1, 8] },
-        { id: 11, word: "나사렛", clue: "예수님께서 어린 시절을 보내신 갈릴리 지방의 한 동네입니다.", orientation: 'vertical', start: [2, 2] },
-        { id: 12, word: "아삽", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 그의 이름으로 된 시편이 여러 편 있습니다.", orientation: 'vertical', start: [4, 0] },
+        { id: 11, word: "나사렛", clue: "예수님께서 어린 시절을 보내신 갈릴리 지방의 한 동네입니다.", orientation: 'vertical', start: [2, 2], displayNumber: 3 },
+        { id: 12, word: "아삽", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 그의 이름으로 된 시편이 여러 편 있습니다.", orientation: 'vertical', start: [4, 0], displayNumber: 4 },
         { id: 13, word: "할렐루야", clue: "'주님을 찬양하라'는 뜻을 가진 히브리어 감탄사입니다.", orientation: 'vertical', start: [4, 4] },
-        { id: 14, word: "시온", clue: "원래 예루살렘의 언덕을 가리켰으나, 상징적으로 하나님의 거처 또는 하나님의 백성을 의미합니다.", orientation: 'vertical', start: [7, 0] },
+        { id: 14, word: "시온", clue: "원래 예루살렘의 언덕을 가리켰으나, 상징적으로 하나님의 거처 또는 하나님의 백성을 의미합니다.", orientation: 'vertical', start: [7, 0], displayNumber: 6 },
         { id: 15, word: "죄인", clue: "하나님의 뜻을 따르지 않고 죄를 지은 사람을 가리키는 말입니다.", orientation: 'vertical', start: [7, 8] }
     ];
 
@@ -1310,7 +1318,7 @@ function setupCrossword() {
 
     function populateGrid() {
         puzzleData.forEach(wordData => {
-            const { word, orientation, start, id } = wordData;
+            const { word, orientation, start, id, displayNumber } = wordData;
             const [startRow, startCol] = start;
             for (let i = 0; i < word.length; i++) {
                 let r = startRow, c = startCol;
@@ -1323,7 +1331,9 @@ function setupCrossword() {
                     if (!cell.dataset.words) cell.dataset.words = '';
                     cell.dataset.words += `${id},`;
                     if (i === 0) {
-                        cell.innerHTML = `<span class="number">${id}</span>`;
+                        // displayNumber가 있으면 그걸 사용, 없으면 id 사용
+                        const numberToShow = displayNumber !== undefined ? displayNumber : id;
+                        cell.innerHTML = `<span class="number" style="font-size: 14px; font-weight: bold;">${numberToShow}</span>`;
                     }
                 }
             }
@@ -1374,7 +1384,8 @@ function setupCrossword() {
             wordsAtThisPosition.forEach(({ id }) => {
                 const wordData = puzzleData.find(w => w.id == id);
                 const button = document.createElement('button');
-                button.textContent = `${wordData.id}번 (${wordData.orientation === 'horizontal' ? '가로' : '세로'})`;
+                const numberToShow = wordData.displayNumber !== undefined ? wordData.displayNumber : wordData.id;
+                button.textContent = `${numberToShow}번 (${wordData.orientation === 'horizontal' ? '가로' : '세로'})`;
                 button.onclick = () => {
                     showClueForWord(wordData);
                 };
@@ -1397,7 +1408,9 @@ function setupCrossword() {
         currentWord = wordData;
         if (currentWord) {
             highlightWordCells(currentWord);
-            clueText.textContent = `${currentWord.id}. ${currentWord.clue}`;
+            // displayNumber가 있으면 그걸 사용, 없으면 id 사용
+            const numberToShow = currentWord.displayNumber !== undefined ? currentWord.displayNumber : currentWord.id;
+            clueText.textContent = `${numberToShow}. ${currentWord.clue}`;
             modal.classList.remove('hidden');
         }
     }
@@ -1412,7 +1425,7 @@ function setupCrossword() {
 
     function revealAnswer() {
         if (!currentWord) return;
-        const { word, orientation, start } = currentWord;
+        const { word, orientation, start, displayNumber, id } = currentWord;
         for (let i = 0; i < word.length; i++) {
             let r = start[0], c = start[1];
             if (orientation === 'horizontal') c += i; else r += i;
