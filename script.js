@@ -1272,7 +1272,7 @@ function setupCrossword() {
         { id: 1, word: "여두둔", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 시편 표제에 그의 이름이 언급됩니다.", orientation: 'vertical', start: [0, 0] },
         
         // 2번: (0,6) - 세로: 마스길
-        { id: 2, word: "마스길", clue: "시편의 표제 중 하나로, '교훈' 또는 '지혜의 시'를 의미합니다.", orientation: 'vertical', start: [0, 6] },
+        { id: 2, word: "마스길", clue: "시편의 표제 중 하나로, '교훈' 또는 '교훈시'를 의미합니다.", orientation: 'vertical', start: [0, 6] },
         
         // 3번: (1,5) - 가로: 이스라엘
         { id: 3, word: "이스라엘", clue: "야곱이 하나님과 겨루어 이긴 후에 받은 새 이름이며, 그의 후손으로 이루어진 민족을 가리킵니다.", orientation: 'horizontal', start: [1, 5] },
@@ -1284,7 +1284,7 @@ function setupCrossword() {
         { id: 5, word: "나단", clue: "다윗 왕 시대의 선지자로, 다윗의 죄를 책망하고 하나님의 뜻을 전했습니다.", orientation: 'horizontal', start: [2, 2] },
         { id: 5, word: "나사렛", clue: "예수님께서 어린 시절을 보내신 갈릴리 지방의 한 동네입니다.", orientation: 'vertical', start: [2, 2] },
         
-        // 6번: (4,0) - 가로: 아옐렛샤할, 세로: 아삽
+        // 6번: (4,0) - 가로: 아얠렛샤할, 세로: 아삽
         { id: 6, word: "아얠렛샤할", clue: "시편 22편의 표제로, '새벽의 암사슴'이라는 뜻을 가진 음악 용어입니다.", orientation: 'horizontal', start: [4, 0] },
         { id: 6, word: "아삽", clue: "다윗 시대의 레위인 성가대 지휘자 중 한 명으로, 그의 이름으로 된 시편이 여러 편 있습니다.", orientation: 'vertical', start: [4, 0] },
         
